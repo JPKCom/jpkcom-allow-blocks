@@ -5,6 +5,7 @@ Description: Only allow certain types of blocks in Gutenberg for non admins.
 Version: 1.0.0
 Author: Jean Pierre Kolb <jpk@jpkc.com>
 Author URI: https://www.jpkc.com
+GitHub Plugin URI: https://github.com/JPKCom/jpkcom-allow-blocks
 */
 
 // https://developer.wordpress.org/block-editor/reference-guides/core-blocks/
