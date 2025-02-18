@@ -6,6 +6,7 @@ Version: 1.0.1
 Author: Jean Pierre Kolb <jpk@jpkc.com>
 Author URI: https://www.jpkc.com
 GitHub Plugin URI: JPKCom/jpkcom-allow-blocks
+Primary Branch: main
 */
 
 // https://developer.wordpress.org/block-editor/reference-guides/core-blocks/
