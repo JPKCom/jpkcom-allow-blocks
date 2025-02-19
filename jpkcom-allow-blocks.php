@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: JPKCom Allow Block Types
-Plugin URI: https://www.jpkc.com/
+Plugin URI: https://github.com/JPKCom/jpkcom-allow-blocks
 Description: Only allow certain types of blocks in Gutenberg for non admins.
 Version: 1.0.3
 Author: Jean Pierre Kolb <jpk@jpkc.com>
