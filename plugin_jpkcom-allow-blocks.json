@@ -1,0 +1,48 @@
+{
+  "name": "JPKCom Allow Block Types",
+  "display_name": "JPKCom Allow Block Types",
+  "slug": "jpkcom-allow-blocks",
+  "version": "2.0.3",
+  "download_url": "https://github.com/JPKCom/jpkcom-allow-blocks/releases/download/v2.0.3/jpkcom-allow-blocks.zip",
+  "checksum_sha256": "f83f89545ba4af68a0950e3463e95c8ca32508436d02c1f10bd287d57a1320ff",
+  "requires": "6.9",
+  "tested": "7.0",
+  "requires_php": "8.3",
+  "author": "Jean Pierre Kolb <jpk@jpkc.com>",
+  "author_profile": "https://www.jpkc.com",
+  "contributors": {
+    "JPKCom": {
+      "profile": "https://profiles.wordpress.org/JPKCom",
+      "avatar": "https://wordpress.org/grav-redirect.php?user=JPKCom&s=36"
+    }
+  },
+  "tags": [
+    "Admin",
+    "Block",
+    "Bootstrap",
+    "Editor",
+    "Gutenberg"
+  ],
+  "license": "GPL-2.0-or-later",
+  "license_uri": "https://www.gnu.org/licenses/gpl-2.0.html",
+  "text_domain": "",
+  "domain_path": "/languages",
+  "network": true,
+  "requires_plugins": [],
+  "homepage": "https://github.com/JPKCom/jpkcom-allow-blocks",
+  "last_updated": "2026-06-17",
+  "sections": {
+    "description": "<p>Only allow certain types of blocks in Gutenberg for non admins.</p>\n<p>For more details visit:\nhttps://developer.wordpress.org/block-editor/reference-guides/core-blocks/</p>\n<h3 id=\"documentation\">Documentation</h3>\n<p><strong>API Documentation:</strong> Complete PHPDoc-generated API\ndocumentation is available at: <a\nhref=\"https://jpkcom.github.io/jpkcom-allow-blocks/docs/\">https://jpkcom.github.io/jpkcom-allow-blocks/docs/</a></p>\n",
+    "installation": "<ol type=\"1\">\n<li>In your admin panel, go to ‘Plugins’ &gt; and click the ‘Add New’\nbutton.</li>\n<li>Click Upload Plugin and ‘Choose File’, then select the Plugin’s .zip\nfile. Click ‘Install Now’.</li>\n<li>Click ‘Activate’ to use the plugin right away.</li>\n</ol>\n",
+    "changelog": "<h3 id=\"section\">2.0.3</h3>\n<ul>\n<li>Added secure self-hosted plugin updates via GitHub with SHA256\nchecksum verification</li>\n<li>Added an automated release workflow (builds the ZIP, generates the\nmanifest and deploys to gh-pages on tag push)</li>\n<li>Raised the minimum WordPress version to 6.9 and “Tested up to” to\nWordPress 7.0</li>\n<li>Switched license metadata to the SPDX identifier\n<code>GPL-2.0-or-later</code> with the HTTPS license URI</li>\n<li>Added PHPDoc-generated API documentation, built and deployed to\ngh-pages on release</li>\n<li>Hardening: enabled <code>declare(strict_types=1)</code> and\ndocumented the block-types callback</li>\n</ul>\n<h3 id=\"section-1\">2.0.2</h3>\n<ul>\n<li>Tested up to WP v6.8</li>\n</ul>\n<h3 id=\"section-2\">2.0.1</h3>\n<ul>\n<li>Fix Stable tag</li>\n</ul>\n<h3 id=\"section-3\">2.0.0</h3>\n<ul>\n<li>Added README.md</li>\n<li>Plugin meta data update</li>\n</ul>\n<h3 id=\"section-4\">1.0.0</h3>\n<ul>\n<li>Initial Release</li>\n</ul>\n",
+    "faq": "\n"
+  },
+  "readme_html": "<h1 id=\"jpkcom-allow-block-types\">JPKCom Allow Block Types</h1>\n<p><strong>Plugin Name:</strong> JPKCom Allow Block Types<br />\n<strong>Plugin URI:</strong>\nhttps://github.com/JPKCom/jpkcom-allow-blocks<br />\n<strong>Description:</strong> Only allow certain types of blocks in\nGutenberg for non admins.<br />\n<strong>Version:</strong> 2.0.3<br />\n<strong>Author:</strong> Jean Pierre Kolb <a href=\"mailto:jpk@jpkc.com\"\nclass=\"email\">jpk@jpkc.com</a><br />\n<strong>Author URI:</strong> https://www.jpkc.com<br />\n<strong>Contributors:</strong> JPKCom<br />\n<strong>Tags:</strong> Admin, Block, Bootstrap, Editor, Gutenberg<br />\n<strong>Requires at least:</strong> 6.9<br />\n<strong>Tested up to:</strong> 7.0<br />\n<strong>Requires PHP:</strong> 8.3<br />\n<strong>Stable tag:</strong> 2.0.3<br />\n<strong>License:</strong> GPL-2.0-or-later<br />\n<strong>License URI:</strong>\nhttps://www.gnu.org/licenses/gpl-2.0.html</p>\n<p>Only allow certain types of blocks in Gutenberg for non admins.</p>\n<h2 id=\"description\">Description</h2>\n<p>Only allow certain types of blocks in Gutenberg for non admins.</p>\n<p>For more details visit:\nhttps://developer.wordpress.org/block-editor/reference-guides/core-blocks/</p>\n<h3 id=\"documentation\">Documentation</h3>\n<p><strong>API Documentation:</strong> Complete PHPDoc-generated API\ndocumentation is available at: <a\nhref=\"https://jpkcom.github.io/jpkcom-allow-blocks/docs/\">https://jpkcom.github.io/jpkcom-allow-blocks/docs/</a></p>\n<h2 id=\"installation\">Installation</h2>\n<ol type=\"1\">\n<li>In your admin panel, go to ‘Plugins’ &gt; and click the ‘Add New’\nbutton.</li>\n<li>Click Upload Plugin and ‘Choose File’, then select the Plugin’s .zip\nfile. Click ‘Install Now’.</li>\n<li>Click ‘Activate’ to use the plugin right away.</li>\n</ol>\n<h2 id=\"changelog\">Changelog</h2>\n<h3 id=\"section\">2.0.3</h3>\n<ul>\n<li>Added secure self-hosted plugin updates via GitHub with SHA256\nchecksum verification</li>\n<li>Added an automated release workflow (builds the ZIP, generates the\nmanifest and deploys to gh-pages on tag push)</li>\n<li>Raised the minimum WordPress version to 6.9 and “Tested up to” to\nWordPress 7.0</li>\n<li>Switched license metadata to the SPDX identifier\n<code>GPL-2.0-or-later</code> with the HTTPS license URI</li>\n<li>Added PHPDoc-generated API documentation, built and deployed to\ngh-pages on release</li>\n<li>Hardening: enabled <code>declare(strict_types=1)</code> and\ndocumented the block-types callback</li>\n</ul>\n<h3 id=\"section-1\">2.0.2</h3>\n<ul>\n<li>Tested up to WP v6.8</li>\n</ul>\n<h3 id=\"section-2\">2.0.1</h3>\n<ul>\n<li>Fix Stable tag</li>\n</ul>\n<h3 id=\"section-3\">2.0.0</h3>\n<ul>\n<li>Added README.md</li>\n<li>Plugin meta data update</li>\n</ul>\n<h3 id=\"section-4\">1.0.0</h3>\n<ul>\n<li>Initial Release</li>\n</ul>\n",
+  "banners": {
+    "low": "https://jpkcom.github.io/jpkcom-allow-blocks/assets/banner-772x250.avif",
+    "high": "https://jpkcom.github.io/jpkcom-allow-blocks/assets/banner-1544x500.avif"
+  },
+  "icons": {
+    "default": "https://s.w.org/plugins/geopattern-icon/jpkcom-allow-blocks.svg"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "Author": "Jean Pierre Kolb <jpk@jpkc.com>",
+  "APIDocumentation": "Complete PHPDoc-generated API documentation is available at",
+  "Version": "2.0.3",
+  "Description": "Only allow certain types of blocks in Gutenberg for non admins.",
+  "PluginURI": "https://github.com/JPKCom/jpkcom-allow-blocks",
+  "PluginName": "JPKCom Allow Block Types",
+  "Contributors": "JPKCom",
+  "Requiresatleast": "6.9",
+  "Testedupto": "7.0",
+  "Stabletag": "2.0.3",
+  "RequiresPHP": "8.3",
+  "License": "GPL-2.0-or-later",
+  "LicenseURI": "https://www.gnu.org/licenses/gpl-2.0.html",
+  "Tags": "Admin, Block, Bootstrap, Editor, Gutenberg",
+  "AuthorURI": "https://www.jpkc.com",
+  "_generated": true
+}
