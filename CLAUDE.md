@@ -38,7 +38,7 @@ The callback ignores its incoming value and always returns the curated array, so
 
 | Constant | Value | Purpose |
 |----------|-------|---------|
-| `JPKCOM_ALLOW_BLOCKS_VERSION` | `'2.0.4'` | Plugin version (sync with header/README/phpdoc.xml) |
+| `JPKCOM_ALLOW_BLOCKS_VERSION` | `'2.0.5'` | Plugin version (sync with header/README/phpdoc.xml) |
 
 ---
 
