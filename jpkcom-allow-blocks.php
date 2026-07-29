@@ -3,15 +3,15 @@
 Plugin Name: JPKCom Allow Block Types
 Plugin URI: https://github.com/JPKCom/jpkcom-allow-blocks
 Description: Only allow certain types of blocks in Gutenberg for non admins.
-Version: 2.0.6
+Version: 2.0.7
 Author: Jean Pierre Kolb <jpk@jpkc.com>
 Author URI: https://www.jpkc.com
 Contributors: JPKCom
 Tags: Admin, Block, Bootstrap, Editor, Gutenberg
 Requires at least: 6.9
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 8.3
-Stable tag: 2.0.6
+Stable tag: 2.0.7
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
@@ -29,7 +29,7 @@ if ( ! defined( constant_name: 'WPINC' ) ) {
  * @since 2.0.3
  */
 if ( ! defined( 'JPKCOM_ALLOW_BLOCKS_VERSION' ) ) {
-    define( 'JPKCOM_ALLOW_BLOCKS_VERSION', '2.0.6' );
+    define( 'JPKCOM_ALLOW_BLOCKS_VERSION', '2.0.7' );
 }
 
 
