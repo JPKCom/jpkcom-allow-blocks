@@ -132,6 +132,76 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_sanitize_settings' ) ) {
 
 }
 
+if ( ! function_exists( function: 'jpkcom_allow_blocks_count_rejected' ) ) {
+
+    /**
+     * Count how many entries a sanitised import or save would discard.
+     *
+     * Walks the same validation rules as {@see jpkcom_allow_blocks_sanitize_settings()}
+     * without mutating anything, so a caller can tell the user "N entries were
+     * invalid and will be ignored" instead of silently dropping them. A
+     * companion function rather than a change to the sanitiser's signature,
+     * so every existing caller of `jpkcom_allow_blocks_sanitize_settings()`
+     * keeps working unchanged.
+     *
+     * Counts, added together:
+     * - one for every `roles` entry whose value is not an array (the entry
+     *   cannot be walked further, so it counts as a single rejection),
+     * - one for every role whose slug does not survive `sanitize_key()`
+     *   unchanged (the whole role is dropped),
+     * - one for every block name within an otherwise valid role that is not
+     *   a string or fails the block-name grammar,
+     * - one for every `labels` entry whose key is not a valid block name or
+     *   whose value is not a string.
+     *
+     * @since 3.0.0
+     *
+     * @param mixed $raw Value from an import file or a form, same input the
+     *                    sanitiser would receive.
+     * @return int Number of entries the sanitiser would discard.
+     */
+    function jpkcom_allow_blocks_count_rejected( mixed $raw ): int {
+        if ( ! is_array( $raw ) ) {
+            return 0;
+        }
+
+        $rejected = 0;
+
+        if ( isset( $raw['roles'] ) && is_array( $raw['roles'] ) ) {
+            foreach ( $raw['roles'] as $role => $blocked ) {
+                if ( ! is_string( $role ) || ! is_array( $blocked ) ) {
+                    ++$rejected;
+                    continue;
+                }
+
+                $slug = sanitize_key( $role );
+
+                if ( '' === $slug || $slug !== $role ) {
+                    ++$rejected;
+                    continue;
+                }
+
+                foreach ( $blocked as $name ) {
+                    if ( ! is_string( $name ) || ! jpkcom_allow_blocks_is_valid_block_name( $name ) ) {
+                        ++$rejected;
+                    }
+                }
+            }
+        }
+
+        if ( isset( $raw['labels'] ) && is_array( $raw['labels'] ) ) {
+            foreach ( $raw['labels'] as $name => $label ) {
+                if ( ! is_string( $name ) || ! is_string( $label ) || ! jpkcom_allow_blocks_is_valid_block_name( $name ) ) {
+                    ++$rejected;
+                }
+            }
+        }
+
+        return $rejected;
+    }
+
+}
+
 if ( ! function_exists( function: 'jpkcom_allow_blocks_get_settings' ) ) {
 
     /**

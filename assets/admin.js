@@ -18,10 +18,11 @@
 		return;
 	}
 
-	var searchField    = document.getElementById( 'jpkcom-ab-search' );
-	var categoryField  = document.getElementById( 'jpkcom-ab-category' );
-	var columnToggles  = document.querySelectorAll( '.jpkcom-ab-toggle-column' );
-	var rows           = table.querySelectorAll( 'tbody tr' );
+	var searchField     = document.getElementById( 'jpkcom-ab-search' );
+	var categoryField   = document.getElementById( 'jpkcom-ab-category' );
+	var columnToggles   = document.querySelectorAll( '.jpkcom-ab-toggle-column' );
+	var rolesToggle     = document.getElementById( 'jpkcom-ab-show-all-roles' );
+	var rows            = table.querySelectorAll( 'tbody tr' );
 
 	/**
 	 * Re-apply the search and category filters to every row.
@@ -68,4 +69,16 @@
 			toggleColumn( toggle.getAttribute( 'data-role' ), toggle.checked );
 		} );
 	} );
+
+	/*
+	 * The "show all roles" checkbox lives in its own small GET form so its
+	 * state round-trips through the query string: submitting it re-renders
+	 * the page with the requested role set, and the save form below reads
+	 * back the same state from a hidden field so the two never disagree.
+	 */
+	if ( rolesToggle && rolesToggle.form ) {
+		rolesToggle.addEventListener( 'change', function () {
+			rolesToggle.form.submit();
+		} );
+	}
 } )();

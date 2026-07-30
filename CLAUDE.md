@@ -189,13 +189,30 @@ custom form by hand, submitted to `admin-post.php`.
   keys), so a block belonging to a currently-deactivated plugin still shows
   up — grouped under category `jpkcom-unregistered` with a warning badge —
   instead of silently vanishing from the one screen that could otherwise
-  unblock it. Rows are sorted by category, then title.
-- **Columns** are every role except `administrator`
-  (`jpkcom_allow_blocks_editable_roles()`). Roles without the `edit_posts`
-  capability (`subscriber` on a default install) are hidden unless the
-  caller explicitly asks to include them — the render call always passes
-  `true`, so they are shown; the parameter exists for callers with a
-  narrower need.
+  unblock it. Rows are sorted by category, then title. An unregistered row
+  carries its own "Forget this block" checkbox (`forget[<block name>]`);
+  ticking it and saving purges that name from every role's deny list and
+  from `labels` unconditionally — the deliberate way to remove such a row
+  for good, since the row's block name is unioned back onto the table on
+  every render otherwise. Even without ticking it, a row that a save leaves
+  blocked by no role at
+  all has its label dropped automatically once the block is not registered:
+  a name nobody blocks and nothing registers has no reason to persist. A
+  registered block's label is only ever taken from the block's own title —
+  never the block name itself — so an unregistered row can never be
+  re-seeded with a label that is just its own name.
+- **Columns** are every role except `administrator`, further filtered to
+  slugs that survive `sanitize_key()` unchanged
+  (`jpkcom_allow_blocks_editable_roles()`) — a custom role slug the store
+  would refuse is never offered as a column the UI could lie about. Roles
+  without the `edit_posts` capability (`subscriber` on a default install)
+  are hidden by default; a checkbox in the controls row ("Show roles that
+  cannot edit posts"), its own small `method="get"` form, toggles
+  `?jpkcom-ab-show-all-roles=1` in the query string. The save form carries
+  the same boolean back in a hidden `include_non_editing` field, so the
+  role set the save handler processes is always identical to the one that
+  was rendered — if the two ever diverged, saving would drop settings for
+  roles the form never showed.
 - **Search, category filter and per-role column toggles** run client-side
   in `assets/admin.js` — plain browser JS, no build step, no dependency.
   Every listener is guarded on the presence of `.jpkcom-ab-table`, so the
@@ -205,12 +222,13 @@ custom form by hand, submitted to `admin-post.php`.
 
 ### Save computes the difference over rendered rows only
 
-The form submits one hidden `rendered[]` input per row it drew, plus a
-`allowed[role][block-name]` checkbox for every ticked box. The handler
-(`jpkcom_allow_blocks_apply_form()`) computes, per role:
+The form submits one hidden `rendered[]` input per row it drew, plus an
+`allowed[role][block-name]` checkbox for every ticked box, plus any ticked
+`forget[block-name]` boxes. The handler (`jpkcom_allow_blocks_apply_form()`)
+computes, per role:
 
 ```
-new deny list = (old deny list − rendered block names) ∪ (rendered block names whose box is unticked)
+new deny list = (old deny list − rendered block names) ∪ (rendered block names whose box is unticked, minus any forgotten this save)
 ```
 
 Block names the form did not render **keep whatever they already had**.
@@ -222,6 +240,24 @@ future rendering that legitimately omits rows (pagination, a role-scoped
 view) must not wipe the settings for the rows it did not draw, and this is
 the mechanism that guarantees that.
 
+### `max_input_vars` and very large sites
+
+Each row contributes roughly one checkbox per rendered role plus a hidden
+`rendered[]` input; 168 registered blocks × 5 roles alone is already close
+to 1000 fields, PHP's default `max_input_vars`. Past that limit PHP
+silently truncates `$_POST` — it does not error. Because the diff is taken
+over the rendered rows only (see above), a **fully** truncated-away row is
+harmless: it never appears in `rendered[]`, so it is treated exactly like a
+row the search filter hid, and keeps its previous setting. What is not
+safe is a row truncated **in the middle** — its `rendered[]` input survives
+but one or more of its trailing `allowed[role][...]` checkboxes for later
+roles do not, which reads as "unticked" and therefore blocks that block for
+those roles even though the administrator never touched that cell. Sites
+with enough blocks and roles that this boundary can fall mid-row should
+raise `max_input_vars` in `php.ini` (or via `ini_set()` early enough to take
+effect); the plugin does not attempt to detect or chunk around the limit
+itself.
+
 ---
 
 ## Export and import (`includes/import-export.php`)
@@ -229,10 +265,14 @@ the mechanism that guarantees that.
 **Export** (`admin_post_jpkcom_allow_blocks_export`) streams a JSON download
 of `jpkcom_allow_blocks_export_payload()` — the full validated settings plus
 `plugin_version`, `site_url` and `exported` for provenance — as
-`jpkcom-allow-blocks-<date>.json`.
+`jpkcom-allow-blocks-<site-host>-<date>.json`, the host coming from
+`home_url()` through `wp_parse_url()` and `sanitize_file_name()`, so two
+exports taken the same day from different sites cannot collide once both
+files land in the same downloads folder.
 
 **Import** is upload → preview → confirm; nothing is written until the
-preview is confirmed.
+preview is confirmed. The whole flow renders inside the plugin's own
+`.wrap` — never a standalone page — so it never leaves the admin chrome.
 
 1. `admin_post_jpkcom_allow_blocks_import_preview` checks
    `manage_options` and its own nonce, verifies the upload with
@@ -240,14 +280,35 @@ preview is confirmed.
    (1 MB), then hands the raw JSON to `jpkcom_allow_blocks_parse_import()`.
    That function rejects, in order, non-array JSON, a missing/wrong
    `schema`, and a missing/non-array `roles` — every rejection path leaves
-   `settings` empty and returns a translated `error`; nothing is read from
-   or written to the option on any of these paths. On success it renders a
-   small standalone HTML page (not the WP admin chrome) showing
-   `jpkcom_allow_blocks_import_preview()`'s counts and a confirm form
-   carrying the already-sanitised payload in a hidden field.
-2. `admin_post_jpkcom_allow_blocks_import_apply` re-parses that hidden
-   field — a tampered field is re-validated, not trusted — merges it over
-   the current settings and saves.
+   `settings` empty and returns a short **error code**
+   (`invalid-json`, `bad-schema`, `no-roles`, ...) rather than translated
+   text, so nothing is read from or written to the option on any of these
+   paths. On success, the sanitised settings and the count of entries
+   `jpkcom_allow_blocks_count_rejected()` found invalid are stashed together
+   in a transient keyed by a random token; the redirect carries only that
+   token.
+2. `jpkcom_allow_blocks_render_import_preview()` reads the token back,
+   shows `jpkcom_allow_blocks_import_preview()`'s counts plus a warning
+   naming how many entries were rejected (if any), and a confirm form that
+   carries only the token — never the payload — back to the browser.
+3. `admin_post_jpkcom_allow_blocks_import_apply` re-reads the same
+   transient by token, merges the stashed settings over the current ones
+   and saves; if the stashed rejection count was greater than zero, the
+   post-save redirect carries it too, so the settings screen can still show
+   "N entries in the file were invalid and were ignored" after the import
+   is applied, not only during the preview.
+
+### Import errors and other notices travel as codes, not free text
+
+`jpkcom_allow_blocks_import_error_redirect()` puts a short code (not a
+message) in the `jpkcom-ab-import-error` query argument.
+`jpkcom_allow_blocks_import_error_message()` in `admin-page.php` is the only
+place that maps a code to translated text; a code it does not recognise is
+ignored — no notice is shown — rather than falling back to something
+generic. This is deliberate: an earlier version put the translated message
+itself in the query string, which a crafted link could use to put arbitrary
+words in front of an administrator (not XSS, since it was escaped on
+output, but still content the plugin did not choose).
 
 ### The merge unit is the role, not the block
 
@@ -379,21 +440,30 @@ module directly, and asserts against its functions:
 
 - `tests/test-settings-store.php` — sanitiser edge cases (invalid role
   slugs, invalid block names, type coercion), the read/write round trip,
-  and `jpkcom_allow_blocks_blocked_for_roles()`'s intersection rule across
-  multiple roles, including a user whose second role blocks nothing.
+  `jpkcom_allow_blocks_blocked_for_roles()`'s intersection rule across
+  multiple roles (including a user whose second role blocks nothing), and
+  `jpkcom_allow_blocks_count_rejected()` against a mix of valid and invalid
+  role and label entries.
 - `tests/test-block-filter.php` — all four incoming `allowed_block_types_all`
   values (`true`, an array, `false`, an empty array), the administrator
   exemption and the `jpkcom_allow_blocks_is_exempt` override, and that an
   unconfigured plugin returns its input completely unchanged.
 - `tests/test-admin-page.php` — `jpkcom_allow_blocks_block_rows()`'s
-  registry/settings union and sort order, `jpkcom_allow_blocks_editable_roles()`,
-  and `jpkcom_allow_blocks_apply_form()`'s save-difference rule: saving a
-  form that only rendered a subset of rows must not touch the rows it did
-  not render.
+  registry/settings union and sort order, `jpkcom_allow_blocks_editable_roles()`
+  (including that a role slug `sanitize_key()` would change is never
+  offered), and `jpkcom_allow_blocks_apply_form()`'s save-difference rule:
+  saving a form that only rendered a subset of rows must not touch the rows
+  it did not render. Also covers the two ways an unregistered row can be
+  removed for good — an explicit `forget[...]` tick, and the automatic
+  label drop once a row is blocked by no role and not registered — and that
+  a registered block's label always comes from its own title.
 - `tests/test-import-export.php` — the export/import round trip, the
-  per-role merge unit (role in file replaces, role absent stays untouched,
-  unknown role slugs are kept), and `jpkcom_allow_blocks_import_preview()`'s
-  counts against the live block registry.
+  export filename carrying the site host, the per-role merge unit (role in
+  file replaces, role absent stays untouched, unknown role slugs are kept),
+  `jpkcom_allow_blocks_import_preview()`'s counts against the live block
+  registry, the stable error codes `jpkcom_allow_blocks_parse_import()`
+  returns for each rejection path, and that its `rejected` count matches
+  the number of invalid entries in the file.
 
 Run all four locally:
 

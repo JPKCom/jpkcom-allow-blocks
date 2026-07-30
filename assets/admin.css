@@ -38,6 +38,24 @@
 	white-space: nowrap;
 }
 
+.jpkcom-ab-roles-toggle-form {
+	display: inline-flex;
+	align-items: center;
+}
+
+.jpkcom-ab-roles-toggle {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35em;
+	white-space: nowrap;
+}
+
+.jpkcom-ab-forget {
+	display: block;
+	margin-top: 0.35em;
+	font-size: 12px;
+}
+
 .jpkcom-ab-import-export {
 	margin: 1em 0;
 }

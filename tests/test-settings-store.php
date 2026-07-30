@@ -147,6 +147,55 @@ jpkcom_check( 'a role blocking nothing empties the intersection', jpkcom_allow_b
 jpkcom_check( 'an unknown role blocks nothing', jpkcom_allow_blocks_blocked_for_roles( array( 'nope' ), $settings ) === array() );
 jpkcom_check( 'no roles blocks nothing', jpkcom_allow_blocks_blocked_for_roles( array(), $settings ) === array() );
 
+/*
+ * jpkcom_allow_blocks_count_rejected() tells a caller how many entries a
+ * sanitising pass would discard, so an import or a corrupt save is not
+ * silently lossy.
+ */
+jpkcom_check( 'non-array input rejects nothing', 0 === jpkcom_allow_blocks_count_rejected( 'garbage' ) );
+jpkcom_check( 'an array with nothing invalid rejects nothing', 0 === jpkcom_allow_blocks_count_rejected( array( 'roles' => array( 'editor' => array( 'core/code' ) ) ) ) );
+
+/* A role with 40 entries, 39 of them invalid. */
+$mostly_invalid = array_merge( array( 'core/code' ), array_fill( 0, 39, 'NOT A BLOCK' ) );
+jpkcom_check(
+    'invalid block names within a valid role are counted one by one',
+    39 === jpkcom_allow_blocks_count_rejected( array( 'roles' => array( 'editor' => $mostly_invalid ) ) ),
+    (string) jpkcom_allow_blocks_count_rejected( array( 'roles' => array( 'editor' => $mostly_invalid ) ) )
+);
+
+jpkcom_check(
+    'a role slug the store would reject counts as one rejected entry',
+    1 === jpkcom_allow_blocks_count_rejected( array( 'roles' => array( 'Bad Role' => array( 'core/code' ) ) ) )
+);
+
+jpkcom_check(
+    'a role value that is not an array counts as one rejected entry',
+    1 === jpkcom_allow_blocks_count_rejected( array( 'roles' => array( 'editor' => 'not-an-array' ) ) )
+);
+
+jpkcom_check(
+    'invalid label entries are counted',
+    2 === jpkcom_allow_blocks_count_rejected(
+        array(
+            'labels' => array(
+                'core/code'  => 'Code',
+                'bad name'   => 'x',
+                'core/table' => array( 'not a string' ),
+            ),
+        )
+    )
+);
+
+jpkcom_check(
+    'rejections across roles and labels are added together',
+    2 === jpkcom_allow_blocks_count_rejected(
+        array(
+            'roles'  => array( 'editor' => array( 'core/code', 'NOT A BLOCK' ) ),
+            'labels' => array( 'bad name' => 'x' ),
+        )
+    )
+);
+
 printf( "\n  %d passed, %d failed\n", $passed, $failed );
 
 exit( $failed > 0 ? 1 : 0 );

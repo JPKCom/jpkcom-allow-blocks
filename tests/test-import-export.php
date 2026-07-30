@@ -65,6 +65,12 @@ if ( ! function_exists( function: 'home_url' ) ) {
     }
 }
 
+if ( ! function_exists( function: 'wp_parse_url' ) ) {
+    function wp_parse_url( string $url, int $component = -1 ): mixed {
+        return parse_url( $url, $component );
+    }
+}
+
 if ( ! function_exists( function: 'wp_json_encode' ) ) {
     function wp_json_encode( mixed $data, int $options = 0, int $depth = 512 ): string|false {
         return json_encode( $data, $options, $depth );
@@ -127,19 +133,45 @@ jpkcom_check( 'the payload records the plugin version', ( $payload['plugin_versi
 jpkcom_check( 'the payload records the site', ( $payload['site_url'] ?? '' ) === 'https://example.test' );
 jpkcom_check( 'the payload is JSON-encodable', is_string( wp_json_encode( $payload ) ) );
 jpkcom_check( 'the filename ends in .json', str_ends_with( haystack: jpkcom_allow_blocks_export_filename(), needle: '.json' ) );
+jpkcom_check( 'the filename embeds the site host', str_contains( haystack: jpkcom_allow_blocks_export_filename(), needle: 'example.test' ), jpkcom_allow_blocks_export_filename() );
 
 echo "\njpkcom-allow-blocks: import\n";
 
-/* Parsing rejects anything that is not a valid payload, without changing state. */
-foreach ( array( 'not json', '[]', '{"schema":99}', '{"roles":[]}' ) as $bad ) {
+/*
+ * Parsing rejects anything that is not a valid payload, without changing
+ * state. The error travels as a short, stable code rather than translated
+ * text - admin-page.php maps the code to a message, and a code this test
+ * does not expect here would mean that mapping silently broke.
+ */
+$bad_inputs = array(
+    'not json'          => 'invalid-json',
+    '[]'                => 'bad-schema',
+    '{"schema":99}'     => 'bad-schema',
+    '{"schema":1}'      => 'no-roles',
+);
+
+foreach ( $bad_inputs as $bad => $expected_code ) {
     $parsed = jpkcom_allow_blocks_parse_import( $bad );
     jpkcom_check( sprintf( 'rejects %s', var_export( $bad, true ) ), false === $parsed['ok'], $parsed['error'] );
+    jpkcom_check( sprintf( 'rejecting %s carries the code "%s"', var_export( $bad, true ), $expected_code ), $expected_code === $parsed['error'], $parsed['error'] );
 }
 
 $good   = wp_json_encode( jpkcom_allow_blocks_export_payload( $settings ) );
 $parsed = jpkcom_allow_blocks_parse_import( (string) $good );
 jpkcom_check( 'accepts its own export', true === $parsed['ok'], $parsed['error'] );
 jpkcom_check( 'a round trip reproduces the roles', $parsed['settings']['roles'] === $settings['roles'] );
+jpkcom_check( 'a clean export reports nothing rejected', 0 === $parsed['rejected'] );
+
+/* A file with invalid entries reports how many were rejected. */
+$dirty  = wp_json_encode(
+    array(
+        'schema' => 1,
+        'roles'  => array( 'editor' => array( 'core/code', 'NOT A BLOCK', 'also bad' ) ),
+    )
+);
+$parsed = jpkcom_allow_blocks_parse_import( (string) $dirty );
+jpkcom_check( 'a file with invalid entries is still accepted', true === $parsed['ok'], $parsed['error'] );
+jpkcom_check( 'the invalid entries are counted', 2 === $parsed['rejected'], (string) $parsed['rejected'] );
 
 /* Merge is per role: a role in the file replaces, a role absent stays. */
 $current = jpkcom_allow_blocks_sanitize_settings(

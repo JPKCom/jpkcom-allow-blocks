@@ -215,13 +215,86 @@ jpkcom_check(
     in_array( 'core/code', $result['roles']['editor'], true )
 );
 
-$result = jpkcom_allow_blocks_apply_form( $settings, array( 'bad name', 'core/code' ), array( 'editor' => array() ) );
-jpkcom_check( 'invalid rendered names are ignored', ! in_array( 'bad name', $result['roles']['editor'], true ) );
+/*
+ * There used to be a test here asserting that an invalid rendered name
+ * ('bad name') does not survive into $result['roles']. It passed even with
+ * the array_filter() it was meant to pin deleted from
+ * jpkcom_allow_blocks_apply_form(), because jpkcom_allow_blocks_sanitize_settings()
+ * - always called on the way out - filters every role list against the
+ * block-name grammar regardless. That filter step in apply_form() was
+ * genuinely redundant, so it was removed from the source rather than kept
+ * for a test that could not actually tell it apart from its absence.
+ */
+
+/* A registered block gets its title recorded as a label. */
+$result = jpkcom_allow_blocks_apply_form( $settings, array( 'core/paragraph' ), array( 'editor' => array() ) );
+jpkcom_check(
+    'a registered block still records its title',
+    ( $result['labels']['core/paragraph'] ?? '' ) === 'Paragraph'
+);
+
+/*
+ * An unregistered row that is ticked allowed for every role and marked
+ * "forget" disappears from the stored settings entirely - both the roles
+ * that used to block it and the label that kept it on screen. Without this,
+ * the row could never be removed: saving with every box ticked leaves the
+ * deny lists empty, but the old code re-recorded a label using the block
+ * name as its own title, which brought the row straight back on the next
+ * render.
+ */
+$settings_with_unregistered = jpkcom_allow_blocks_sanitize_settings(
+    array(
+        'roles'  => array(
+            'editor' => array( 'gone/block' ),
+        ),
+        'labels' => array( 'gone/block' => 'Retired Block' ),
+    )
+);
+
+$result = jpkcom_allow_blocks_apply_form(
+    $settings_with_unregistered,
+    array( 'gone/block' ),
+    array( 'editor' => array( 'gone/block' => '1' ) ),
+    array( 'gone/block' => '1' ),
+    array( 'editor' )
+);
 
 jpkcom_check(
-    'labels are recorded for rendered blocks',
-    ( $result['labels']['core/code'] ?? '' ) !== ''
+    'a forgotten unregistered row leaves every role deny list',
+    ! in_array( 'gone/block', $result['roles']['editor'], true )
 );
+jpkcom_check(
+    'a forgotten unregistered row loses its label',
+    ! isset( $result['labels']['gone/block'] )
+);
+
+/*
+ * Even without ticking "forget", an unregistered row that ends up blocked
+ * by no role after the save loses its label automatically: a name nobody
+ * blocks and nothing registers has no reason to persist. $roles is
+ * restricted to 'editor' here, the only role the fixture ever blocked the
+ * row for, so the outcome is not muddied by other roles the stub declares.
+ */
+$result = jpkcom_allow_blocks_apply_form(
+    $settings_with_unregistered,
+    array( 'gone/block' ),
+    array( 'editor' => array( 'gone/block' => '1' ) ),
+    array(),
+    array( 'editor' )
+);
+
+jpkcom_check(
+    'an unregistered row unblocked everywhere loses its label without forget',
+    ! isset( $result['labels']['gone/block'] )
+);
+
+/* Roles offered as columns are filtered to slugs the store would accept. */
+$GLOBALS['jpkcom_wp_roles']['Shop_Manager'] = array( 'name' => 'Shop Manager', 'capabilities' => array( 'edit_posts' => true ) );
+
+$roles = jpkcom_allow_blocks_editable_roles( true );
+jpkcom_check( 'a role slug sanitize_key() would change is not offered as a column', ! isset( $roles['Shop_Manager'] ) );
+
+unset( $GLOBALS['jpkcom_wp_roles']['Shop_Manager'] );
 
 printf( "\n  %d passed, %d failed\n", $passed, $failed );
 

@@ -46,12 +46,19 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_export_filename' ) ) {
     /**
      * Filename offered for a downloaded export.
      *
+     * Includes the site's host so two exports made on the same day from
+     * different sites do not collide once both files sit in the same
+     * downloads folder.
+     *
      * @since 3.0.0
      *
      * @return string Filename ending in `.json`.
      */
     function jpkcom_allow_blocks_export_filename(): string {
-        return sanitize_file_name( 'jpkcom-allow-blocks-' . gmdate( 'Y-m-d' ) . '.json' );
+        $host = wp_parse_url( home_url(), PHP_URL_HOST );
+        $site = is_string( $host ) && '' !== $host ? $host : 'site';
+
+        return sanitize_file_name( 'jpkcom-allow-blocks-' . $site . '-' . gmdate( 'Y-m-d' ) . '.json' );
     }
 
 }
@@ -66,14 +73,20 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_parse_import' ) ) {
     /**
      * Decode and validate an import payload.
      *
-     * Every rejection path leaves `settings` empty and carries a translated
-     * reason: the caller must be able to show the user why nothing happened,
-     * and nothing here writes anything.
+     * Every rejection path leaves `settings` empty and carries a short error
+     * code rather than a translated message: the code travels through a
+     * redirect's query string, and a free-text message there would let a
+     * crafted link put arbitrary words in front of an administrator.
+     * `includes/admin-page.php`'s `jpkcom_allow_blocks_import_error_message()`
+     * maps each code to its translated text. Nothing here writes anything.
      *
      * @since 3.0.0
      *
      * @param string $json Raw file contents.
-     * @return array{ok:bool,error:string,settings:array} Parse result.
+     * @return array{ok:bool,error:string,rejected:int,settings:array} Parse result. `error` is
+     *         a stable code ('invalid-json', 'bad-schema', 'no-roles') on failure, empty on
+     *         success. `rejected` counts entries the raw payload contained that did not survive
+     *         sanitising, always 0 on failure since nothing is sanitised on that path.
      */
     function jpkcom_allow_blocks_parse_import( string $json ): array {
         $decoded = json_decode( $json, true );
@@ -81,7 +94,8 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_parse_import' ) ) {
         if ( ! is_array( $decoded ) ) {
             return array(
                 'ok'       => false,
-                'error'    => __( 'The file is not valid JSON.', 'jpkcom-allow-blocks' ),
+                'error'    => 'invalid-json',
+                'rejected' => 0,
                 'settings' => array(),
             );
         }
@@ -89,7 +103,8 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_parse_import' ) ) {
         if ( ! isset( $decoded['schema'] ) || 1 !== $decoded['schema'] ) {
             return array(
                 'ok'       => false,
-                'error'    => __( 'This file is not a recognised block permissions export.', 'jpkcom-allow-blocks' ),
+                'error'    => 'bad-schema',
+                'rejected' => 0,
                 'settings' => array(),
             );
         }
@@ -97,7 +112,8 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_parse_import' ) ) {
         if ( ! isset( $decoded['roles'] ) || ! is_array( $decoded['roles'] ) ) {
             return array(
                 'ok'       => false,
-                'error'    => __( 'The file has no roles to import.', 'jpkcom-allow-blocks' ),
+                'error'    => 'no-roles',
+                'rejected' => 0,
                 'settings' => array(),
             );
         }
@@ -105,6 +121,7 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_parse_import' ) ) {
         return array(
             'ok'       => true,
             'error'    => '',
+            'rejected' => jpkcom_allow_blocks_count_rejected( $decoded ),
             'settings' => jpkcom_allow_blocks_sanitize_settings( $decoded ),
         );
     }
@@ -213,16 +230,21 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_import_error_redirect' ) 
      * Used in place of wp_die() for anything short of a failed capability or
      * nonce check, so a rejected upload never throws the user out of the
      * admin interface - they land back on the settings screen with an
-     * explanation instead of a bare error page.
+     * explanation instead of a bare error page. Carries a short error code
+     * rather than a translated message: `admin-page.php` maps the code to
+     * text, and ignores anything it does not recognise, so a crafted link
+     * cannot put arbitrary words in front of an administrator through this
+     * query argument.
      *
      * @since 3.0.0
      *
-     * @param string $message  Translated error message to show.
+     * @param string $code     Error code, one of the keys
+     *                         `jpkcom_allow_blocks_import_error_message()` understands.
      * @param string $back_url Settings page URL to redirect to.
      * @return never
      */
-    function jpkcom_allow_blocks_import_error_redirect( string $message, string $back_url ): never {
-        wp_safe_redirect( add_query_arg( 'jpkcom-ab-import-error', rawurlencode( $message ), $back_url ) );
+    function jpkcom_allow_blocks_import_error_redirect( string $code, string $back_url ): never {
+        wp_safe_redirect( add_query_arg( 'jpkcom-ab-import-error', $code, $back_url ) );
         exit;
     }
 
@@ -257,23 +279,23 @@ add_action( 'admin_post_jpkcom_allow_blocks_import_preview', static function ():
     $file     = $_FILES['jpkcom_allow_blocks_file'] ?? null;
 
     if ( ! is_array( $file ) || ! isset( $file['tmp_name'], $file['error'] ) || ! is_string( $file['tmp_name'] ) || UPLOAD_ERR_OK !== $file['error'] ) {
-        jpkcom_allow_blocks_import_error_redirect( __( 'No file was uploaded.', 'jpkcom-allow-blocks' ), $back_url );
+        jpkcom_allow_blocks_import_error_redirect( 'no-file', $back_url );
     }
 
     if ( ! is_uploaded_file( $file['tmp_name'] ) ) {
-        jpkcom_allow_blocks_import_error_redirect( __( 'The uploaded file could not be verified.', 'jpkcom-allow-blocks' ), $back_url );
+        jpkcom_allow_blocks_import_error_redirect( 'unverified', $back_url );
     }
 
     $size = filesize( $file['tmp_name'] );
 
     if ( false === $size || $size > JPKCOM_ALLOW_BLOCKS_IMPORT_MAX_BYTES ) {
-        jpkcom_allow_blocks_import_error_redirect( __( 'The file is larger than the 1 MB limit.', 'jpkcom-allow-blocks' ), $back_url );
+        jpkcom_allow_blocks_import_error_redirect( 'too-large', $back_url );
     }
 
     $json = file_get_contents( $file['tmp_name'] );
 
     if ( false === $json ) {
-        jpkcom_allow_blocks_import_error_redirect( __( 'The file could not be read.', 'jpkcom-allow-blocks' ), $back_url );
+        jpkcom_allow_blocks_import_error_redirect( 'unreadable', $back_url );
     }
 
     $parsed = jpkcom_allow_blocks_parse_import( $json );
@@ -286,11 +308,21 @@ add_action( 'admin_post_jpkcom_allow_blocks_import_preview', static function ():
      * The parsed settings are stashed server-side rather than round-tripped
      * through the browser: the preview screen only ever needs the token to
      * find them again, which also keeps the whole uploaded payload from
-     * being reflected back into the page.
+     * being reflected back into the page. The rejected count travels
+     * alongside the settings so the preview can tell the user how many
+     * entries in the file were invalid, without having to keep the raw
+     * upload around to recompute it.
      */
     $token = wp_generate_password( 20, false, false );
 
-    set_transient( 'jpkcom_allow_blocks_import_' . $token, $parsed['settings'], 15 * MINUTE_IN_SECONDS );
+    set_transient(
+        'jpkcom_allow_blocks_import_' . $token,
+        array(
+            'settings' => $parsed['settings'],
+            'rejected' => $parsed['rejected'],
+        ),
+        15 * MINUTE_IN_SECONDS
+    );
 
     wp_safe_redirect( add_query_arg( 'jpkcom-ab-import', $token, $back_url ) );
     exit;
@@ -307,22 +339,29 @@ add_action( 'admin_post_jpkcom_allow_blocks_import_apply', static function (): v
     $token    = isset( $_POST['token'] ) && is_string( $_POST['token'] ) ? sanitize_text_field( wp_unslash( $_POST['token'] ) ) : '';
 
     if ( '' === $token ) {
-        jpkcom_allow_blocks_import_error_redirect( __( 'The import preview has expired. Please upload the file again.', 'jpkcom-allow-blocks' ), $back_url );
+        jpkcom_allow_blocks_import_error_redirect( 'expired', $back_url );
     }
 
     $transient_key = 'jpkcom_allow_blocks_import_' . $token;
-    $incoming      = get_transient( $transient_key );
+    $stashed       = get_transient( $transient_key );
 
-    if ( ! is_array( $incoming ) ) {
-        jpkcom_allow_blocks_import_error_redirect( __( 'The import preview has expired. Please upload the file again.', 'jpkcom-allow-blocks' ), $back_url );
+    if ( ! is_array( $stashed ) || ! isset( $stashed['settings'] ) || ! is_array( $stashed['settings'] ) ) {
+        jpkcom_allow_blocks_import_error_redirect( 'expired', $back_url );
     }
 
-    $merged = jpkcom_allow_blocks_merge_import( jpkcom_allow_blocks_get_settings(), $incoming );
+    $merged = jpkcom_allow_blocks_merge_import( jpkcom_allow_blocks_get_settings(), $stashed['settings'] );
 
     jpkcom_allow_blocks_save_settings( $merged );
 
     delete_transient( $transient_key );
 
-    wp_safe_redirect( add_query_arg( 'jpkcom-ab-imported', '1', $back_url ) );
+    $redirect_url = add_query_arg( 'jpkcom-ab-imported', '1', $back_url );
+    $rejected     = isset( $stashed['rejected'] ) ? (int) $stashed['rejected'] : 0;
+
+    if ( $rejected > 0 ) {
+        $redirect_url = add_query_arg( 'jpkcom-ab-rejected', $rejected, $redirect_url );
+    }
+
+    wp_safe_redirect( $redirect_url );
     exit;
 } );

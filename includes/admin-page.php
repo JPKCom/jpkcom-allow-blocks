@@ -39,7 +39,11 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_editable_roles' ) ) {
      * Administrators are never offered: they always bypass the filter, so a
      * checkbox for them would be a lie. Roles without `edit_posts` never see
      * the block editor, so they are hidden by default and only surfaced when
-     * explicitly asked for.
+     * explicitly asked for. A slug the store would refuse (anything
+     * `sanitize_key()` would change, e.g. a custom role registered with
+     * upper case or spaces) is never offered either: the UI must not put a
+     * column on screen whose ticks `jpkcom_allow_blocks_sanitize_settings()`
+     * would silently discard on save.
      *
      * @since 3.0.0
      *
@@ -52,6 +56,10 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_editable_roles' ) ) {
 
         foreach ( $roles as $slug => $role ) {
             if ( 'administrator' === $slug ) {
+                continue;
+            }
+
+            if ( sanitize_key( $slug ) !== $slug ) {
                 continue;
             }
 
@@ -161,9 +169,9 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_render_import_preview' ) 
             return;
         }
 
-        $incoming = get_transient( 'jpkcom_allow_blocks_import_' . $token );
+        $stashed = get_transient( 'jpkcom_allow_blocks_import_' . $token );
 
-        if ( ! is_array( $incoming ) ) {
+        if ( ! is_array( $stashed ) || ! isset( $stashed['settings'] ) || ! is_array( $stashed['settings'] ) ) {
             ?>
             <div class="notice notice-warning">
                 <p><?php echo esc_html__( 'The import preview has expired. Please upload the file again.', 'jpkcom-allow-blocks' ); ?></p>
@@ -171,6 +179,9 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_render_import_preview' ) 
             <?php
             return;
         }
+
+        $incoming = $stashed['settings'];
+        $rejected = isset( $stashed['rejected'] ) ? (int) $stashed['rejected'] : 0;
 
         $current      = jpkcom_allow_blocks_get_settings();
         $known_roles  = array_keys( jpkcom_allow_blocks_editable_roles( true ) );
@@ -194,6 +205,27 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_render_import_preview' ) 
                 );
                 ?>
             </p>
+
+            <?php if ( $rejected > 0 ) : ?>
+                <div class="notice notice-warning">
+                    <p>
+                        <?php
+                        echo esc_html(
+                            sprintf(
+                                /* translators: %d: number of invalid entries found in the imported file. */
+                                _n(
+                                    '%d entry in the file was invalid and will be ignored.',
+                                    '%d entries in the file were invalid and will be ignored.',
+                                    $rejected,
+                                    'jpkcom-allow-blocks'
+                                ),
+                                $rejected
+                            )
+                        );
+                        ?>
+                    </p>
+                </div>
+            <?php endif; ?>
 
             <?php if ( array() !== $preview['unknown_roles'] ) : ?>
                 <div class="notice notice-warning">
@@ -240,6 +272,39 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_render_import_preview' ) 
 
 }
 
+if ( ! function_exists( function: 'jpkcom_allow_blocks_import_error_message' ) ) {
+
+    /**
+     * Translated message for a known import error code.
+     *
+     * The error travels through the query string as a short code rather than
+     * free text, so a crafted link cannot put arbitrary words in front of an
+     * administrator. A code this function does not recognise is ignored -
+     * the caller shows no notice at all rather than falling back to
+     * something generic.
+     *
+     * @since 3.0.0
+     *
+     * @param string $code Error code produced by includes/import-export.php.
+     * @return string Translated message, or '' when the code is unknown.
+     */
+    function jpkcom_allow_blocks_import_error_message( string $code ): string {
+        $messages = array(
+            'no-file'      => __( 'No file was uploaded.', 'jpkcom-allow-blocks' ),
+            'unverified'   => __( 'The uploaded file could not be verified.', 'jpkcom-allow-blocks' ),
+            'too-large'    => __( 'The file is larger than the 1 MB limit.', 'jpkcom-allow-blocks' ),
+            'unreadable'   => __( 'The file could not be read.', 'jpkcom-allow-blocks' ),
+            'invalid-json' => __( 'The file is not valid JSON.', 'jpkcom-allow-blocks' ),
+            'bad-schema'   => __( 'This file is not a recognised block permissions export.', 'jpkcom-allow-blocks' ),
+            'no-roles'     => __( 'The file has no roles to import.', 'jpkcom-allow-blocks' ),
+            'expired'      => __( 'The import preview has expired. Please upload the file again.', 'jpkcom-allow-blocks' ),
+        );
+
+        return $messages[ $code ] ?? '';
+    }
+
+}
+
 if ( ! function_exists( function: 'jpkcom_allow_blocks_render_page' ) ) {
 
     /**
@@ -259,8 +324,11 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_render_page' ) ) {
             return;
         }
 
+        $include_non_editing = isset( $_GET['jpkcom-ab-show-all-roles'] ) && is_string( $_GET['jpkcom-ab-show-all-roles'] )
+            && '1' === wp_unslash( $_GET['jpkcom-ab-show-all-roles'] );
+
         $settings = jpkcom_allow_blocks_get_settings();
-        $roles    = jpkcom_allow_blocks_editable_roles( true );
+        $roles    = jpkcom_allow_blocks_editable_roles( $include_non_editing );
         $rows     = jpkcom_allow_blocks_block_rows( $settings );
 
         $categories = array_values( array_unique( array_column( $rows, 'category' ) ) );
@@ -290,9 +358,41 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_render_page' ) ) {
                 </div>
             <?php endif; ?>
 
-            <?php if ( isset( $_GET['jpkcom-ab-import-error'] ) && is_string( $_GET['jpkcom-ab-import-error'] ) ) : ?>
+            <?php
+            $rejected_count = isset( $_GET['jpkcom-ab-rejected'] ) && is_string( $_GET['jpkcom-ab-rejected'] )
+                ? absint( wp_unslash( $_GET['jpkcom-ab-rejected'] ) )
+                : 0;
+            ?>
+            <?php if ( $rejected_count > 0 ) : ?>
+                <div class="notice notice-warning is-dismissible">
+                    <p>
+                        <?php
+                        echo esc_html(
+                            sprintf(
+                                /* translators: %d: number of invalid entries found in the imported file. */
+                                _n(
+                                    '%d entry in the file was invalid and was ignored.',
+                                    '%d entries in the file were invalid and were ignored.',
+                                    $rejected_count,
+                                    'jpkcom-allow-blocks'
+                                ),
+                                $rejected_count
+                            )
+                        );
+                        ?>
+                    </p>
+                </div>
+            <?php endif; ?>
+
+            <?php
+            $import_error_code    = isset( $_GET['jpkcom-ab-import-error'] ) && is_string( $_GET['jpkcom-ab-import-error'] )
+                ? sanitize_key( wp_unslash( $_GET['jpkcom-ab-import-error'] ) )
+                : '';
+            $import_error_message = '' !== $import_error_code ? jpkcom_allow_blocks_import_error_message( $import_error_code ) : '';
+            ?>
+            <?php if ( '' !== $import_error_message ) : ?>
                 <div class="notice notice-error is-dismissible">
-                    <p><?php echo esc_html( sanitize_text_field( wp_unslash( $_GET['jpkcom-ab-import-error'] ) ) ); ?></p>
+                    <p><?php echo esc_html( $import_error_message ); ?></p>
                 </div>
             <?php endif; ?>
 
@@ -314,6 +414,14 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_render_page' ) ) {
                     </select>
                 </p>
 
+                <form method="get" class="jpkcom-ab-roles-toggle-form">
+                    <input type="hidden" name="page" value="<?php echo esc_attr( jpkcom_allow_blocks_menu_slug() ); ?>" />
+                    <label class="jpkcom-ab-roles-toggle">
+                        <input type="checkbox" id="jpkcom-ab-show-all-roles" name="jpkcom-ab-show-all-roles" value="1" <?php checked( $include_non_editing ); ?> />
+                        <?php echo esc_html__( 'Show roles that cannot edit posts', 'jpkcom-allow-blocks' ); ?>
+                    </label>
+                </form>
+
                 <p class="jpkcom-ab-columns-box">
                     <?php foreach ( $roles as $slug => $label ) : ?>
                         <label class="jpkcom-ab-column-toggle">
@@ -327,6 +435,7 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_render_page' ) ) {
             <form method="post" action="admin-post.php">
                 <?php wp_nonce_field( 'jpkcom_allow_blocks_save', 'jpkcom_allow_blocks_nonce' ); ?>
                 <input type="hidden" name="action" value="jpkcom_allow_blocks_save" />
+                <input type="hidden" name="include_non_editing" value="<?php echo esc_attr( $include_non_editing ? '1' : '0' ); ?>" />
 
                 <?php submit_button( __( 'Save changes', 'jpkcom-allow-blocks' ), 'primary', 'jpkcom-ab-save-top' ); ?>
 
@@ -350,6 +459,10 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_render_page' ) ) {
                                         <span class="jpkcom-ab-warning" title="<?php echo esc_attr__( 'Not currently registered on this site.', 'jpkcom-allow-blocks' ); ?>">
                                             <?php echo esc_html__( 'Unregistered', 'jpkcom-allow-blocks' ); ?>
                                         </span>
+                                        <label class="jpkcom-ab-forget">
+                                            <input type="checkbox" name="forget[<?php echo esc_attr( $row['name'] ); ?>]" value="1" />
+                                            <?php echo esc_html__( 'Forget this block', 'jpkcom-allow-blocks' ); ?>
+                                        </label>
                                     <?php endif; ?>
                                     <input type="hidden" name="rendered[]" value="<?php echo esc_attr( $row['name'] ); ?>" />
                                 </td>
@@ -412,23 +525,55 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_apply_form' ) ) {
      * not show keep whatever they had. A save while the table is filtered must
      * not wipe the rows that were scrolled out of view.
      *
+     * An unregistered row can be dropped for good in two ways: ticking
+     * `forget[<name>]` removes it from every role's deny list and from
+     * `labels` unconditionally, regardless of the per-role checkboxes on the
+     * same row; and, even without ticking it, a row that ends up blocked by
+     * no role at all after this save has its label dropped automatically
+     * once the block is not registered - a name nobody blocks and nothing
+     * registers has no reason to persist. A registered block's label is
+     * always refreshed from its current title, never from the block name:
+     * a block without a real title in its registration is not given one
+     * here either.
+     *
+     * `$rendered` is only deduplicated here, not validated: an invalid name
+     * moving through this function does no harm because
+     * {@see jpkcom_allow_blocks_sanitize_settings()} always filters the role
+     * lists and labels it returns against the block-name grammar, so a
+     * second filter pass here would be provably redundant rather than a
+     * second line of defence.
+     *
      * @since 3.0.0
      *
-     * @param array                        $settings Current validated settings.
-     * @param string[]                     $rendered Block names the form rendered.
-     * @param array<string,array<string,mixed>> $allowed Ticked boxes, keyed role then block name.
+     * @param array                              $settings Current validated settings.
+     * @param string[]                            $rendered Block names the form rendered.
+     * @param array<string,array<string,mixed>>   $allowed  Ticked boxes, keyed role then block name.
+     * @param array<string,mixed>                 $forget   Rows whose "forget this block" box was ticked, keyed by block name.
+     * @param string[]|null                       $roles    Role slugs to process, matching what was rendered. Defaults to
+     *                                                       every editable role, including ones that cannot edit posts.
      * @return array New settings, not yet stored.
      */
-    function jpkcom_allow_blocks_apply_form( array $settings, array $rendered, array $allowed ): array {
-        $rendered = array_values( array_unique( array_filter( $rendered, 'jpkcom_allow_blocks_is_valid_block_name' ) ) );
-        $rows     = array_column( jpkcom_allow_blocks_block_rows( $settings ), null, 'name' );
+    function jpkcom_allow_blocks_apply_form( array $settings, array $rendered, array $allowed, array $forget = array(), ?array $roles = null ): array {
+        $rendered = array_values( array_unique( $rendered ) );
+        $roles    = $roles ?? array_keys( jpkcom_allow_blocks_editable_roles( true ) );
 
-        foreach ( array_keys( jpkcom_allow_blocks_editable_roles( true ) ) as $role ) {
+        $forgotten = array_values(
+            array_intersect(
+                array_filter( array_keys( $forget ), 'jpkcom_allow_blocks_is_valid_block_name' ),
+                $rendered
+            )
+        );
+
+        foreach ( $roles as $role ) {
             $previous = $settings['roles'][ $role ] ?? array();
             $kept     = array_values( array_diff( $previous, $rendered ) );
             $ticked   = $allowed[ $role ] ?? array();
 
             foreach ( $rendered as $name ) {
+                if ( in_array( $name, $forgotten, true ) ) {
+                    continue;
+                }
+
                 if ( ! isset( $ticked[ $name ] ) ) {
                     $kept[] = $name;
                 }
@@ -437,11 +582,39 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_apply_form' ) ) {
             $settings['roles'][ $role ] = array_values( array_unique( $kept ) );
         }
 
-        foreach ( $rendered as $name ) {
-            $title = $rows[ $name ]['title'] ?? $name;
+        $registered = WP_Block_Type_Registry::get_instance()->get_all_registered();
 
-            if ( is_string( $title ) && '' !== $title ) {
-                $settings['labels'][ $name ] = $title;
+        foreach ( $rendered as $name ) {
+            if ( in_array( $name, $forgotten, true ) ) {
+                unset( $settings['labels'][ $name ] );
+                continue;
+            }
+
+            if ( isset( $registered[ $name ] ) ) {
+                $title = (string) ( $registered[ $name ]->title ?? '' );
+
+                if ( '' !== $title ) {
+                    $settings['labels'][ $name ] = $title;
+                }
+
+                continue;
+            }
+
+            if ( ! isset( $settings['labels'][ $name ] ) ) {
+                continue;
+            }
+
+            $still_blocked = false;
+
+            foreach ( $settings['roles'] as $blocked ) {
+                if ( in_array( $name, $blocked, true ) ) {
+                    $still_blocked = true;
+                    break;
+                }
+            }
+
+            if ( ! $still_blocked ) {
+                unset( $settings['labels'][ $name ] );
             }
         }
 
@@ -465,8 +638,27 @@ add_action( 'admin_post_jpkcom_allow_blocks_save', static function (): void {
         ? wp_unslash( $_POST['allowed'] )
         : array();
 
+    $forget = isset( $_POST['forget'] ) && is_array( $_POST['forget'] )
+        ? wp_unslash( $_POST['forget'] )
+        : array();
+
+    /*
+     * The role set used to compute the diff must match what was rendered
+     * exactly, or saving would drop settings for roles the form never
+     * showed. The hidden field carries the same value the page was
+     * rendered with.
+     */
+    $include_non_editing = isset( $_POST['include_non_editing'] ) && '1' === $_POST['include_non_editing'];
+    $roles                = array_keys( jpkcom_allow_blocks_editable_roles( $include_non_editing ) );
+
     jpkcom_allow_blocks_save_settings(
-        jpkcom_allow_blocks_apply_form( jpkcom_allow_blocks_get_settings(), $rendered, is_array( $allowed ) ? $allowed : array() )
+        jpkcom_allow_blocks_apply_form(
+            jpkcom_allow_blocks_get_settings(),
+            $rendered,
+            is_array( $allowed ) ? $allowed : array(),
+            is_array( $forget ) ? $forget : array(),
+            $roles
+        )
     );
 
     wp_safe_redirect( add_query_arg( 'jpkcom-ab-saved', '1', admin_url( 'themes.php?page=' . jpkcom_allow_blocks_menu_slug() ) ) );
