@@ -215,7 +215,7 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_render_page' ) ) {
                 <?php wp_nonce_field( 'jpkcom_allow_blocks_save', 'jpkcom_allow_blocks_nonce' ); ?>
                 <input type="hidden" name="action" value="jpkcom_allow_blocks_save" />
 
-                <?php submit_button( __( 'Save changes', 'jpkcom-allow-blocks' ) ); ?>
+                <?php submit_button( __( 'Save changes', 'jpkcom-allow-blocks' ), 'primary', 'jpkcom-ab-save-top' ); ?>
 
                 <table class="widefat striped jpkcom-ab-table">
                     <thead>
@@ -264,7 +264,7 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_render_page' ) ) {
                     </tbody>
                 </table>
 
-                <?php submit_button( __( 'Save changes', 'jpkcom-allow-blocks' ) ); ?>
+                <?php submit_button( __( 'Save changes', 'jpkcom-allow-blocks' ), 'primary', 'jpkcom-ab-save-bottom' ); ?>
             </form>
 
             <h2><?php echo esc_html__( 'Import and export', 'jpkcom-allow-blocks' ); ?></h2>
