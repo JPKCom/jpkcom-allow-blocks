@@ -3,7 +3,7 @@
 Plugin Name: JPKCom Allow Block Types
 Plugin URI: https://github.com/JPKCom/jpkcom-allow-blocks
 Description: Only allow certain types of blocks in Gutenberg for non admins.
-Version: 2.0.8
+Version: 3.0.0
 Author: Jean Pierre Kolb <jpk@jpkc.com>
 Author URI: https://www.jpkc.com
 Contributors: JPKCom
@@ -11,7 +11,7 @@ Tags: Admin, Block, Bootstrap, Editor, Gutenberg
 Requires at least: 6.9
 Tested up to: 7.1
 Requires PHP: 8.3
-Stable tag: 2.0.8
+Stable tag: 3.0.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
@@ -29,7 +29,7 @@ if ( ! defined( constant_name: 'WPINC' ) ) {
  * @since 2.0.3
  */
 if ( ! defined( 'JPKCOM_ALLOW_BLOCKS_VERSION' ) ) {
-    define( 'JPKCOM_ALLOW_BLOCKS_VERSION', '2.0.8' );
+    define( 'JPKCOM_ALLOW_BLOCKS_VERSION', '3.0.0' );
 }
 
 
@@ -58,49 +58,39 @@ add_action( 'init', static function (): void {
     }
 }, 5 );
 
-// https://developer.wordpress.org/block-editor/reference-guides/core-blocks/
+if ( ! defined( 'JPKCOM_ALLOW_BLOCKS_PATH' ) ) {
+    define( constant_name: 'JPKCOM_ALLOW_BLOCKS_PATH', value: plugin_dir_path( __FILE__ ) );
+}
 
+/**
+ * Load the plugin modules.
+ *
+ * Loaded on plugins_loaded so the settings store exists before anything reads
+ * it, and well before `allowed_block_types_all` is applied when the editor
+ * assembles its settings in wp-admin.
+ *
+ * @since 3.0.0
+ *
+ * @return void
+ */
+add_action( 'plugins_loaded', static function (): void {
 
-if ( ! is_admin() ) {
+    $modules = array(
+        'includes/settings-store.php',
+        'includes/block-filter.php',
+    );
 
-    if ( ! function_exists( function: 'jpkcom_allowed_block_types' ) ) {
-
-        /**
-         * Restrict the editor to a curated list of allowed block types.
-         *
-         * @since 1.0.0
-         *
-         * @param bool|string[]            $allowed_block_types  Array of allowed block types, or boolean to enable/disable all.
-         * @param \WP_Block_Editor_Context $block_editor_context The current block editor context.
-         * @return string[] Allowed block type names.
-         */
-        function jpkcom_allowed_block_types( $allowed_block_types, $block_editor_context ): array {
-
-            $allowed_block_types = array(
-                'areoi/accordion-item',
-                'areoi/accordion',
-                'areoi/button',
-                'areoi/carousel-item',
-                'areoi/carousel',
-                'areoi/column-break',
-                'areoi/column',
-                'areoi/container',
-                'areoi/div',
-                'areoi/row',
-                'areoi/strip',
-                'core/gallery',
-                'core/heading',
-                'core/image',
-                'core/list-item',
-                'core/list',
-                'core/paragraph',
-            );
-
-            return $allowed_block_types;
-        }
-
+    if ( is_admin() ) {
+        $modules[] = 'includes/admin-page.php';
+        $modules[] = 'includes/import-export.php';
     }
 
-    add_filter( 'allowed_block_types_all', 'jpkcom_allowed_block_types', 10, 2 );
+    foreach ( $modules as $module ) {
+        $file = JPKCOM_ALLOW_BLOCKS_PATH . $module;
 
-}
+        if ( file_exists( $file ) ) {
+            require_once $file;
+        }
+    }
+
+}, 5 );
