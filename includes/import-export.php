@@ -157,27 +157,28 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_import_preview' ) ) {
      * exists on this site. `unknown_roles` names incoming roles absent from
      * `$known_roles` so the import is not silently doing more than it
      * appears to. `unknown_blocks` names blocks the incoming file mentions
-     * that this site's current settings do not mention anywhere, since this
-     * function has no access to the live block registry.
+     * that are not in `$known_blocks` - the live block registry, passed in
+     * rather than read here so this stays a pure, testable function. That
+     * includes a block already present in `$current`: a plugin that is
+     * currently switched off still leaves its block name in the stored
+     * settings, and the whole point of this count is to surface exactly
+     * that "this install cannot currently offer it" case.
      *
      * @since 3.0.0
      *
-     * @param array    $current    Current validated settings.
-     * @param array    $incoming   Validated settings decoded from an import file.
+     * @param array    $current     Current validated settings.
+     * @param array    $incoming    Validated settings decoded from an import file.
      * @param string[] $known_roles Role slugs that exist on this site.
+     * @param string[] $known_blocks Block names registered on this site. Defaults to
+     *                                empty, which marks every incoming block unknown;
+     *                                callers should always pass the real registry list.
      * @return array{roles_changed:int,blocks_changed:int,unknown_roles:string[],unknown_blocks:string[]} Preview summary.
      */
-    function jpkcom_allow_blocks_import_preview( array $current, array $incoming, array $known_roles ): array {
+    function jpkcom_allow_blocks_import_preview( array $current, array $incoming, array $known_roles, array $known_blocks = array() ): array {
         $current  = jpkcom_allow_blocks_sanitize_settings( $current );
         $incoming = jpkcom_allow_blocks_sanitize_settings( $incoming );
 
-        $known_blocks = array_values(
-            array_unique( array_merge( array_keys( $current['labels'] ), ...array_values( $current['roles'] ) ) )
-        );
-
-        $incoming_blocks = array_values(
-            array_unique( array_merge( array_keys( $incoming['labels'] ), ...array_values( $incoming['roles'] ) ) )
-        );
+        $incoming_blocks = array_values( array_unique( array_merge( array(), ...array_values( $incoming['roles'] ) ) ) );
 
         $roles_changed  = 0;
         $blocks_changed = 0;
@@ -264,8 +265,9 @@ add_action( 'admin_post_jpkcom_allow_blocks_import_preview', static function ():
         wp_die( esc_html__( 'The file could not be re-encoded for confirmation.', 'jpkcom-allow-blocks' ), '', array( 'response' => 400 ) );
     }
 
-    $known_roles = array_keys( jpkcom_allow_blocks_editable_roles( true ) );
-    $preview     = jpkcom_allow_blocks_import_preview( jpkcom_allow_blocks_get_settings(), $parsed['settings'], $known_roles );
+    $known_roles  = array_keys( jpkcom_allow_blocks_editable_roles( true ) );
+    $known_blocks = array_keys( WP_Block_Type_Registry::get_instance()->get_all_registered() );
+    $preview      = jpkcom_allow_blocks_import_preview( jpkcom_allow_blocks_get_settings(), $parsed['settings'], $known_roles, $known_blocks );
 
     ?>
     <!DOCTYPE html>

@@ -162,6 +162,29 @@ jpkcom_check( 'preview counts the changed roles', $preview['roles_changed'] === 
 jpkcom_check( 'preview names roles unknown here', $preview['unknown_roles'] === array( 'shop_manager' ) );
 jpkcom_check( 'preview counts changed blocks', $preview['blocks_changed'] > 0 );
 
+/*
+ * unknown_blocks is scored against the live block registry, passed in as
+ * $known_blocks, not against what is already in the stored settings.
+ */
+$incoming_blocks = jpkcom_allow_blocks_sanitize_settings(
+    array( 'roles' => array( 'editor' => array( 'core/paragraph', 'gone/block' ) ) )
+);
+
+$preview = jpkcom_allow_blocks_import_preview( $current, $incoming_blocks, array( 'editor', 'author' ), array( 'core/paragraph' ) );
+jpkcom_check( 'preview names blocks unknown to the registry', $preview['unknown_blocks'] === array( 'gone/block' ), json_encode( $preview['unknown_blocks'] ) );
+
+/* A block already stored here (from $current) still counts as unknown when it is not in the registry. */
+$incoming_known_here = jpkcom_allow_blocks_sanitize_settings(
+    array( 'roles' => array( 'editor' => array( 'core/code' ) ) )
+);
+
+$preview = jpkcom_allow_blocks_import_preview( $current, $incoming_known_here, array( 'editor', 'author' ), array( 'core/paragraph' ) );
+jpkcom_check(
+    'a block already in the stored settings still counts as unknown when off the registry',
+    $preview['unknown_blocks'] === array( 'core/code' ),
+    json_encode( $preview['unknown_blocks'] )
+);
+
 printf( "\n  %d passed, %d failed\n", $passed, $failed );
 
 exit( $failed > 0 ? 1 : 0 );
