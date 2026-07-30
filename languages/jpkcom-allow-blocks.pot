@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-30T18:04:18+02:00\n"
+"POT-Creation-Date: 2026-07-30T18:14:49+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: jpkcom-allow-blocks\n"
@@ -39,72 +39,81 @@ msgstr ""
 msgid "https://www.jpkc.com"
 msgstr ""
 
-#: includes/admin-page.php:173
-#: includes/admin-page.php:359
-#: includes/admin-page.php:360
+#: includes/admin-page.php:172
+#: includes/admin-page.php:366
+#: includes/admin-page.php:367
 msgid "Block permissions"
 msgstr ""
 
-#: includes/admin-page.php:175
+#: includes/admin-page.php:174
 msgid "Choose which blocks each role may insert. Administrators always have every block."
 msgstr ""
 
-#: includes/admin-page.php:179
+#: includes/admin-page.php:178
 msgid "Block permissions saved."
 msgstr ""
 
-#: includes/admin-page.php:185
+#: includes/admin-page.php:184
 msgid "Block permissions imported."
 msgstr ""
 
-#: includes/admin-page.php:192
-msgid "Export"
-msgstr ""
-
-#: includes/admin-page.php:198
-msgid "Block permissions file"
-msgstr ""
-
-#: includes/admin-page.php:200
-msgid "Import…"
-msgstr ""
-
-#: includes/admin-page.php:205
+#: includes/admin-page.php:190
 msgid "Search blocks"
 msgstr ""
 
-#: includes/admin-page.php:206
+#: includes/admin-page.php:191
 msgid "Search blocks…"
 msgstr ""
 
-#: includes/admin-page.php:210
-#: includes/admin-page.php:237
+#: includes/admin-page.php:195
+#: includes/admin-page.php:224
 msgid "Category"
 msgstr ""
 
-#: includes/admin-page.php:212
+#: includes/admin-page.php:197
 msgid "All categories"
 msgstr ""
 
-#: includes/admin-page.php:236
+#: includes/admin-page.php:218
+#: includes/admin-page.php:267
+msgid "Save changes"
+msgstr ""
+
+#: includes/admin-page.php:223
 msgid "Block"
 msgstr ""
 
-#: includes/admin-page.php:250
+#: includes/admin-page.php:237
 msgid "Not currently registered on this site."
 msgstr ""
 
-#: includes/admin-page.php:251
+#: includes/admin-page.php:238
 msgid "Unregistered"
 msgstr ""
 
 #. translators: 1: block title, 2: role name.
-#: includes/admin-page.php:263
+#: includes/admin-page.php:250
 #, php-format
 msgid "Allow %1$s for %2$s"
 msgstr ""
 
-#: includes/admin-page.php:335
+#: includes/admin-page.php:270
+msgid "Import and export"
+msgstr ""
+
+#: includes/admin-page.php:276
+msgid "Export"
+msgstr ""
+
+#: includes/admin-page.php:282
+msgid "Block permissions file"
+msgstr ""
+
+#: includes/admin-page.php:284
+msgid "Import…"
+msgstr ""
+
+#: includes/admin-page.php:342
 msgid "You are not allowed to change block permissions."
 msgstr ""
 

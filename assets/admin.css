@@ -8,14 +8,26 @@
 .jpkcom-ab-controls {
 	display: flex;
 	flex-wrap: wrap;
-	align-items: flex-start;
+	align-items: center;
 	gap: 1.5em;
 	margin: 1em 0;
+}
+
+.jpkcom-ab-controls p {
+	margin: 0;
+}
+
+.jpkcom-ab-controls .search-box,
+.jpkcom-ab-controls .jpkcom-ab-category-box {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5em;
 }
 
 .jpkcom-ab-columns-box {
 	display: flex;
 	flex-wrap: wrap;
+	align-items: center;
 	gap: 0.75em 1.25em;
 }
 
@@ -24,6 +36,17 @@
 	align-items: center;
 	gap: 0.35em;
 	white-space: nowrap;
+}
+
+.jpkcom-ab-import-export {
+	margin: 1em 0;
+}
+
+.jpkcom-ab-io-row {
+	display: flex;
+	align-items: center;
+	gap: 0.75em;
+	margin: 0.75em 0;
 }
 
 .jpkcom-ab-table {

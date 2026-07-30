@@ -140,11 +140,10 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_render_page' ) ) {
     /**
      * Render the settings screen.
      *
-     * Purely presentational: emits the form and checkbox matrix, but the form
-     * has no working submit handler until the admin-post.php action from
-     * Task 5 exists. A checkbox is checked when the block is not blocked for
-     * that role, i.e. it reflects the allow list rather than the stored deny
-     * list.
+     * Emits the controls, the save form with its checkbox matrix, and the
+     * import/export section, in that order. A checkbox is checked when the
+     * block is not blocked for that role, i.e. it reflects the allow list
+     * rather than the stored deny list.
      *
      * @since 3.0.0
      *
@@ -186,20 +185,6 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_render_page' ) ) {
                 </div>
             <?php endif; ?>
 
-            <form method="post" action="admin-post.php" class="jpkcom-ab-export-form">
-                <?php wp_nonce_field( 'jpkcom_allow_blocks_export' ); ?>
-                <input type="hidden" name="action" value="jpkcom_allow_blocks_export" />
-                <button type="submit" class="button"><?php echo esc_html__( 'Export', 'jpkcom-allow-blocks' ); ?></button>
-            </form>
-
-            <form method="post" action="admin-post.php" enctype="multipart/form-data" class="jpkcom-ab-import-form">
-                <?php wp_nonce_field( 'jpkcom_allow_blocks_import_preview' ); ?>
-                <input type="hidden" name="action" value="jpkcom_allow_blocks_import_preview" />
-                <label for="jpkcom-ab-import-file" class="screen-reader-text"><?php echo esc_html__( 'Block permissions file', 'jpkcom-allow-blocks' ); ?></label>
-                <input type="file" id="jpkcom-ab-import-file" name="jpkcom_allow_blocks_file" accept="application/json,.json" required="required" />
-                <button type="submit" class="button"><?php echo esc_html__( 'Import…', 'jpkcom-allow-blocks' ); ?></button>
-            </form>
-
             <div class="jpkcom-ab-controls">
                 <p class="search-box">
                     <label for="jpkcom-ab-search" class="screen-reader-text"><?php echo esc_html__( 'Search blocks', 'jpkcom-allow-blocks' ); ?></label>
@@ -229,6 +214,8 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_render_page' ) ) {
             <form method="post" action="admin-post.php">
                 <?php wp_nonce_field( 'jpkcom_allow_blocks_save', 'jpkcom_allow_blocks_nonce' ); ?>
                 <input type="hidden" name="action" value="jpkcom_allow_blocks_save" />
+
+                <?php submit_button( __( 'Save changes', 'jpkcom-allow-blocks' ) ); ?>
 
                 <table class="widefat striped jpkcom-ab-table">
                     <thead>
@@ -276,7 +263,27 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_render_page' ) ) {
                         <?php endforeach; ?>
                     </tbody>
                 </table>
+
+                <?php submit_button( __( 'Save changes', 'jpkcom-allow-blocks' ) ); ?>
             </form>
+
+            <h2><?php echo esc_html__( 'Import and export', 'jpkcom-allow-blocks' ); ?></h2>
+
+            <div class="jpkcom-ab-import-export">
+                <form method="post" action="admin-post.php" class="jpkcom-ab-export-form jpkcom-ab-io-row">
+                    <?php wp_nonce_field( 'jpkcom_allow_blocks_export' ); ?>
+                    <input type="hidden" name="action" value="jpkcom_allow_blocks_export" />
+                    <button type="submit" class="button"><?php echo esc_html__( 'Export', 'jpkcom-allow-blocks' ); ?></button>
+                </form>
+
+                <form method="post" action="admin-post.php" enctype="multipart/form-data" class="jpkcom-ab-import-form jpkcom-ab-io-row">
+                    <?php wp_nonce_field( 'jpkcom_allow_blocks_import_preview' ); ?>
+                    <input type="hidden" name="action" value="jpkcom_allow_blocks_import_preview" />
+                    <label for="jpkcom-ab-import-file" class="screen-reader-text"><?php echo esc_html__( 'Block permissions file', 'jpkcom-allow-blocks' ); ?></label>
+                    <input type="file" id="jpkcom-ab-import-file" name="jpkcom_allow_blocks_file" accept="application/json,.json" required="required" />
+                    <button type="submit" class="button"><?php echo esc_html__( 'Import…', 'jpkcom-allow-blocks' ); ?></button>
+                </form>
+            </div>
         </div>
         <?php
     }

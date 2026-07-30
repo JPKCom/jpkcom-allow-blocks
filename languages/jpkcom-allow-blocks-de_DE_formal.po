@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: JPKCom Allow Block Types 3.0.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/jpkcom-allow-blocks\n"
-"POT-Creation-Date: 2026-07-30T18:04:18+02:00\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/jpkcom-allow-"
+"blocks\n"
+"POT-Creation-Date: 2026-07-30T18:14:49+02:00\n"
 "PO-Revision-Date: 2026-07-30 12:00+0100\n"
 "Last-Translator: Jean Pierre Kolb <jpk@jpkc.com>\n"
 "Language-Team: German (Formal)\n"
@@ -32,7 +33,9 @@ msgstr ""
 #. Description of the plugin
 #: jpkcom-allow-blocks.php
 msgid "Only allow certain types of blocks in Gutenberg for non admins."
-msgstr "Beschränkt für Nicht-Administratoren, welche Blocktypen im Gutenberg-Editor verwendet werden dürfen."
+msgstr ""
+"Beschränkt für Nicht-Administratoren, welche Blocktypen im Gutenberg-Editor "
+"verwendet werden dürfen."
 
 #. Author of the plugin
 #: jpkcom-allow-blocks.php
@@ -44,82 +47,100 @@ msgstr ""
 msgid "https://www.jpkc.com"
 msgstr ""
 
-#: includes/admin-page.php:173
-#: includes/admin-page.php:359
-#: includes/admin-page.php:360
+#: includes/admin-page.php:172 includes/admin-page.php:366
+#: includes/admin-page.php:367
 msgid "Block permissions"
 msgstr "Blockberechtigungen"
 
-#: includes/admin-page.php:175
-msgid "Choose which blocks each role may insert. Administrators always have every block."
-msgstr "Wählen Sie aus, welche Blöcke jede Rolle einfügen darf. Administratoren haben immer Zugriff auf alle Blöcke."
+#: includes/admin-page.php:174
+msgid ""
+"Choose which blocks each role may insert. Administrators always have every "
+"block."
+msgstr ""
+"Wählen Sie aus, welche Blöcke jede Rolle einfügen darf. Administratoren "
+"haben immer Zugriff auf alle Blöcke."
 
-#: includes/admin-page.php:179
+#: includes/admin-page.php:178
 msgid "Block permissions saved."
 msgstr "Blockberechtigungen gespeichert."
 
-#: includes/admin-page.php:185
+#: includes/admin-page.php:184
 msgid "Block permissions imported."
 msgstr "Blockberechtigungen importiert."
 
-#: includes/admin-page.php:192
-msgid "Export"
-msgstr "Exportieren"
-
-#: includes/admin-page.php:198
-msgid "Block permissions file"
-msgstr "Blockberechtigungsdatei"
-
-#: includes/admin-page.php:200
-msgid "Import…"
-msgstr "Importieren…"
-
-#: includes/admin-page.php:205
+#: includes/admin-page.php:190
 msgid "Search blocks"
 msgstr "Blöcke suchen"
 
-#: includes/admin-page.php:206
+#: includes/admin-page.php:191
 msgid "Search blocks…"
 msgstr "Blöcke suchen…"
 
-#: includes/admin-page.php:210
-#: includes/admin-page.php:237
+#: includes/admin-page.php:195 includes/admin-page.php:224
 msgid "Category"
 msgstr "Kategorie"
 
-#: includes/admin-page.php:212
+#: includes/admin-page.php:197
 msgid "All categories"
 msgstr "Alle Kategorien"
 
-#: includes/admin-page.php:236
+#: includes/admin-page.php:218 includes/admin-page.php:267
+msgid "Save changes"
+msgstr "Änderungen speichern"
+
+#: includes/admin-page.php:223
 msgid "Block"
 msgstr "Block"
 
-#: includes/admin-page.php:250
+#: includes/admin-page.php:237
 msgid "Not currently registered on this site."
 msgstr "Auf dieser Website derzeit nicht registriert."
 
-#: includes/admin-page.php:251
+#: includes/admin-page.php:238
 msgid "Unregistered"
 msgstr "Nicht registriert"
 
 #. translators: 1: block title, 2: role name.
-#: includes/admin-page.php:263
+#: includes/admin-page.php:250
 #, php-format
 msgid "Allow %1$s for %2$s"
 msgstr "%1$s für %2$s erlauben"
 
-#: includes/admin-page.php:335
+#: includes/admin-page.php:270
+msgid "Import and export"
+msgstr "Import und Export"
+
+#: includes/admin-page.php:276
+msgid "Export"
+msgstr "Exportieren"
+
+#: includes/admin-page.php:282
+msgid "Block permissions file"
+msgstr "Blockberechtigungsdatei"
+
+#: includes/admin-page.php:284
+msgid "Import…"
+msgstr "Importieren…"
+
+#: includes/admin-page.php:342
 msgid "You are not allowed to change block permissions."
 msgstr "Sie dürfen die Blockberechtigungen nicht ändern."
 
 #: includes/class-plugin-updater.php:475
-msgid "Security verification failed: the update manifest could not be loaded, so the package cannot be verified."
-msgstr "Sicherheitsprüfung fehlgeschlagen: Das Update-Manifest konnte nicht geladen werden, daher kann das Paket nicht verifiziert werden."
+msgid ""
+"Security verification failed: the update manifest could not be loaded, so "
+"the package cannot be verified."
+msgstr ""
+"Sicherheitsprüfung fehlgeschlagen: Das Update-Manifest konnte nicht geladen "
+"werden, daher kann das Paket nicht verifiziert werden."
 
 #: includes/class-plugin-updater.php:482
-msgid "Security verification failed: the update manifest contains no SHA-256 checksum, so the package cannot be verified."
-msgstr "Sicherheitsprüfung fehlgeschlagen: Das Update-Manifest enthält keine SHA-256-Prüfsumme, daher kann das Paket nicht verifiziert werden."
+msgid ""
+"Security verification failed: the update manifest contains no SHA-256 "
+"checksum, so the package cannot be verified."
+msgstr ""
+"Sicherheitsprüfung fehlgeschlagen: Das Update-Manifest enthält keine SHA-256-"
+"Prüfsumme, daher kann das Paket nicht verifiziert werden."
 
 #: includes/class-plugin-updater.php:492
 #, php-format
@@ -129,8 +150,12 @@ msgstr "Download fehlgeschlagen: %s"
 #. translators: 1: expected SHA-256 hash, 2: calculated SHA-256 hash
 #: includes/class-plugin-updater.php:508
 #, php-format
-msgid "Security verification failed: Plugin checksum mismatch. Expected: %1$s, Got: %2$s"
-msgstr "Sicherheitsprüfung fehlgeschlagen: Prüfsumme des Plugins stimmt nicht überein. Erwartet: %1$s, Erhalten: %2$s"
+msgid ""
+"Security verification failed: Plugin checksum mismatch. Expected: %1$s, Got: "
+"%2$s"
+msgstr ""
+"Sicherheitsprüfung fehlgeschlagen: Prüfsumme des Plugins stimmt nicht "
+"überein. Erwartet: %1$s, Erhalten: %2$s"
 
 #: includes/import-export.php:84
 msgid "The file is not valid JSON."
@@ -148,8 +173,7 @@ msgstr "Die Datei enthält keine zu importierenden Rollen."
 msgid "You are not allowed to export block permissions."
 msgstr "Sie dürfen Blockberechtigungen nicht exportieren."
 
-#: includes/import-export.php:228
-#: includes/import-export.php:344
+#: includes/import-export.php:228 includes/import-export.php:344
 msgid "You are not allowed to import block permissions."
 msgstr "Sie dürfen Blockberechtigungen nicht importieren."
 
@@ -173,8 +197,7 @@ msgstr "Die Datei konnte nicht gelesen werden."
 msgid "The file could not be re-encoded for confirmation."
 msgstr "Die Datei konnte zur Bestätigung nicht neu kodiert werden."
 
-#: includes/import-export.php:277
-#: includes/import-export.php:281
+#: includes/import-export.php:277 includes/import-export.php:281
 msgid "Import preview"
 msgstr "Importvorschau"
 
@@ -182,13 +205,17 @@ msgstr "Importvorschau"
 #: includes/import-export.php:288
 #, php-format
 msgid "%1$d role(s) will change, touching %2$d block permission entry/entries."
-msgstr "Es ändern sich %1$d Rolle(n), betroffen sind %2$d Blockberechtigungseintrag/-einträge."
+msgstr ""
+"Es ändern sich %1$d Rolle(n), betroffen sind %2$d Blockberechtigungseintrag/-"
+"einträge."
 
 #. translators: %s: comma-separated role slugs.
 #: includes/import-export.php:303
 #, php-format
 msgid "These roles do not exist on this site and will be stored anyway: %s"
-msgstr "Diese Rollen existieren auf dieser Website nicht und werden trotzdem gespeichert: %s"
+msgstr ""
+"Diese Rollen existieren auf dieser Website nicht und werden trotzdem "
+"gespeichert: %s"
 
 #. translators: %s: comma-separated block names.
 #: includes/import-export.php:319
