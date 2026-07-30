@@ -71,6 +71,12 @@ if ( ! function_exists( function: 'wp_json_encode' ) ) {
     }
 }
 
+if ( ! function_exists( function: '__' ) ) {
+    function __( string $text, string $domain = 'default' ): string {
+        return $text;
+    }
+}
+
 /* Registering the export handler at require time needs add_action(). */
 $GLOBALS['jpkcom_hooks'] = array();
 
@@ -121,6 +127,40 @@ jpkcom_check( 'the payload records the plugin version', ( $payload['plugin_versi
 jpkcom_check( 'the payload records the site', ( $payload['site_url'] ?? '' ) === 'https://example.test' );
 jpkcom_check( 'the payload is JSON-encodable', is_string( wp_json_encode( $payload ) ) );
 jpkcom_check( 'the filename ends in .json', str_ends_with( haystack: jpkcom_allow_blocks_export_filename(), needle: '.json' ) );
+
+echo "\njpkcom-allow-blocks: import\n";
+
+/* Parsing rejects anything that is not a valid payload, without changing state. */
+foreach ( array( 'not json', '[]', '{"schema":99}', '{"roles":[]}' ) as $bad ) {
+    $parsed = jpkcom_allow_blocks_parse_import( $bad );
+    jpkcom_check( sprintf( 'rejects %s', var_export( $bad, true ) ), false === $parsed['ok'], $parsed['error'] );
+}
+
+$good   = wp_json_encode( jpkcom_allow_blocks_export_payload( $settings ) );
+$parsed = jpkcom_allow_blocks_parse_import( (string) $good );
+jpkcom_check( 'accepts its own export', true === $parsed['ok'], $parsed['error'] );
+jpkcom_check( 'a round trip reproduces the roles', $parsed['settings']['roles'] === $settings['roles'] );
+
+/* Merge is per role: a role in the file replaces, a role absent stays. */
+$current = jpkcom_allow_blocks_sanitize_settings(
+    array( 'roles' => array( 'editor' => array( 'core/code' ), 'author' => array( 'core/html' ) ) )
+);
+$incoming = jpkcom_allow_blocks_sanitize_settings(
+    array( 'roles' => array( 'editor' => array( 'core/table' ), 'shop_manager' => array( 'core/video' ) ) )
+);
+
+$merged = jpkcom_allow_blocks_merge_import( $current, $incoming );
+
+jpkcom_check( 'a role in the file replaces its list', $merged['roles']['editor'] === array( 'core/table' ) );
+jpkcom_check( 'a role absent from the file is untouched', $merged['roles']['author'] === array( 'core/html' ) );
+jpkcom_check( 'a role unknown here is stored anyway', ( $merged['roles']['shop_manager'] ?? array() ) === array( 'core/video' ) );
+
+/* The preview names what will happen before anything is written. */
+$preview = jpkcom_allow_blocks_import_preview( $current, $incoming, array( 'editor', 'author' ) );
+
+jpkcom_check( 'preview counts the changed roles', $preview['roles_changed'] === 2, json_encode( $preview ) );
+jpkcom_check( 'preview names roles unknown here', $preview['unknown_roles'] === array( 'shop_manager' ) );
+jpkcom_check( 'preview counts changed blocks', $preview['blocks_changed'] > 0 );
 
 printf( "\n  %d passed, %d failed\n", $passed, $failed );
 
