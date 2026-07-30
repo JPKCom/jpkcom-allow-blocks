@@ -205,12 +205,35 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_import_preview' ) ) {
 
 }
 
+if ( ! function_exists( function: 'jpkcom_allow_blocks_import_error_redirect' ) ) {
+
+    /**
+     * Redirect back to the settings page with an import error notice.
+     *
+     * Used in place of wp_die() for anything short of a failed capability or
+     * nonce check, so a rejected upload never throws the user out of the
+     * admin interface - they land back on the settings screen with an
+     * explanation instead of a bare error page.
+     *
+     * @since 3.0.0
+     *
+     * @param string $message  Translated error message to show.
+     * @param string $back_url Settings page URL to redirect to.
+     * @return never
+     */
+    function jpkcom_allow_blocks_import_error_redirect( string $message, string $back_url ): never {
+        wp_safe_redirect( add_query_arg( 'jpkcom-ab-import-error', rawurlencode( $message ), $back_url ) );
+        exit;
+    }
+
+}
+
 add_action( 'admin_post_jpkcom_allow_blocks_export', static function (): void {
     if ( ! current_user_can( 'manage_options' ) ) {
         wp_die( esc_html__( 'You are not allowed to export block permissions.', 'jpkcom-allow-blocks' ), '', array( 'response' => 403 ) );
     }
 
-    check_admin_referer( 'jpkcom_allow_blocks_export' );
+    check_admin_referer( 'jpkcom_allow_blocks_export', 'jpkcom_allow_blocks_export_nonce' );
 
     $payload  = jpkcom_allow_blocks_export_payload( jpkcom_allow_blocks_get_settings() );
     $filename = jpkcom_allow_blocks_export_filename();
@@ -228,114 +251,48 @@ add_action( 'admin_post_jpkcom_allow_blocks_import_preview', static function ():
         wp_die( esc_html__( 'You are not allowed to import block permissions.', 'jpkcom-allow-blocks' ), '', array( 'response' => 403 ) );
     }
 
-    check_admin_referer( 'jpkcom_allow_blocks_import_preview' );
+    check_admin_referer( 'jpkcom_allow_blocks_import_preview', 'jpkcom_allow_blocks_import_nonce' );
 
     $back_url = admin_url( 'themes.php?page=' . jpkcom_allow_blocks_menu_slug() );
     $file     = $_FILES['jpkcom_allow_blocks_file'] ?? null;
 
     if ( ! is_array( $file ) || ! isset( $file['tmp_name'], $file['error'] ) || ! is_string( $file['tmp_name'] ) || UPLOAD_ERR_OK !== $file['error'] ) {
-        wp_die( esc_html__( 'No file was uploaded.', 'jpkcom-allow-blocks' ), '', array( 'response' => 400 ) );
+        jpkcom_allow_blocks_import_error_redirect( __( 'No file was uploaded.', 'jpkcom-allow-blocks' ), $back_url );
     }
 
     if ( ! is_uploaded_file( $file['tmp_name'] ) ) {
-        wp_die( esc_html__( 'The uploaded file could not be verified.', 'jpkcom-allow-blocks' ), '', array( 'response' => 400 ) );
+        jpkcom_allow_blocks_import_error_redirect( __( 'The uploaded file could not be verified.', 'jpkcom-allow-blocks' ), $back_url );
     }
 
     $size = filesize( $file['tmp_name'] );
 
     if ( false === $size || $size > JPKCOM_ALLOW_BLOCKS_IMPORT_MAX_BYTES ) {
-        wp_die( esc_html__( 'The file is larger than the 1 MB limit.', 'jpkcom-allow-blocks' ), '', array( 'response' => 400 ) );
+        jpkcom_allow_blocks_import_error_redirect( __( 'The file is larger than the 1 MB limit.', 'jpkcom-allow-blocks' ), $back_url );
     }
 
     $json = file_get_contents( $file['tmp_name'] );
 
     if ( false === $json ) {
-        wp_die( esc_html__( 'The file could not be read.', 'jpkcom-allow-blocks' ), '', array( 'response' => 400 ) );
+        jpkcom_allow_blocks_import_error_redirect( __( 'The file could not be read.', 'jpkcom-allow-blocks' ), $back_url );
     }
 
     $parsed = jpkcom_allow_blocks_parse_import( $json );
 
     if ( ! $parsed['ok'] ) {
-        wp_die( esc_html( $parsed['error'] ), '', array( 'response' => 400 ) );
+        jpkcom_allow_blocks_import_error_redirect( $parsed['error'], $back_url );
     }
 
-    $payload_json = wp_json_encode( $parsed['settings'] );
+    /*
+     * The parsed settings are stashed server-side rather than round-tripped
+     * through the browser: the preview screen only ever needs the token to
+     * find them again, which also keeps the whole uploaded payload from
+     * being reflected back into the page.
+     */
+    $token = wp_generate_password( 20, false, false );
 
-    if ( false === $payload_json ) {
-        wp_die( esc_html__( 'The file could not be re-encoded for confirmation.', 'jpkcom-allow-blocks' ), '', array( 'response' => 400 ) );
-    }
+    set_transient( 'jpkcom_allow_blocks_import_' . $token, $parsed['settings'], 15 * MINUTE_IN_SECONDS );
 
-    $known_roles  = array_keys( jpkcom_allow_blocks_editable_roles( true ) );
-    $known_blocks = array_keys( WP_Block_Type_Registry::get_instance()->get_all_registered() );
-    $preview      = jpkcom_allow_blocks_import_preview( jpkcom_allow_blocks_get_settings(), $parsed['settings'], $known_roles, $known_blocks );
-
-    ?>
-    <!DOCTYPE html>
-    <html <?php language_attributes(); ?>>
-    <head>
-        <meta charset="<?php bloginfo( 'charset' ); ?>" />
-        <title><?php echo esc_html__( 'Import preview', 'jpkcom-allow-blocks' ); ?></title>
-    </head>
-    <body class="wp-admin">
-        <div class="wrap jpkcom-ab-wrap">
-            <h1><?php echo esc_html__( 'Import preview', 'jpkcom-allow-blocks' ); ?></h1>
-
-            <p>
-                <?php
-                echo esc_html(
-                    sprintf(
-                        /* translators: 1: number of roles that will change, 2: number of block entries that will change. */
-                        __( '%1$d role(s) will change, touching %2$d block permission entry/entries.', 'jpkcom-allow-blocks' ),
-                        $preview['roles_changed'],
-                        $preview['blocks_changed']
-                    )
-                );
-                ?>
-            </p>
-
-            <?php if ( array() !== $preview['unknown_roles'] ) : ?>
-                <div class="notice notice-warning">
-                    <p>
-                        <?php
-                        echo esc_html(
-                            sprintf(
-                                /* translators: %s: comma-separated role slugs. */
-                                __( 'These roles do not exist on this site and will be stored anyway: %s', 'jpkcom-allow-blocks' ),
-                                implode( ', ', $preview['unknown_roles'] )
-                            )
-                        );
-                        ?>
-                    </p>
-                </div>
-            <?php endif; ?>
-
-            <?php if ( array() !== $preview['unknown_blocks'] ) : ?>
-                <div class="notice notice-warning">
-                    <p>
-                        <?php
-                        echo esc_html(
-                            sprintf(
-                                /* translators: %s: comma-separated block names. */
-                                __( 'These blocks are not currently tracked on this site: %s', 'jpkcom-allow-blocks' ),
-                                implode( ', ', $preview['unknown_blocks'] )
-                            )
-                        );
-                        ?>
-                    </p>
-                </div>
-            <?php endif; ?>
-
-            <form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
-                <?php wp_nonce_field( 'jpkcom_allow_blocks_import_apply' ); ?>
-                <input type="hidden" name="action" value="jpkcom_allow_blocks_import_apply" />
-                <input type="hidden" name="payload" value="<?php echo esc_attr( $payload_json ); ?>" />
-                <button type="submit" class="button button-primary"><?php echo esc_html__( 'Apply import', 'jpkcom-allow-blocks' ); ?></button>
-                <a class="button" href="<?php echo esc_url( $back_url ); ?>"><?php echo esc_html__( 'Cancel', 'jpkcom-allow-blocks' ); ?></a>
-            </form>
-        </div>
-    </body>
-    </html>
-    <?php
+    wp_safe_redirect( add_query_arg( 'jpkcom-ab-import', $token, $back_url ) );
     exit;
 } );
 
@@ -344,19 +301,28 @@ add_action( 'admin_post_jpkcom_allow_blocks_import_apply', static function (): v
         wp_die( esc_html__( 'You are not allowed to import block permissions.', 'jpkcom-allow-blocks' ), '', array( 'response' => 403 ) );
     }
 
-    check_admin_referer( 'jpkcom_allow_blocks_import_apply' );
+    check_admin_referer( 'jpkcom_allow_blocks_import_apply', 'jpkcom_allow_blocks_apply_nonce' );
 
-    $payload = isset( $_POST['payload'] ) && is_string( $_POST['payload'] ) ? wp_unslash( $_POST['payload'] ) : '';
-    $parsed  = jpkcom_allow_blocks_parse_import( $payload );
+    $back_url = admin_url( 'themes.php?page=' . jpkcom_allow_blocks_menu_slug() );
+    $token    = isset( $_POST['token'] ) && is_string( $_POST['token'] ) ? sanitize_text_field( wp_unslash( $_POST['token'] ) ) : '';
 
-    if ( ! $parsed['ok'] ) {
-        wp_die( esc_html( $parsed['error'] ), '', array( 'response' => 400 ) );
+    if ( '' === $token ) {
+        jpkcom_allow_blocks_import_error_redirect( __( 'The import preview has expired. Please upload the file again.', 'jpkcom-allow-blocks' ), $back_url );
     }
 
-    $merged = jpkcom_allow_blocks_merge_import( jpkcom_allow_blocks_get_settings(), $parsed['settings'] );
+    $transient_key = 'jpkcom_allow_blocks_import_' . $token;
+    $incoming      = get_transient( $transient_key );
+
+    if ( ! is_array( $incoming ) ) {
+        jpkcom_allow_blocks_import_error_redirect( __( 'The import preview has expired. Please upload the file again.', 'jpkcom-allow-blocks' ), $back_url );
+    }
+
+    $merged = jpkcom_allow_blocks_merge_import( jpkcom_allow_blocks_get_settings(), $incoming );
 
     jpkcom_allow_blocks_save_settings( $merged );
 
-    wp_safe_redirect( add_query_arg( 'jpkcom-ab-imported', '1', admin_url( 'themes.php?page=' . jpkcom_allow_blocks_menu_slug() ) ) );
+    delete_transient( $transient_key );
+
+    wp_safe_redirect( add_query_arg( 'jpkcom-ab-imported', '1', $back_url ) );
     exit;
 } );

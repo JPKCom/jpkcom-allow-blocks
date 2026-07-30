@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-30T18:14:49+02:00\n"
+"POT-Creation-Date: 2026-07-30T18:33:24+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: jpkcom-allow-blocks\n"
@@ -39,81 +39,117 @@ msgstr ""
 msgid "https://www.jpkc.com"
 msgstr ""
 
-#: includes/admin-page.php:172
-#: includes/admin-page.php:366
-#: includes/admin-page.php:367
+#: includes/admin-page.php:169
+#: includes/import-export.php:310
+#: includes/import-export.php:317
+msgid "The import preview has expired. Please upload the file again."
+msgstr ""
+
+#: includes/admin-page.php:183
+msgid "Import preview"
+msgstr ""
+
+#. translators: 1: number of roles that will change, 2: number of block entries that will change.
+#: includes/admin-page.php:190
+#, php-format
+msgid "%1$d role(s) will change, touching %2$d block permission entry/entries."
+msgstr ""
+
+#. translators: %s: comma-separated role slugs.
+#: includes/admin-page.php:205
+#, php-format
+msgid "These roles do not exist on this site and will be stored anyway: %s"
+msgstr ""
+
+#. translators: %s: comma-separated block names.
+#: includes/admin-page.php:221
+#, php-format
+msgid "These blocks are not currently tracked on this site: %s"
+msgstr ""
+
+#: includes/admin-page.php:234
+msgid "Apply import"
+msgstr ""
+
+#: includes/admin-page.php:235
+msgid "Cancel"
+msgstr ""
+
+#: includes/admin-page.php:277
+#: includes/admin-page.php:479
+#: includes/admin-page.php:480
 msgid "Block permissions"
 msgstr ""
 
-#: includes/admin-page.php:174
+#: includes/admin-page.php:279
 msgid "Choose which blocks each role may insert. Administrators always have every block."
 msgstr ""
 
-#: includes/admin-page.php:178
+#: includes/admin-page.php:283
 msgid "Block permissions saved."
 msgstr ""
 
-#: includes/admin-page.php:184
+#: includes/admin-page.php:289
 msgid "Block permissions imported."
 msgstr ""
 
-#: includes/admin-page.php:190
+#: includes/admin-page.php:303
 msgid "Search blocks"
 msgstr ""
 
-#: includes/admin-page.php:191
+#: includes/admin-page.php:304
 msgid "Search blocks…"
 msgstr ""
 
-#: includes/admin-page.php:195
-#: includes/admin-page.php:224
+#: includes/admin-page.php:308
+#: includes/admin-page.php:337
 msgid "Category"
 msgstr ""
 
-#: includes/admin-page.php:197
+#: includes/admin-page.php:310
 msgid "All categories"
 msgstr ""
 
-#: includes/admin-page.php:218
-#: includes/admin-page.php:267
+#: includes/admin-page.php:331
+#: includes/admin-page.php:380
 msgid "Save changes"
 msgstr ""
 
-#: includes/admin-page.php:223
+#: includes/admin-page.php:336
 msgid "Block"
 msgstr ""
 
-#: includes/admin-page.php:237
+#: includes/admin-page.php:350
 msgid "Not currently registered on this site."
 msgstr ""
 
-#: includes/admin-page.php:238
+#: includes/admin-page.php:351
 msgid "Unregistered"
 msgstr ""
 
 #. translators: 1: block title, 2: role name.
-#: includes/admin-page.php:250
+#: includes/admin-page.php:363
 #, php-format
 msgid "Allow %1$s for %2$s"
 msgstr ""
 
-#: includes/admin-page.php:270
+#: includes/admin-page.php:383
 msgid "Import and export"
 msgstr ""
 
-#: includes/admin-page.php:276
+#: includes/admin-page.php:389
 msgid "Export"
 msgstr ""
 
-#: includes/admin-page.php:282
+#: includes/admin-page.php:395
 msgid "Block permissions file"
 msgstr ""
 
-#: includes/admin-page.php:284
+#: includes/admin-page.php:397
 msgid "Import…"
 msgstr ""
 
-#: includes/admin-page.php:342
+#: includes/admin-page.php:455
 msgid "You are not allowed to change block permissions."
 msgstr ""
 
@@ -148,62 +184,27 @@ msgstr ""
 msgid "The file has no roles to import."
 msgstr ""
 
-#: includes/import-export.php:210
+#: includes/import-export.php:233
 msgid "You are not allowed to export block permissions."
 msgstr ""
 
-#: includes/import-export.php:228
-#: includes/import-export.php:344
+#: includes/import-export.php:251
+#: includes/import-export.php:301
 msgid "You are not allowed to import block permissions."
 msgstr ""
 
-#: includes/import-export.php:237
+#: includes/import-export.php:260
 msgid "No file was uploaded."
 msgstr ""
 
-#: includes/import-export.php:241
+#: includes/import-export.php:264
 msgid "The uploaded file could not be verified."
 msgstr ""
 
-#: includes/import-export.php:247
+#: includes/import-export.php:270
 msgid "The file is larger than the 1 MB limit."
 msgstr ""
 
-#: includes/import-export.php:253
+#: includes/import-export.php:276
 msgid "The file could not be read."
-msgstr ""
-
-#: includes/import-export.php:265
-msgid "The file could not be re-encoded for confirmation."
-msgstr ""
-
-#: includes/import-export.php:277
-#: includes/import-export.php:281
-msgid "Import preview"
-msgstr ""
-
-#. translators: 1: number of roles that will change, 2: number of block entries that will change.
-#: includes/import-export.php:288
-#, php-format
-msgid "%1$d role(s) will change, touching %2$d block permission entry/entries."
-msgstr ""
-
-#. translators: %s: comma-separated role slugs.
-#: includes/import-export.php:303
-#, php-format
-msgid "These roles do not exist on this site and will be stored anyway: %s"
-msgstr ""
-
-#. translators: %s: comma-separated block names.
-#: includes/import-export.php:319
-#, php-format
-msgid "These blocks are not currently tracked on this site: %s"
-msgstr ""
-
-#: includes/import-export.php:332
-msgid "Apply import"
-msgstr ""
-
-#: includes/import-export.php:333
-msgid "Cancel"
 msgstr ""

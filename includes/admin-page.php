@@ -135,6 +135,111 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_block_rows' ) ) {
 
 }
 
+if ( ! function_exists( function: 'jpkcom_allow_blocks_render_import_preview' ) ) {
+
+    /**
+     * Render the pending import preview, if a valid one exists.
+     *
+     * Reads the token the preview handler put in the `jpkcom-ab-import` query
+     * argument, fetches the parsed settings it stashed in a transient under
+     * that token, and renders a confirmation block inside the caller's
+     * `.wrap` - never a standalone document, so the import flow never leaves
+     * the admin chrome. A missing or expired transient renders an
+     * explanatory notice instead and the normal screen still renders
+     * underneath it.
+     *
+     * @since 3.0.0
+     *
+     * @return void
+     */
+    function jpkcom_allow_blocks_render_import_preview(): void {
+        $token = isset( $_GET['jpkcom-ab-import'] ) && is_string( $_GET['jpkcom-ab-import'] )
+            ? sanitize_text_field( wp_unslash( $_GET['jpkcom-ab-import'] ) )
+            : '';
+
+        if ( '' === $token ) {
+            return;
+        }
+
+        $incoming = get_transient( 'jpkcom_allow_blocks_import_' . $token );
+
+        if ( ! is_array( $incoming ) ) {
+            ?>
+            <div class="notice notice-warning">
+                <p><?php echo esc_html__( 'The import preview has expired. Please upload the file again.', 'jpkcom-allow-blocks' ); ?></p>
+            </div>
+            <?php
+            return;
+        }
+
+        $current      = jpkcom_allow_blocks_get_settings();
+        $known_roles  = array_keys( jpkcom_allow_blocks_editable_roles( true ) );
+        $known_blocks = array_keys( WP_Block_Type_Registry::get_instance()->get_all_registered() );
+        $preview      = jpkcom_allow_blocks_import_preview( $current, $incoming, $known_roles, $known_blocks );
+        $back_url     = admin_url( 'themes.php?page=' . jpkcom_allow_blocks_menu_slug() );
+
+        ?>
+        <div class="jpkcom-ab-import-preview">
+            <h2><?php echo esc_html__( 'Import preview', 'jpkcom-allow-blocks' ); ?></h2>
+
+            <p>
+                <?php
+                echo esc_html(
+                    sprintf(
+                        /* translators: 1: number of roles that will change, 2: number of block entries that will change. */
+                        __( '%1$d role(s) will change, touching %2$d block permission entry/entries.', 'jpkcom-allow-blocks' ),
+                        $preview['roles_changed'],
+                        $preview['blocks_changed']
+                    )
+                );
+                ?>
+            </p>
+
+            <?php if ( array() !== $preview['unknown_roles'] ) : ?>
+                <div class="notice notice-warning">
+                    <p>
+                        <?php
+                        echo esc_html(
+                            sprintf(
+                                /* translators: %s: comma-separated role slugs. */
+                                __( 'These roles do not exist on this site and will be stored anyway: %s', 'jpkcom-allow-blocks' ),
+                                implode( ', ', $preview['unknown_roles'] )
+                            )
+                        );
+                        ?>
+                    </p>
+                </div>
+            <?php endif; ?>
+
+            <?php if ( array() !== $preview['unknown_blocks'] ) : ?>
+                <div class="notice notice-warning">
+                    <p>
+                        <?php
+                        echo esc_html(
+                            sprintf(
+                                /* translators: %s: comma-separated block names. */
+                                __( 'These blocks are not currently tracked on this site: %s', 'jpkcom-allow-blocks' ),
+                                implode( ', ', $preview['unknown_blocks'] )
+                            )
+                        );
+                        ?>
+                    </p>
+                </div>
+            <?php endif; ?>
+
+            <form method="post" action="admin-post.php" class="jpkcom-ab-import-apply-form">
+                <?php wp_nonce_field( 'jpkcom_allow_blocks_import_apply', 'jpkcom_allow_blocks_apply_nonce' ); ?>
+                <input type="hidden" name="action" value="jpkcom_allow_blocks_import_apply" />
+                <input type="hidden" name="token" value="<?php echo esc_attr( $token ); ?>" />
+                <button type="submit" class="button button-primary"><?php echo esc_html__( 'Apply import', 'jpkcom-allow-blocks' ); ?></button>
+                <a class="button" href="<?php echo esc_url( $back_url ); ?>"><?php echo esc_html__( 'Cancel', 'jpkcom-allow-blocks' ); ?></a>
+            </form>
+        </div>
+        <?php
+    }
+
+}
+
 if ( ! function_exists( function: 'jpkcom_allow_blocks_render_page' ) ) {
 
     /**
@@ -184,6 +289,14 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_render_page' ) ) {
                     <p><?php echo esc_html__( 'Block permissions imported.', 'jpkcom-allow-blocks' ); ?></p>
                 </div>
             <?php endif; ?>
+
+            <?php if ( isset( $_GET['jpkcom-ab-import-error'] ) && is_string( $_GET['jpkcom-ab-import-error'] ) ) : ?>
+                <div class="notice notice-error is-dismissible">
+                    <p><?php echo esc_html( sanitize_text_field( wp_unslash( $_GET['jpkcom-ab-import-error'] ) ) ); ?></p>
+                </div>
+            <?php endif; ?>
+
+            <?php jpkcom_allow_blocks_render_import_preview(); ?>
 
             <div class="jpkcom-ab-controls">
                 <p class="search-box">
@@ -271,13 +384,13 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_render_page' ) ) {
 
             <div class="jpkcom-ab-import-export">
                 <form method="post" action="admin-post.php" class="jpkcom-ab-export-form jpkcom-ab-io-row">
-                    <?php wp_nonce_field( 'jpkcom_allow_blocks_export' ); ?>
+                    <?php wp_nonce_field( 'jpkcom_allow_blocks_export', 'jpkcom_allow_blocks_export_nonce' ); ?>
                     <input type="hidden" name="action" value="jpkcom_allow_blocks_export" />
                     <button type="submit" class="button"><?php echo esc_html__( 'Export', 'jpkcom-allow-blocks' ); ?></button>
                 </form>
 
                 <form method="post" action="admin-post.php" enctype="multipart/form-data" class="jpkcom-ab-import-form jpkcom-ab-io-row">
-                    <?php wp_nonce_field( 'jpkcom_allow_blocks_import_preview' ); ?>
+                    <?php wp_nonce_field( 'jpkcom_allow_blocks_import_preview', 'jpkcom_allow_blocks_import_nonce' ); ?>
                     <input type="hidden" name="action" value="jpkcom_allow_blocks_import_preview" />
                     <label for="jpkcom-ab-import-file" class="screen-reader-text"><?php echo esc_html__( 'Block permissions file', 'jpkcom-allow-blocks' ); ?></label>
                     <input type="file" id="jpkcom-ab-import-file" name="jpkcom_allow_blocks_file" accept="application/json,.json" required="required" />
