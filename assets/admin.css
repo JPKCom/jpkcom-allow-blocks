@@ -1,0 +1,85 @@
+/**
+ * Settings screen styling.
+ *
+ * @package JPKCom_Allow_Blocks
+ * @since   3.0.0
+ */
+
+.jpkcom-ab-controls {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	gap: 1.5em;
+	margin: 1em 0;
+}
+
+.jpkcom-ab-columns-box {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75em 1.25em;
+}
+
+.jpkcom-ab-column-toggle {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35em;
+	white-space: nowrap;
+}
+
+.jpkcom-ab-table {
+	border-collapse: collapse;
+}
+
+.jpkcom-ab-table thead th {
+	position: sticky;
+	top: 32px;
+	background: #fff;
+	z-index: 1;
+}
+
+.jpkcom-ab-table .jpkcom-ab-col-title {
+	width: 40%;
+}
+
+.jpkcom-ab-table .jpkcom-ab-col-category {
+	width: 15%;
+}
+
+.jpkcom-ab-table .jpkcom-ab-col-role {
+	width: auto;
+	text-align: center;
+}
+
+.jpkcom-ab-table tbody td {
+	vertical-align: middle;
+}
+
+.jpkcom-ab-table code {
+	margin-left: 0.5em;
+	color: #646970;
+}
+
+.jpkcom-ab-unregistered {
+	background-color: #fcf0f1;
+}
+
+.jpkcom-ab-warning {
+	display: inline-block;
+	margin-left: 0.5em;
+	padding: 0 0.5em;
+	border-radius: 3px;
+	background: #d63638;
+	color: #fff;
+	font-size: 11px;
+	line-height: 1.6;
+	text-transform: uppercase;
+}
+
+.jpkcom-ab-table tr.jpkcom-ab-hidden-row {
+	display: none;
+}
+
+.jpkcom-ab-table td.jpkcom-ab-hidden-column,
+.jpkcom-ab-table th.jpkcom-ab-hidden-column {
+	display: none;
+}
