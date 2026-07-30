@@ -1,4 +1,31 @@
-<h3 id="section">2.0.8</h3>
+<h3 id="section">3.0.0</h3>
+<ul>
+<li><strong>Breaking:</strong> <code>jpkcom_allowed_block_types()</code>
+has been removed with no deprecated shim. It always returned the same
+hard-coded array regardless of its arguments, so a shim could only
+return that same stale list — code calling it directly will now fatal
+instead of silently getting outdated data</li>
+<li>Changed: the fixed 17-block allow-list is gone. Block permissions
+are now configured per role from a new settings screen under
+<strong>Appearance → Block permissions</strong>, with every currently
+registered block available to every role by default</li>
+<li>Fixed: the previous restriction never actually took effect. It was
+registered inside <code>if ( ! is_admin() )</code>, but the block editor
+<em>is</em> part of wp-admin, so <code>allowed_block_types_all</code>
+was never filtered there. Every block was available to everyone
+regardless of the plugin’s hard-coded list</li>
+<li>Added: export block permissions to a JSON file and re-import them
+elsewhere, with a preview step before anything is written</li>
+<li>Added: <code>jpkcom_allow_blocks_is_exempt</code> filter to change
+which users bypass the restriction (defaults to
+<code>manage_options</code>), and
+<code>jpkcom_allow_blocks_extra_block_names</code> to add block names
+that are only registered in JavaScript and therefore invisible to the
+PHP-side registry</li>
+<li>Added: German translations (<code>de_DE</code>,
+<code>de_DE_formal</code>)</li>
+</ul>
+<h3 id="section-1">2.0.8</h3>
 <ul>
 <li>Fixed: the update manifest no longer reports
 <code>network: true</code> for this plugin. The generator defaulted a
@@ -14,7 +41,7 @@ repository are now English throughout, and the developer notes in
 <code>CLAUDE.md</code> were translated and trimmed. No effect on the
 shipped plugin</li>
 </ul>
-<h3 id="section-1">2.0.7</h3>
+<h3 id="section-2">2.0.7</h3>
 <ul>
 <li>Changed: <code>Tested up to</code> raised to WordPress 7.1</li>
 <li>Changed: the bundled updater’s runtime floor now matches the
@@ -26,7 +53,7 @@ and <code>tested</code> now say 6.9 and 7.1. They only apply when the
 README metadata cannot be read, but a stale fallback would have
 published a minimum the plugin no longer supports</li>
 </ul>
-<h3 id="section-2">2.0.6</h3>
+<h3 id="section-3">2.0.6</h3>
 <ul>
 <li>Added: plugin banners (<code>assets/banner-1544x500.avif</code>,
 <code>assets/banner-772x250.avif</code>) — a plain <code>#3c4955</code>
@@ -34,7 +61,7 @@ surface with no lettering. The update manifest already advertised these
 two URLs, but nothing was published under them, so the plugin card in
 wp-admin had a broken banner</li>
 </ul>
-<h3 id="section-3">2.0.5</h3>
+<h3 id="section-4">2.0.5</h3>
 <ul>
 <li>CI: the release step no longer copies the staging directory into
 itself, so the ZIP has no empty
@@ -47,7 +74,7 @@ to full commit SHAs</li>
 <li>CI: security and regression tests now run on every pull request,
 where a plugin has them</li>
 </ul>
-<h3 id="section-4">2.0.4</h3>
+<h3 id="section-5">2.0.4</h3>
 <ul>
 <li>Security: update packages are now verified <em>before</em>
 installation — the verified file is handed to WordPress instead of being
@@ -72,7 +99,7 @@ instead of being retried on every admin request</li>
 <li>Added: CI workflow on every pull request (PHP lint, named-argument
 check, YAML validation, action-pinning guard)</li>
 </ul>
-<h3 id="section-5">2.0.3</h3>
+<h3 id="section-6">2.0.3</h3>
 <ul>
 <li>Added secure self-hosted plugin updates via GitHub with SHA256
 checksum verification</li>
@@ -87,20 +114,20 @@ gh-pages on release</li>
 <li>Hardening: enabled <code>declare(strict_types=1)</code> and
 documented the block-types callback</li>
 </ul>
-<h3 id="section-6">2.0.2</h3>
+<h3 id="section-7">2.0.2</h3>
 <ul>
 <li>Tested up to WP v6.8</li>
 </ul>
-<h3 id="section-7">2.0.1</h3>
+<h3 id="section-8">2.0.1</h3>
 <ul>
 <li>Fix Stable tag</li>
 </ul>
-<h3 id="section-8">2.0.0</h3>
+<h3 id="section-9">2.0.0</h3>
 <ul>
 <li>Added README.md</li>
 <li>Plugin meta data update</li>
 </ul>
-<h3 id="section-9">1.0.0</h3>
+<h3 id="section-10">1.0.0</h3>
 <ul>
 <li>Initial Release</li>
 </ul>

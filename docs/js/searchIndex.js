@@ -1,6 +1,61 @@
 Search.appendIndex(
     [
                 {
+            "fqsen": "\\jpkcom_allow_blocks_menu_slug\u0028\u0029",
+            "name": "jpkcom_allow_blocks_menu_slug",
+            "summary": "Slug\u0020of\u0020the\u0020settings\u0020page.",
+            "url": "namespaces/default.html#function_jpkcom_allow_blocks_menu_slug"
+        },                {
+            "fqsen": "\\jpkcom_allow_blocks_editable_roles\u0028\u0029",
+            "name": "jpkcom_allow_blocks_editable_roles",
+            "summary": "Roles\u0020that\u0020can\u0020be\u0020restricted\u0020from\u0020the\u0020settings\u0020screen.",
+            "url": "namespaces/default.html#function_jpkcom_allow_blocks_editable_roles"
+        },                {
+            "fqsen": "\\jpkcom_allow_blocks_block_rows\u0028\u0029",
+            "name": "jpkcom_allow_blocks_block_rows",
+            "summary": "Rows\u0020for\u0020the\u0020block\u0020matrix.",
+            "url": "namespaces/default.html#function_jpkcom_allow_blocks_block_rows"
+        },                {
+            "fqsen": "\\jpkcom_allow_blocks_render_import_preview\u0028\u0029",
+            "name": "jpkcom_allow_blocks_render_import_preview",
+            "summary": "Render\u0020the\u0020pending\u0020import\u0020preview,\u0020if\u0020a\u0020valid\u0020one\u0020exists.",
+            "url": "namespaces/default.html#function_jpkcom_allow_blocks_render_import_preview"
+        },                {
+            "fqsen": "\\jpkcom_allow_blocks_import_error_message\u0028\u0029",
+            "name": "jpkcom_allow_blocks_import_error_message",
+            "summary": "Translated\u0020message\u0020for\u0020a\u0020known\u0020import\u0020error\u0020code.",
+            "url": "namespaces/default.html#function_jpkcom_allow_blocks_import_error_message"
+        },                {
+            "fqsen": "\\jpkcom_allow_blocks_render_page\u0028\u0029",
+            "name": "jpkcom_allow_blocks_render_page",
+            "summary": "Render\u0020the\u0020settings\u0020screen.",
+            "url": "namespaces/default.html#function_jpkcom_allow_blocks_render_page"
+        },                {
+            "fqsen": "\\jpkcom_allow_blocks_apply_form\u0028\u0029",
+            "name": "jpkcom_allow_blocks_apply_form",
+            "summary": "Compute\u0020new\u0020settings\u0020from\u0020a\u0020settings\u002Dscreen\u0020submission.",
+            "url": "namespaces/default.html#function_jpkcom_allow_blocks_apply_form"
+        },                {
+            "fqsen": "\\jpkcom_allow_blocks_is_exempt\u0028\u0029",
+            "name": "jpkcom_allow_blocks_is_exempt",
+            "summary": "Whether\u0020the\u0020current\u0020user\u0020is\u0020exempt\u0020from\u0020any\u0020restriction.",
+            "url": "namespaces/default.html#function_jpkcom_allow_blocks_is_exempt"
+        },                {
+            "fqsen": "\\jpkcom_allow_blocks_current_role_slugs\u0028\u0029",
+            "name": "jpkcom_allow_blocks_current_role_slugs",
+            "summary": "Role\u0020slugs\u0020of\u0020the\u0020current\u0020user.",
+            "url": "namespaces/default.html#function_jpkcom_allow_blocks_current_role_slugs"
+        },                {
+            "fqsen": "\\jpkcom_allow_blocks_all_block_names\u0028\u0029",
+            "name": "jpkcom_allow_blocks_all_block_names",
+            "summary": "Every\u0020block\u0020name\u0020this\u0020site\u0020knows\u0020about.",
+            "url": "namespaces/default.html#function_jpkcom_allow_blocks_all_block_names"
+        },                {
+            "fqsen": "\\jpkcom_allow_blocks_filter_allowed\u0028\u0029",
+            "name": "jpkcom_allow_blocks_filter_allowed",
+            "summary": "Remove\u0020the\u0020blocked\u0020block\u0020types\u0020from\u0020the\u0020allowed\u0020list.",
+            "url": "namespaces/default.html#function_jpkcom_allow_blocks_filter_allowed"
+        },                {
             "fqsen": "\\JPKComAllowBlocksGitUpdate\\JPKComGitPluginUpdater",
             "name": "JPKComGitPluginUpdater",
             "summary": "Class\u0020JPKComGitPluginUpdater",
@@ -71,15 +126,90 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/JPKComAllowBlocksGitUpdate-JPKComGitPluginUpdater.html#property_cache_enabled"
         },                {
+            "fqsen": "\\JPKCOM_ALLOW_BLOCKS_IMPORT_MAX_BYTES",
+            "name": "JPKCOM_ALLOW_BLOCKS_IMPORT_MAX_BYTES",
+            "summary": "",
+            "url": "namespaces/default.html#constant_JPKCOM_ALLOW_BLOCKS_IMPORT_MAX_BYTES"
+        },                {
+            "fqsen": "\\jpkcom_allow_blocks_export_payload\u0028\u0029",
+            "name": "jpkcom_allow_blocks_export_payload",
+            "summary": "Build\u0020the\u0020exportable\u0020payload\u0020for\u0020a\u0020settings\u0020structure.",
+            "url": "namespaces/default.html#function_jpkcom_allow_blocks_export_payload"
+        },                {
+            "fqsen": "\\jpkcom_allow_blocks_export_filename\u0028\u0029",
+            "name": "jpkcom_allow_blocks_export_filename",
+            "summary": "Filename\u0020offered\u0020for\u0020a\u0020downloaded\u0020export.",
+            "url": "namespaces/default.html#function_jpkcom_allow_blocks_export_filename"
+        },                {
+            "fqsen": "\\jpkcom_allow_blocks_parse_import\u0028\u0029",
+            "name": "jpkcom_allow_blocks_parse_import",
+            "summary": "Decode\u0020and\u0020validate\u0020an\u0020import\u0020payload.",
+            "url": "namespaces/default.html#function_jpkcom_allow_blocks_parse_import"
+        },                {
+            "fqsen": "\\jpkcom_allow_blocks_merge_import\u0028\u0029",
+            "name": "jpkcom_allow_blocks_merge_import",
+            "summary": "Merge\u0020an\u0020imported\u0020settings\u0020structure\u0020into\u0020the\u0020current\u0020one.",
+            "url": "namespaces/default.html#function_jpkcom_allow_blocks_merge_import"
+        },                {
+            "fqsen": "\\jpkcom_allow_blocks_import_preview\u0028\u0029",
+            "name": "jpkcom_allow_blocks_import_preview",
+            "summary": "Describe\u0020what\u0020an\u0020import\u0020would\u0020change,\u0020before\u0020anything\u0020is\u0020written.",
+            "url": "namespaces/default.html#function_jpkcom_allow_blocks_import_preview"
+        },                {
+            "fqsen": "\\jpkcom_allow_blocks_import_error_redirect\u0028\u0029",
+            "name": "jpkcom_allow_blocks_import_error_redirect",
+            "summary": "Redirect\u0020back\u0020to\u0020the\u0020settings\u0020page\u0020with\u0020an\u0020import\u0020error\u0020notice.",
+            "url": "namespaces/default.html#function_jpkcom_allow_blocks_import_error_redirect"
+        },                {
+            "fqsen": "\\jpkcom_allow_blocks_option_name\u0028\u0029",
+            "name": "jpkcom_allow_blocks_option_name",
+            "summary": "Name\u0020of\u0020the\u0020option\u0020holding\u0020all\u0020settings.",
+            "url": "namespaces/default.html#function_jpkcom_allow_blocks_option_name"
+        },                {
+            "fqsen": "\\jpkcom_allow_blocks_is_valid_block_name\u0028\u0029",
+            "name": "jpkcom_allow_blocks_is_valid_block_name",
+            "summary": "Whether\u0020a\u0020string\u0020is\u0020a\u0020syntactically\u0020valid\u0020block\u0020name.",
+            "url": "namespaces/default.html#function_jpkcom_allow_blocks_is_valid_block_name"
+        },                {
+            "fqsen": "\\jpkcom_allow_blocks_empty_settings\u0028\u0029",
+            "name": "jpkcom_allow_blocks_empty_settings",
+            "summary": "The\u0020empty\u0020settings\u0020structure.",
+            "url": "namespaces/default.html#function_jpkcom_allow_blocks_empty_settings"
+        },                {
+            "fqsen": "\\jpkcom_allow_blocks_sanitize_settings\u0028\u0029",
+            "name": "jpkcom_allow_blocks_sanitize_settings",
+            "summary": "Coerce\u0020any\u0020input\u0020into\u0020a\u0020valid\u0020settings\u0020structure.",
+            "url": "namespaces/default.html#function_jpkcom_allow_blocks_sanitize_settings"
+        },                {
+            "fqsen": "\\jpkcom_allow_blocks_count_rejected\u0028\u0029",
+            "name": "jpkcom_allow_blocks_count_rejected",
+            "summary": "Count\u0020how\u0020many\u0020entries\u0020a\u0020sanitised\u0020import\u0020or\u0020save\u0020would\u0020discard.",
+            "url": "namespaces/default.html#function_jpkcom_allow_blocks_count_rejected"
+        },                {
+            "fqsen": "\\jpkcom_allow_blocks_get_settings\u0028\u0029",
+            "name": "jpkcom_allow_blocks_get_settings",
+            "summary": "Read\u0020the\u0020validated\u0020settings.",
+            "url": "namespaces/default.html#function_jpkcom_allow_blocks_get_settings"
+        },                {
+            "fqsen": "\\jpkcom_allow_blocks_save_settings\u0028\u0029",
+            "name": "jpkcom_allow_blocks_save_settings",
+            "summary": "Validate\u0020and\u0020store\u0020the\u0020settings.",
+            "url": "namespaces/default.html#function_jpkcom_allow_blocks_save_settings"
+        },                {
+            "fqsen": "\\jpkcom_allow_blocks_blocked_for_roles\u0028\u0029",
+            "name": "jpkcom_allow_blocks_blocked_for_roles",
+            "summary": "Block\u0020names\u0020blocked\u0020for\u0020every\u0020one\u0020of\u0020the\u0020given\u0020roles.",
+            "url": "namespaces/default.html#function_jpkcom_allow_blocks_blocked_for_roles"
+        },                {
             "fqsen": "\\JPKCOM_ALLOW_BLOCKS_VERSION",
             "name": "JPKCOM_ALLOW_BLOCKS_VERSION",
             "summary": "",
             "url": "namespaces/default.html#constant_JPKCOM_ALLOW_BLOCKS_VERSION"
         },                {
-            "fqsen": "\\jpkcom_allowed_block_types\u0028\u0029",
-            "name": "jpkcom_allowed_block_types",
-            "summary": "Restrict\u0020the\u0020editor\u0020to\u0020a\u0020curated\u0020list\u0020of\u0020allowed\u0020block\u0020types.",
-            "url": "namespaces/default.html#function_jpkcom_allowed_block_types"
+            "fqsen": "\\JPKCOM_ALLOW_BLOCKS_PATH",
+            "name": "JPKCOM_ALLOW_BLOCKS_PATH",
+            "summary": "",
+            "url": "namespaces/default.html#constant_JPKCOM_ALLOW_BLOCKS_PATH"
         },                {
             "fqsen": "\\",
             "name": "\\",

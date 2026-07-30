@@ -1,5 +1,38 @@
-<p>Only allow certain types of blocks in Gutenberg for non admins.</p>
-<p>For more details visit:
+<p>Restrict, per WordPress role, which block types the block editor
+offers. Administrators always see every block and are never
+affected.</p>
+<h3 id="the-settings-screen">The settings screen</h3>
+<p>Under <strong>Appearance → Block permissions</strong> is a matrix:
+every block type known to the site as a row, every non-administrator
+role as a column. Unticking a box blocks that block for that role; a
+freshly installed site starts with nothing blocked, so every block stays
+available until you switch it off.</p>
+<p>Blocks are grouped by their block category. A block that belonged to
+a plugin which is currently deactivated is still listed, under an
+“Unregistered” group with a warning marker, so a permission set up
+earlier is never silently lost — it can be removed deliberately once you
+know the block is really gone for good. Roles that cannot use the block
+editor at all (no <code>edit_posts</code> capability, e.g. Subscriber on
+a default install) are hidden by default; a toggle above the table
+brings them back for sites with custom roles.</p>
+<p>A search box, a category filter and per-role column toggles narrow
+the table down without a page reload — useful once the list runs into
+the hundreds of rows on a site with many block plugins.</p>
+<p>The restriction only affects the block editor’s inserter. It is not a
+security or content-validation boundary.</p>
+<h3 id="export-and-import">Export and import</h3>
+<p><strong>Export</strong> downloads the current settings as a JSON
+file, so a permission matrix built on one site can be moved to
+another.</p>
+<p><strong>Import</strong> never writes anything on upload alone:
+choosing a file first shows a preview — how many roles would change, how
+many block entries that touches, and any role or block name in the file
+that this site does not currently know about — and only writes the
+settings once that preview is confirmed. Importing merges per role: for
+every role present in the file, that role’s whole list of blocked blocks
+replaces what was stored; any role the file does not mention is left
+exactly as it was.</p>
+<p>For more details on WordPress’ built-in block types visit:
 https://developer.wordpress.org/block-editor/reference-guides/core-blocks/</p>
 <h3 id="documentation">Documentation</h3>
 <p><strong>API Documentation:</strong> Complete PHPDoc-generated API

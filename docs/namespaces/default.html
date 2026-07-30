@@ -67,6 +67,16 @@
                 <section class="phpdocumentor-sidebar__category -packages">
             <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/JPKCom.html" class="">JPKCom</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="packages/JPKCom-Allow.html" class="">Allow</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="packages/JPKComAllowBlocks.html" class="">JPKComAllowBlocks</a>
 </h4>
 
@@ -126,9 +136,21 @@
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="namespaces/default.html#constant_JPKCOM_ALLOW_BLOCKS_IMPORT_MAX_BYTES">JPKCOM_ALLOW_BLOCKS_IMPORT_MAX_BYTES</a>
+    <span>
+        &nbsp;: mixed&nbsp;= 1048576                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="namespaces/default.html#constant_JPKCOM_ALLOW_BLOCKS_PATH">JPKCOM_ALLOW_BLOCKS_PATH</a>
+    <span>
+        &nbsp;: mixed&nbsp;= \plugin_dir_path(__FILE__)                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="namespaces/default.html#constant_JPKCOM_ALLOW_BLOCKS_VERSION">JPKCOM_ALLOW_BLOCKS_VERSION</a>
     <span>
-        &nbsp;: mixed&nbsp;= &#039;2.0.8&#039;                            </span>
+        &nbsp;: mixed&nbsp;= &#039;3.0.0&#039;                            </span>
 </dt>
 
     </dl>
@@ -143,11 +165,179 @@
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -function -">
-    <a class="" href="namespaces/default.html#function_jpkcom_allowed_block_types">jpkcom_allowed_block_types()</a>
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_menu_slug">jpkcom_allow_blocks_menu_slug()</a>
+    <span>
+                                &nbsp;: string    </span>
+</dt>
+<dd>Slug of the settings page.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_editable_roles">jpkcom_allow_blocks_editable_roles()</a>
+    <span>
+                                &nbsp;: array&lt;string, string&gt;    </span>
+</dt>
+<dd>Roles that can be restricted from the settings screen.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_block_rows">jpkcom_allow_blocks_block_rows()</a>
+    <span>
+                                &nbsp;: array&lt;int, array{name: string, title: string, category: string, registered: bool}&gt;    </span>
+</dt>
+<dd>Rows for the block matrix.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_render_import_preview">jpkcom_allow_blocks_render_import_preview()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Render the pending import preview, if a valid one exists.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_import_error_message">jpkcom_allow_blocks_import_error_message()</a>
+    <span>
+                                &nbsp;: string    </span>
+</dt>
+<dd>Translated message for a known import error code.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_render_page">jpkcom_allow_blocks_render_page()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Render the settings screen.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_apply_form">jpkcom_allow_blocks_apply_form()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+</dt>
+<dd>Compute new settings from a settings-screen submission.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_is_exempt">jpkcom_allow_blocks_is_exempt()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Whether the current user is exempt from any restriction.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_current_role_slugs">jpkcom_allow_blocks_current_role_slugs()</a>
     <span>
                                 &nbsp;: array&lt;string|int, string&gt;    </span>
 </dt>
-<dd>Restrict the editor to a curated list of allowed block types.</dd>
+<dd>Role slugs of the current user.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_all_block_names">jpkcom_allow_blocks_all_block_names()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, string&gt;    </span>
+</dt>
+<dd>Every block name this site knows about.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_filter_allowed">jpkcom_allow_blocks_filter_allowed()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+<dd>Remove the blocked block types from the allowed list.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_export_payload">jpkcom_allow_blocks_export_payload()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+</dt>
+<dd>Build the exportable payload for a settings structure.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_export_filename">jpkcom_allow_blocks_export_filename()</a>
+    <span>
+                                &nbsp;: string    </span>
+</dt>
+<dd>Filename offered for a downloaded export.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_parse_import">jpkcom_allow_blocks_parse_import()</a>
+    <span>
+                                &nbsp;: array{ok: bool, error: string, rejected: int, settings: array}    </span>
+</dt>
+<dd>Decode and validate an import payload.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_merge_import">jpkcom_allow_blocks_merge_import()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+</dt>
+<dd>Merge an imported settings structure into the current one.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_import_preview">jpkcom_allow_blocks_import_preview()</a>
+    <span>
+                                &nbsp;: array{roles_changed: int, blocks_changed: int, unknown_roles: string[], unknown_blocks: string[]}    </span>
+</dt>
+<dd>Describe what an import would change, before anything is written.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_import_error_redirect">jpkcom_allow_blocks_import_error_redirect()</a>
+    <span>
+                                &nbsp;: never    </span>
+</dt>
+<dd>Redirect back to the settings page with an import error notice.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_option_name">jpkcom_allow_blocks_option_name()</a>
+    <span>
+                                &nbsp;: string    </span>
+</dt>
+<dd>Name of the option holding all settings.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_is_valid_block_name">jpkcom_allow_blocks_is_valid_block_name()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Whether a string is a syntactically valid block name.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_empty_settings">jpkcom_allow_blocks_empty_settings()</a>
+    <span>
+                                &nbsp;: array{schema: int, updated: string, roles: array<string,string[]>, labels: array<string,string>}    </span>
+</dt>
+<dd>The empty settings structure.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_sanitize_settings">jpkcom_allow_blocks_sanitize_settings()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+</dt>
+<dd>Coerce any input into a valid settings structure.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_count_rejected">jpkcom_allow_blocks_count_rejected()</a>
+    <span>
+                                &nbsp;: int    </span>
+</dt>
+<dd>Count how many entries a sanitised import or save would discard.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_get_settings">jpkcom_allow_blocks_get_settings()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+</dt>
+<dd>Read the validated settings.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_save_settings">jpkcom_allow_blocks_save_settings()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Validate and store the settings.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_blocked_for_roles">jpkcom_allow_blocks_blocked_for_roles()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, string&gt;    </span>
+</dt>
+<dd>Block names blocked for every one of the given roles.</dd>
 
     </dl>
 
@@ -159,6 +349,66 @@
 
         </h3>
                     <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_JPKCOM_ALLOW_BLOCKS_IMPORT_MAX_BYTES">
+        JPKCOM_ALLOW_BLOCKS_IMPORT_MAX_BYTES
+        <a href="namespaces/default.html#constant_JPKCOM_ALLOW_BLOCKS_IMPORT_MAX_BYTES" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/import-export.php"><a href="files/includes-import-export.html"><abbr title="includes/import-export.php">import-export.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">68</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">JPKCOM_ALLOW_BLOCKS_IMPORT_MAX_BYTES</span>
+    = <span class="phpdocumentor-signature__default-value">1048576</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_JPKCOM_ALLOW_BLOCKS_PATH">
+        JPKCOM_ALLOW_BLOCKS_PATH
+        <a href="namespaces/default.html#constant_JPKCOM_ALLOW_BLOCKS_PATH" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="jpkcom-allow-blocks.php"><a href="files/jpkcom-allow-blocks.html">jpkcom-allow-blocks.php</a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">64</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">JPKCOM_ALLOW_BLOCKS_PATH</span>
+    = <span class="phpdocumentor-signature__default-value">\plugin_dir_path(__FILE__)</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
     <h4 class="phpdocumentor-element__name" id="constant_JPKCOM_ALLOW_BLOCKS_VERSION">
         JPKCOM_ALLOW_BLOCKS_VERSION
         <a href="namespaces/default.html#constant_JPKCOM_ALLOW_BLOCKS_VERSION" class="headerlink"><i class="fas fa-link"></i></a>
@@ -168,7 +418,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="jpkcom-allow-blocks.php"><a href="files/jpkcom-allow-blocks.html">jpkcom-allow-blocks.php</a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">32</span>
+    <span class="phpdocumentor-element-found-in__line">34</span>
 
     </aside>
 
@@ -178,7 +428,7 @@
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">JPKCOM_ALLOW_BLOCKS_VERSION</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;2.0.8&#039;</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;3.0.0&#039;</span>
 </code>
 
 
@@ -197,52 +447,31 @@
 
         </h3>
                     <article class="phpdocumentor-element -function - ">
-    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allowed_block_types">
-        jpkcom_allowed_block_types()
-        <a href="namespaces/default.html#function_jpkcom_allowed_block_types" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_menu_slug">
+        jpkcom_allow_blocks_menu_slug()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_menu_slug" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="jpkcom-allow-blocks.php"><a href="files/jpkcom-allow-blocks.html">jpkcom-allow-blocks.php</a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/admin-page.php"><a href="files/includes-admin-page.html"><abbr title="includes/admin-page.php">admin-page.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">77</span>
+    <span class="phpdocumentor-element-found-in__line">28</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Restrict the editor to a curated list of allowed block types.</p>
+        <p class="phpdocumentor-summary">Slug of the settings page.</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility"></span>
-                    <span class="phpdocumentor-signature__name">jpkcom_allowed_block_types</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">bool|array&lt;string|int, string&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$allowed_block_types</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><abbr title="\WP_Block_Editor_Context">WP_Block_Editor_Context</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$block_editor_context</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, string&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_menu_slug</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
     
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-argument-list__argument__name">$allowed_block_types</span>
-                : <span class="phpdocumentor-argument-list__argument__type">bool|array&lt;string|int, string&gt;</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>Array of allowed block types, or boolean to enable/disable all.</p>
-</section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-argument-list__argument__name">$block_editor_context</span>
-                : <span class="phpdocumentor-argument-list__argument__type"><abbr title="\WP_Block_Editor_Context">WP_Block_Editor_Context</abbr></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>The current block editor context.</p>
-</section>
-
-            </dd>
-            </dl>
-
     
-    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allowed_block_types_tags">
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_menu_slug_tags">
         Tags
-        <a href="namespaces/default.html#function_jpkcom_allowed_block_types_tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_menu_slug_tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
@@ -250,7 +479,528 @@
                 <span class="phpdocumentor-tag__name">since</span>
             </dt>
                             <dd class="phpdocumentor-tag-list__definition">
-                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                            <span class="phpdocumentor-tag-link">3.0.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Menu slug.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_editable_roles">
+        jpkcom_allow_blocks_editable_roles()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_editable_roles" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/admin-page.php"><a href="files/includes-admin-page.html"><abbr title="includes/admin-page.php">admin-page.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">53</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Roles that can be restricted from the settings screen.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_editable_roles</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$include_non_editing</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">false</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string, string&gt;</span></code>
+
+        <section class="phpdocumentor-description"><p>Administrators are never offered: they always bypass the filter, so a
+checkbox for them would be a lie. Roles without <code class="prettyprint">edit_posts</code> never see
+the block editor, so they are hidden by default and only surfaced when
+explicitly asked for. A slug the store would refuse (anything
+<code class="prettyprint">sanitize_key()</code> would change, e.g. a custom role registered with
+upper case or spaces) is never offered either: the UI must not put a
+column on screen whose ticks <code class="prettyprint">jpkcom_allow_blocks_sanitize_settings()</code>
+would silently discard on save.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$include_non_editing</span>
+                : <span class="phpdocumentor-argument-list__argument__type">bool</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">false</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Whether to also include roles that cannot edit posts.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_editable_roles_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_editable_roles_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.0.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string, string&gt;</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Role slug to display name.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_block_rows">
+        jpkcom_allow_blocks_block_rows()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_block_rows" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/admin-page.php"><a href="files/includes-admin-page.html"><abbr title="includes/admin-page.php">admin-page.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">94</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Rows for the block matrix.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_block_rows</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$settings</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;int, array{name: string, title: string, category: string, registered: bool}&gt;</span></code>
+
+        <section class="phpdocumentor-description"><p>The union of the registered blocks and every block name mentioned in the
+settings, so a block from a deactivated plugin still shows up instead of
+silently vanishing from the screen that would otherwise unblock it.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$settings</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;string|int, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Validated settings.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_block_rows_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_block_rows_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.0.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;int, array{name: string, title: string, category: string, registered: bool}&gt;</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Rows, sorted by category then title.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_render_import_preview">
+        jpkcom_allow_blocks_render_import_preview()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_render_import_preview" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/admin-page.php"><a href="files/includes-admin-page.html"><abbr title="includes/admin-page.php">admin-page.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">163</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Render the pending import preview, if a valid one exists.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_render_import_preview</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+        <section class="phpdocumentor-description"><p>Reads the token the preview handler put in the <code class="prettyprint">jpkcom-ab-import</code> query
+argument, fetches the parsed settings it stashed in a transient under
+that token, and renders a confirmation block inside the caller's
+<code class="prettyprint">.wrap</code> - never a standalone document, so the import flow never leaves
+the admin chrome. A missing or expired transient renders an
+explanatory notice instead and the normal screen still renders
+underneath it.</p>
+</section>
+
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_render_import_preview_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_render_import_preview_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.0.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_import_error_message">
+        jpkcom_allow_blocks_import_error_message()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_import_error_message" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/admin-page.php"><a href="files/includes-admin-page.html"><abbr title="includes/admin-page.php">admin-page.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">291</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Translated message for a known import error code.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_import_error_message</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$code</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+        <section class="phpdocumentor-description"><p>The error travels through the query string as a short code rather than
+free text, so a crafted link cannot put arbitrary words in front of an
+administrator. A code this function does not recognise is ignored -
+the caller shows no notice at all rather than falling back to
+something generic.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$code</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Error code produced by includes/import-export.php.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_import_error_message_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_import_error_message_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.0.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Translated message, or '' when the code is unknown.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_render_page">
+        jpkcom_allow_blocks_render_page()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_render_page" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/admin-page.php"><a href="files/includes-admin-page.html"><abbr title="includes/admin-page.php">admin-page.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">322</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Render the settings screen.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_render_page</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+        <section class="phpdocumentor-description"><p>Emits the controls, the save form with its checkbox matrix, and the
+import/export section, in that order. A checkbox is checked when the
+block is not blocked for that role, i.e. it reflects the allow list
+rather than the stored deny list.</p>
+</section>
+
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_render_page_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_render_page_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.0.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_apply_form">
+        jpkcom_allow_blocks_apply_form()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_apply_form" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/admin-page.php"><a href="files/includes-admin-page.html"><abbr title="includes/admin-page.php">admin-page.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">570</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Compute new settings from a settings-screen submission.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_apply_form</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$settings</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">array&lt;string|int, string&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$rendered</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">array&lt;string, array&lt;string, mixed&gt;&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$allowed</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">array&lt;string, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$forget</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">array()</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">array&lt;string|int, string&gt;|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$roles</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+
+        <section class="phpdocumentor-description"><p>The difference is taken over the rendered rows only: names the form did
+not show keep whatever they had. A save while the table is filtered must
+not wipe the rows that were scrolled out of view.</p>
+<p>An unregistered row can be dropped for good in two ways: ticking
+<code class="prettyprint">forget[&lt;name&gt;]</code> removes it from <strong>every role the stored settings
+currently know about</strong> and from <code class="prettyprint">labels</code> unconditionally, regardless
+of the per-role checkboxes on the same row and regardless of whether
+a given role was even rendered this save (see below); and, even
+without ticking it, a row that ends up blocked by no role at all
+after this save has its label dropped automatically once the block
+is not registered - a name nobody blocks and nothing registers has
+no reason to persist. A registered block's label is always refreshed
+from its current title, never from the block name: a block without a
+real title in its registration is not given one here either.</p>
+<p>Forget deliberately purges more broadly than the checkbox diff does.
+The checkbox diff below is scoped to <code class="prettyprint">$roles</code> because that has to
+match exactly what was rendered - see the parameter doc. But &quot;forget
+this block&quot; is a stronger promise than &quot;uncheck every box I can see&quot;:
+a role hidden by the &quot;show roles without edit_posts&quot; toggle can still
+block the same name, and if forget only cleared the rendered roles,
+the name would keep blocking silently in the hidden role while
+disappearing from <code class="prettyprint">labels</code> - unregistered, unreachable, and still
+growing the option, the exact failure this mechanism exists to close.</p>
+<p><code class="prettyprint">$rendered</code> is only deduplicated here, not validated: an invalid name
+moving through this function does no harm because
+<a href="namespaces/default.html#function_jpkcom_allow_blocks_sanitize_settings"><abbr title="\jpkcom_allow_blocks_sanitize_settings()">jpkcom_allow_blocks_sanitize_settings()</abbr></a> always filters the role
+lists and labels it returns against the block-name grammar, so a
+second filter pass here would be provably redundant rather than a
+second line of defence.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$settings</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;string|int, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Current validated settings.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$rendered</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;string|int, string&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Block names the form rendered.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$allowed</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;string, array&lt;string, mixed&gt;&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Ticked boxes, keyed role then block name.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$forget</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;string, mixed&gt;</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">array()</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Rows whose &quot;forget this block&quot; box was ticked, keyed by block name.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$roles</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;string|int, string&gt;|null</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Role slugs the checkbox diff processes, matching what was
+rendered. Defaults to every editable role, including ones
+that cannot edit posts. Does not limit the forget purge,
+which always reaches every role already present in
+<code class="prettyprint">$settings['roles']</code> in addition to these.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_apply_form_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_apply_form_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.0.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>New settings, not yet stored.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_is_exempt">
+        jpkcom_allow_blocks_is_exempt()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_is_exempt" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/block-filter.php"><a href="files/includes-block-filter.html"><abbr title="includes/block-filter.php">block-filter.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">29</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Whether the current user is exempt from any restriction.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_is_exempt</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+        <section class="phpdocumentor-description"><p>Expressed as a capability rather than a role slug so multisite super
+admins are covered. Administrators are never restricted.</p>
+</section>
+
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_is_exempt_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_is_exempt_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.0.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>True when no restriction applies.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_current_role_slugs">
+        jpkcom_allow_blocks_current_role_slugs()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_current_role_slugs" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/block-filter.php"><a href="files/includes-block-filter.html"><abbr title="includes/block-filter.php">block-filter.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">51</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Role slugs of the current user.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_current_role_slugs</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, string&gt;</span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_current_role_slugs_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_current_role_slugs_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.0.0</span>
                                                                                                         
                                     </dd>
                         </dl>
@@ -259,7 +1009,1069 @@
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">array&lt;string|int, string&gt;</span>
                     &mdash;
-                <section class="phpdocumentor-description"><p>Allowed block type names.</p>
+                <section class="phpdocumentor-description"><p>Role slugs, empty when there is no user.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_all_block_names">
+        jpkcom_allow_blocks_all_block_names()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_all_block_names" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/block-filter.php"><a href="files/includes-block-filter.html"><abbr title="includes/block-filter.php">block-filter.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">85</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Every block name this site knows about.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_all_block_names</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$settings</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, string&gt;</span></code>
+
+        <section class="phpdocumentor-description"><p>The server-side registry, plus every name mentioned in the settings so a
+deactivated plugin's blocks are not silently forgotten, plus whatever the
+extension filter adds.</p>
+<p>Blocks registered only in JavaScript are invisible to PHP. Sites using
+such blocks can add their names through
+<code class="prettyprint">jpkcom_allow_blocks_extra_block_names</code>.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$settings</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;string|int, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Validated settings.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_all_block_names_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_all_block_names_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.0.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, string&gt;</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Unique block names.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_filter_allowed">
+        jpkcom_allow_blocks_filter_allowed()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_filter_allowed" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/block-filter.php"><a href="files/includes-block-filter.html"><abbr title="includes/block-filter.php">block-filter.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">128</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Remove the blocked block types from the allowed list.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_filter_allowed</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$allowed</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$context</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+        <section class="phpdocumentor-description"><p>Returns the incoming value untouched whenever nothing is blocked, so an
+active but unconfigured plugin has no effect at all. An incoming array is
+only ever reduced, never extended, so restrictions set by other plugins
+are respected instead of overwritten.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$allowed</span>
+                : <span class="phpdocumentor-argument-list__argument__type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Incoming value: true, false or an array of names.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$context</span>
+                : <span class="phpdocumentor-argument-list__argument__type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The block editor context. Unused.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_filter_allowed_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_filter_allowed_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.0.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">mixed</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The allowed block types.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_export_payload">
+        jpkcom_allow_blocks_export_payload()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_export_payload" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/import-export.php"><a href="files/includes-import-export.html"><abbr title="includes/import-export.php">import-export.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">33</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Build the exportable payload for a settings structure.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_export_payload</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$settings</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+
+        <section class="phpdocumentor-description"><p>Adds provenance fields so an import can tell where a file came from:
+which plugin version wrote it, which site it was exported from, and
+when.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$settings</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;string|int, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Validated settings.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_export_payload_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_export_payload_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.0.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The settings plus <code class="prettyprint">plugin_version</code>, <code class="prettyprint">site_url</code> and <code class="prettyprint">exported</code>.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_export_filename">
+        jpkcom_allow_blocks_export_filename()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_export_filename" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/import-export.php"><a href="files/includes-import-export.html"><abbr title="includes/import-export.php">import-export.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">57</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Filename offered for a downloaded export.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_export_filename</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+        <section class="phpdocumentor-description"><p>Includes the site's host so two exports made on the same day from
+different sites do not collide once both files sit in the same
+downloads folder.</p>
+</section>
+
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_export_filename_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_export_filename_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.0.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Filename ending in <code class="prettyprint">.json</code>.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_parse_import">
+        jpkcom_allow_blocks_parse_import()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_parse_import" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/import-export.php"><a href="files/includes-import-export.html"><abbr title="includes/import-export.php">import-export.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">91</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Decode and validate an import payload.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_parse_import</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$json</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array{ok: bool, error: string, rejected: int, settings: array}</span></code>
+
+        <section class="phpdocumentor-description"><p>Every rejection path leaves <code class="prettyprint">settings</code> empty and carries a short error
+code rather than a translated message: the code travels through a
+redirect's query string, and a free-text message there would let a
+crafted link put arbitrary words in front of an administrator.
+<code class="prettyprint">includes/admin-page.php</code>'s <code class="prettyprint">jpkcom_allow_blocks_import_error_message()</code>
+maps each code to its translated text. Nothing here writes anything.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$json</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Raw file contents.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_parse_import_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_parse_import_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.0.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array{ok: bool, error: string, rejected: int, settings: array}</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Parse result. <code class="prettyprint">error</code> is
+a stable code ('invalid-json', 'bad-schema', 'no-roles') on failure, empty on
+success. <code class="prettyprint">rejected</code> counts entries the raw payload contained that did not survive
+sanitising, always 0 on failure since nothing is sanitised on that path.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_merge_import">
+        jpkcom_allow_blocks_merge_import()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_merge_import" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/import-export.php"><a href="files/includes-import-export.html"><abbr title="includes/import-export.php">import-export.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">150</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Merge an imported settings structure into the current one.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_merge_import</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$current</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$incoming</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+
+        <section class="phpdocumentor-description"><p>The unit is the role, not the individual block: a role present in
+<code class="prettyprint">$incoming</code> replaces that role's whole list, a role absent from it is
+left completely untouched. A role that does not exist on this site is
+stored anyway - it may be created later, or come from a plugin that is
+currently deactivated - which mirrors why this plugin stores a deny
+list at all: nothing is ever pruned. Labels are merged with the
+incoming file winning for keys it contains.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$current</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;string|int, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Current validated settings.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$incoming</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;string|int, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Validated settings decoded from an import file.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_merge_import_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_merge_import_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.0.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Merged settings, not yet stored.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_import_preview">
+        jpkcom_allow_blocks_import_preview()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_import_preview" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/import-export.php"><a href="files/includes-import-export.html"><abbr title="includes/import-export.php">import-export.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">194</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Describe what an import would change, before anything is written.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_import_preview</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$current</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$incoming</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">array&lt;string|int, string&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$known_roles</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">array&lt;string|int, string&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$known_blocks</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">array()</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array{roles_changed: int, blocks_changed: int, unknown_roles: string[], unknown_blocks: string[]}</span></code>
+
+        <section class="phpdocumentor-description"><p>Counts are taken per role: a role counts as changed when its list
+would differ from what is currently stored, whether or not the role
+exists on this site. <code class="prettyprint">unknown_roles</code> names incoming roles absent from
+<code class="prettyprint">$known_roles</code> so the import is not silently doing more than it
+appears to. <code class="prettyprint">unknown_blocks</code> names blocks the incoming file mentions
+that are not in <code class="prettyprint">$known_blocks</code> - the live block registry, passed in
+rather than read here so this stays a pure, testable function. That
+includes a block already present in <code class="prettyprint">$current</code>: a plugin that is
+currently switched off still leaves its block name in the stored
+settings, and the whole point of this count is to surface exactly
+that &quot;this install cannot currently offer it&quot; case.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$current</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;string|int, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Current validated settings.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$incoming</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;string|int, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Validated settings decoded from an import file.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$known_roles</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;string|int, string&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Role slugs that exist on this site.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$known_blocks</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;string|int, string&gt;</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">array()</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Block names registered on this site. Defaults to
+empty, which marks every incoming block unknown;
+callers should always pass the real registry list.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_import_preview_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_import_preview_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.0.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array{roles_changed: int, blocks_changed: int, unknown_roles: string[], unknown_blocks: string[]}</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Preview summary.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_import_error_redirect">
+        jpkcom_allow_blocks_import_error_redirect()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_import_error_redirect" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/import-export.php"><a href="files/includes-import-export.html"><abbr title="includes/import-export.php">import-export.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">246</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Redirect back to the settings page with an import error notice.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_import_error_redirect</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$code</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$back_url</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">never</span></code>
+
+        <section class="phpdocumentor-description"><p>Used in place of wp_die() for anything short of a failed capability or
+nonce check, so a rejected upload never throws the user out of the
+admin interface - they land back on the settings screen with an
+explanation instead of a bare error page. Carries a short error code
+rather than a translated message: <code class="prettyprint">admin-page.php</code> maps the code to
+text, and ignores anything it does not recognise, so a crafted link
+cannot put arbitrary words in front of an administrator through this
+query argument.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$code</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Error code, one of the keys
+<code class="prettyprint">jpkcom_allow_blocks_import_error_message()</code> understands.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$back_url</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Settings page URL to redirect to.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_import_error_redirect_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_import_error_redirect_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.0.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">never</span>
+            </section>
+
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_option_name">
+        jpkcom_allow_blocks_option_name()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_option_name" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/settings-store.php"><a href="files/includes-settings-store.html"><abbr title="includes/settings-store.php">settings-store.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">27</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Name of the option holding all settings.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_option_name</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_option_name_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_option_name_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.0.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Option name.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_is_valid_block_name">
+        jpkcom_allow_blocks_is_valid_block_name()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_is_valid_block_name" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/settings-store.php"><a href="files/includes-settings-store.html"><abbr title="includes/settings-store.php">settings-store.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">46</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Whether a string is a syntactically valid block name.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_is_valid_block_name</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$name</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+        <section class="phpdocumentor-description"><p>Follows the WordPress block name grammar: a lowercase namespace and name
+separated by exactly one slash.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$name</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Candidate block name.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_is_valid_block_name_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_is_valid_block_name_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.0.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>True when the name may be stored.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_empty_settings">
+        jpkcom_allow_blocks_empty_settings()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_empty_settings" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/settings-store.php"><a href="files/includes-settings-store.html"><abbr title="includes/settings-store.php">settings-store.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">61</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The empty settings structure.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_empty_settings</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array{schema: int, updated: string, roles: array<string,string[]>, labels: array<string,string>}</span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_empty_settings_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_empty_settings_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.0.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array{schema: int, updated: string, roles: array<string,string[]>, labels: array<string,string>}</span>
+            </section>
+
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_sanitize_settings">
+        jpkcom_allow_blocks_sanitize_settings()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_sanitize_settings" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/settings-store.php"><a href="files/includes-settings-store.html"><abbr title="includes/settings-store.php">settings-store.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">85</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Coerce any input into a valid settings structure.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_sanitize_settings</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$raw</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+
+        <section class="phpdocumentor-description"><p>Entries that fail validation are dropped rather than stored. Never throws,
+so a corrupt option can only ever mean &quot;nothing is blocked&quot;.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$raw</span>
+                : <span class="phpdocumentor-argument-list__argument__type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Value from the database, an import file or a form.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_sanitize_settings_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_sanitize_settings_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.0.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The validated structure.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_count_rejected">
+        jpkcom_allow_blocks_count_rejected()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_count_rejected" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/settings-store.php"><a href="files/includes-settings-store.html"><abbr title="includes/settings-store.php">settings-store.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">163</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Count how many entries a sanitised import or save would discard.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_count_rejected</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$raw</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
+
+        <section class="phpdocumentor-description"><p>Walks the same validation rules as <a href="namespaces/default.html#function_jpkcom_allow_blocks_sanitize_settings"><abbr title="\jpkcom_allow_blocks_sanitize_settings()">jpkcom_allow_blocks_sanitize_settings()</abbr></a>
+without mutating anything, so a caller can tell the user &quot;N entries were
+invalid and will be ignored&quot; instead of silently dropping them. A
+companion function rather than a change to the sanitiser's signature,
+so every existing caller of <code class="prettyprint">jpkcom_allow_blocks_sanitize_settings()</code>
+keeps working unchanged.</p>
+<p>Counts, added together:</p>
+<ul>
+<li>one for every <code class="prettyprint">roles</code> entry whose value is not an array (the entry
+cannot be walked further, so it counts as a single rejection),</li>
+<li>one for every role whose slug does not survive <code class="prettyprint">sanitize_key()</code>
+unchanged (the whole role is dropped),</li>
+<li>one for every block name within an otherwise valid role that is not
+a string or fails the block-name grammar,</li>
+<li>one for every <code class="prettyprint">labels</code> entry whose key is not a valid block name or
+whose value is not a string.</li>
+</ul>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$raw</span>
+                : <span class="phpdocumentor-argument-list__argument__type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Value from an import file or a form, same input the
+sanitiser would receive.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_count_rejected_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_count_rejected_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.0.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">int</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Number of entries the sanitiser would discard.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_get_settings">
+        jpkcom_allow_blocks_get_settings()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_get_settings" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/settings-store.php"><a href="files/includes-settings-store.html"><abbr title="includes/settings-store.php">settings-store.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">214</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Read the validated settings.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_get_settings</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_get_settings_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_get_settings_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.0.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The validated structure.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_save_settings">
+        jpkcom_allow_blocks_save_settings()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_save_settings" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/settings-store.php"><a href="files/includes-settings-store.html"><abbr title="includes/settings-store.php">settings-store.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">233</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Validate and store the settings.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_save_settings</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$settings</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+        <section class="phpdocumentor-description"><p>Autoload is off: the option is only read in the admin area, so the front
+end should not carry it on every request.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$settings</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;string|int, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Structure to store.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_save_settings_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_save_settings_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.0.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>True when the option was written.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_blocked_for_roles">
+        jpkcom_allow_blocks_blocked_for_roles()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_blocked_for_roles" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/settings-store.php"><a href="files/includes-settings-store.html"><abbr title="includes/settings-store.php">settings-store.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">258</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Block names blocked for every one of the given roles.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_blocked_for_roles</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">array&lt;string|int, string&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$role_slugs</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">array&lt;string|int, mixed&gt;|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$settings</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, string&gt;</span></code>
+
+        <section class="phpdocumentor-description"><p>The intersection, not the union: a block is blocked only when all of the
+user's roles block it. This mirrors WordPress capability semantics, where
+holding more roles never means holding fewer rights. A role with no entry
+blocks nothing, so it empties the intersection.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$role_slugs</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;string|int, string&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Roles of the user.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$settings</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;string|int, mixed&gt;|null</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Settings to use, or null to read them.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_blocked_for_roles_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_blocked_for_roles_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.0.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, string&gt;</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Blocked block names, re-indexed.</p>
 </section>
 
             </section>
@@ -287,6 +2099,8 @@
                             <li class="phpdocumentor-on-this-page-section__title">Constants</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="namespaces/default.html#constant_JPKCOM_ALLOW_BLOCKS_IMPORT_MAX_BYTES">JPKCOM_ALLOW_BLOCKS_IMPORT_MAX_BYTES</a></li>
+                                                    <li class=""><a href="namespaces/default.html#constant_JPKCOM_ALLOW_BLOCKS_PATH">JPKCOM_ALLOW_BLOCKS_PATH</a></li>
                                                     <li class=""><a href="namespaces/default.html#constant_JPKCOM_ALLOW_BLOCKS_VERSION">JPKCOM_ALLOW_BLOCKS_VERSION</a></li>
                                             </ul>
                 </li>
@@ -294,7 +2108,31 @@
                             <li class="phpdocumentor-on-this-page-section__title">Functions</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
-                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allowed_block_types">jpkcom_allowed_block_types()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_all_block_names">jpkcom_allow_blocks_all_block_names()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_apply_form">jpkcom_allow_blocks_apply_form()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_block_rows">jpkcom_allow_blocks_block_rows()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_blocked_for_roles">jpkcom_allow_blocks_blocked_for_roles()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_count_rejected">jpkcom_allow_blocks_count_rejected()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_current_role_slugs">jpkcom_allow_blocks_current_role_slugs()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_editable_roles">jpkcom_allow_blocks_editable_roles()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_empty_settings">jpkcom_allow_blocks_empty_settings()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_export_filename">jpkcom_allow_blocks_export_filename()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_export_payload">jpkcom_allow_blocks_export_payload()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_filter_allowed">jpkcom_allow_blocks_filter_allowed()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_get_settings">jpkcom_allow_blocks_get_settings()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_import_error_message">jpkcom_allow_blocks_import_error_message()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_import_error_redirect">jpkcom_allow_blocks_import_error_redirect()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_import_preview">jpkcom_allow_blocks_import_preview()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_is_exempt">jpkcom_allow_blocks_is_exempt()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_is_valid_block_name">jpkcom_allow_blocks_is_valid_block_name()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_menu_slug">jpkcom_allow_blocks_menu_slug()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_merge_import">jpkcom_allow_blocks_merge_import()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_option_name">jpkcom_allow_blocks_option_name()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_parse_import">jpkcom_allow_blocks_parse_import()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_render_import_preview">jpkcom_allow_blocks_render_import_preview()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_render_page">jpkcom_allow_blocks_render_page()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_sanitize_settings">jpkcom_allow_blocks_sanitize_settings()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_save_settings">jpkcom_allow_blocks_save_settings()</a></li>
                                             </ul>
                 </li>
                     </ul>
