@@ -3,7 +3,7 @@
 **Plugin Name:** JPKCom Allow Block Types  
 **Plugin URI:** https://github.com/JPKCom/jpkcom-allow-blocks  
 **Description:** Only allow certain types of blocks in Gutenberg for non admins.  
-**Version:** 2.0.7  
+**Version:** 2.0.8  
 **Author:** Jean Pierre Kolb <jpk@jpkc.com>  
 **Author URI:** https://www.jpkc.com  
 **Contributors:** JPKCom  
@@ -11,7 +11,7 @@
 **Requires at least:** 6.9  
 **Tested up to:** 7.1  
 **Requires PHP:** 8.3  
-**Stable tag:** 2.0.7  
+**Stable tag:** 2.0.8  
 **License:** GPL-2.0-or-later  
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -39,6 +39,11 @@ For more details visit: https://developer.wordpress.org/block-editor/reference-g
 
 
 ## Changelog
+
+### 2.0.8
+* Fixed: the update manifest no longer reports `network: true` for this plugin. The generator defaulted a missing `Network:` header to true, while WordPress' own default for a missing header is "not network-only". Metadata only — WordPress derives network-only from the plugin header via `is_network_only_plugin()`, not from the update manifest
+* CI: the lint and guard workflow now also runs on pushes to `main`. It only covered pull requests, so a direct push with bypass rights skipped every check
+* Changed: comments, workflow step names and CI output across the repository are now English throughout, and the developer notes in `CLAUDE.md` were translated and trimmed. No effect on the shipped plugin
 
 ### 2.0.7
 * Changed: `Tested up to` raised to WordPress 7.1
