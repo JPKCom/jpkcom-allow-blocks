@@ -3,7 +3,7 @@
 **Plugin Name:** JPKCom Allow Block Types  
 **Plugin URI:** https://github.com/JPKCom/jpkcom-allow-blocks  
 **Description:** Only allow certain types of blocks in Gutenberg for non admins.  
-**Version:** 2.0.8  
+**Version:** 3.0.0  
 **Author:** Jean Pierre Kolb <jpk@jpkc.com>  
 **Author URI:** https://www.jpkc.com  
 **Contributors:** JPKCom  
@@ -11,7 +11,7 @@
 **Requires at least:** 6.9  
 **Tested up to:** 7.1  
 **Requires PHP:** 8.3  
-**Stable tag:** 2.0.8  
+**Stable tag:** 3.0.0  
 **License:** GPL-2.0-or-later  
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -20,9 +20,46 @@ Only allow certain types of blocks in Gutenberg for non admins.
 
 ## Description
 
-Only allow certain types of blocks in Gutenberg for non admins.
+Restrict, per WordPress role, which block types the block editor offers.
+Administrators always see every block and are never affected.
 
-For more details visit: https://developer.wordpress.org/block-editor/reference-guides/core-blocks/
+### The settings screen
+
+Under **Appearance → Block permissions** is a matrix: every block type known
+to the site as a row, every non-administrator role as a column. Unticking a
+box blocks that block for that role; a freshly installed site starts with
+nothing blocked, so every block stays available until you switch it off.
+
+Blocks are grouped by their block category. A block that belonged to a
+plugin which is currently deactivated is still listed, under an
+"Unregistered" group with a warning marker, so a permission set up earlier
+is never silently lost — it can be removed deliberately once you know the
+block is really gone for good. Roles that cannot use the block editor at
+all (no `edit_posts` capability, e.g. Subscriber on a default install) are
+hidden by default; a toggle above the table brings them back for sites with
+custom roles.
+
+A search box, a category filter and per-role column toggles narrow the
+table down without a page reload — useful once the list runs into the
+hundreds of rows on a site with many block plugins.
+
+The restriction only affects the block editor's inserter. It is not a
+security or content-validation boundary.
+
+### Export and import
+
+**Export** downloads the current settings as a JSON file, so a permission
+matrix built on one site can be moved to another.
+
+**Import** never writes anything on upload alone: choosing a file first
+shows a preview — how many roles would change, how many block entries that
+touches, and any role or block name in the file that this site does not
+currently know about — and only writes the settings once that preview is
+confirmed. Importing merges per role: for every role present in the file,
+that role's whole list of blocked blocks replaces what was stored;
+any role the file does not mention is left exactly as it was.
+
+For more details on WordPress' built-in block types visit: https://developer.wordpress.org/block-editor/reference-guides/core-blocks/
 
 
 ### Documentation
@@ -39,6 +76,14 @@ For more details visit: https://developer.wordpress.org/block-editor/reference-g
 
 
 ## Changelog
+
+### 3.0.0
+* **Breaking:** `jpkcom_allowed_block_types()` has been removed with no deprecated shim. It always returned the same hard-coded array regardless of its arguments, so a shim could only return that same stale list — code calling it directly will now fatal instead of silently getting outdated data
+* Changed: the fixed 17-block allow-list is gone. Block permissions are now configured per role from a new settings screen under **Appearance → Block permissions**, with every currently registered block available to every role by default
+* Fixed: the previous restriction never actually took effect. It was registered inside `if ( ! is_admin() )`, but the block editor *is* part of wp-admin, so `allowed_block_types_all` was never filtered there. Every block was available to everyone regardless of the plugin's hard-coded list
+* Added: export block permissions to a JSON file and re-import them elsewhere, with a preview step before anything is written
+* Added: `jpkcom_allow_blocks_is_exempt` filter to change which users bypass the restriction (defaults to `manage_options`), and `jpkcom_allow_blocks_extra_block_names` to add block names that are only registered in JavaScript and therefore invisible to the PHP-side registry
+* Added: German translations (`de_DE`, `de_DE_formal`)
 
 ### 2.0.8
 * Fixed: the update manifest no longer reports `network: true` for this plugin. The generator defaulted a missing `Network:` header to true, while WordPress' own default for a missing header is "not network-only". Metadata only — WordPress derives network-only from the plugin header via `is_network_only_plugin()`, not from the update manifest

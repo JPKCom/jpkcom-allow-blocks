@@ -15,7 +15,7 @@
 - Target version **3.0.0**. Bump five places: header `Version:`, header `Stable tag:`, `JPKCOM_ALLOW_BLOCKS_VERSION`, `phpdoc.xml` `<version number="…">`, `README.md` `**Version:**` and `**Stable tag:**`.
 - `Requires at least: 6.9`, `Requires PHP: 8.3`, `Tested up to: 7.1` — unchanged.
 - Every PHP file: `declare(strict_types=1);` and a direct-access guard. Main file uses `if ( ! defined( constant_name: 'WPINC' ) ) { die; }`; include files use `if ( ! defined( constant_name: 'ABSPATH' ) ) { exit; }`.
-- Every function is `jpkcom_allow_blocks_`-prefixed and wrapped in `if ( ! function_exists( function: '…' ) )`. No unprefixed global names.
+- Every function **in the plugin's own code** is `jpkcom_allow_blocks_`-prefixed and wrapped in `if ( ! function_exists( function: '…' ) )`. No unprefixed global names. Test files are the exception: they follow the fleet's existing harness convention and declare a bare `jpkcom_check()` helper, matching every other `tests/test-*.php` in the JPKCom plugins.
 - **Repository language is English** — comments, variable names, commit messages, docs. German only inside translation catalogues.
 - Commits carry **no** `Co-Authored-By` trailer.
 - CI runs on every pull request and push to `main`: `php -l`, a named-argument guard, YAML validation, action SHA pinning, and `tests/test-*.php`. The named-argument guard rejects named arguments that do not match an internal function's real parameter names — only use ones you have verified (`constant_name:`, `path:`, `haystack:`, `needle:`, `string:`, `flags:`, `encoding:`, `function:`, `class:`).
@@ -1197,13 +1197,13 @@ add_action( 'admin_menu', static function (): void {
     add_action( 'admin_print_styles-' . $hook, static function (): void {
         wp_enqueue_style(
             'jpkcom-allow-blocks-admin',
-            plugins_url( 'assets/admin.css', dirname( path: __FILE__ ) . '/jpkcom-allow-blocks.php' ),
+            plugins_url( 'assets/admin.css', JPKCOM_ALLOW_BLOCKS_PATH . 'jpkcom-allow-blocks.php' ),
             array(),
             JPKCOM_ALLOW_BLOCKS_VERSION
         );
         wp_enqueue_script(
             'jpkcom-allow-blocks-admin',
-            plugins_url( 'assets/admin.js', dirname( path: __FILE__ ) . '/jpkcom-allow-blocks.php' ),
+            plugins_url( 'assets/admin.js', JPKCOM_ALLOW_BLOCKS_PATH . 'jpkcom-allow-blocks.php' ),
             array(),
             JPKCOM_ALLOW_BLOCKS_VERSION,
             true
