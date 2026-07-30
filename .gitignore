@@ -68,6 +68,10 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 .claude/*
 
 # phpDocumentor
+# docs/ holds generated API documentation and is rebuilt on every release, so it
+# stays out of git - except docs/superpowers/, which holds hand-written design
+# specs. Both are excluded from the release ZIP by .github/workflows/release.yml.
 .phpdoc/
-docs/
+docs/*
+!docs/superpowers/
 phpDocumentor.phar
