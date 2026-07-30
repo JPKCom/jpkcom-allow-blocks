@@ -269,6 +269,49 @@ jpkcom_check(
 );
 
 /*
+ * Forget must purge every role the stored settings know about, not only
+ * the roles this save's checkbox diff processes. The "show roles without
+ * edit_posts" toggle can legitimately render a narrower $roles than what
+ * is actually stored - e.g. 'subscriber' blocks the same name but its
+ * column is hidden. Ticking "forget" with only 'editor' rendered must
+ * still clear 'subscriber', or the row goes unregistered-and-unreachable
+ * while still growing the option: exactly the stale-row failure this
+ * mechanism exists to close.
+ */
+$settings_blocked_by_two_roles = jpkcom_allow_blocks_sanitize_settings(
+    array(
+        'roles'  => array(
+            'editor'     => array( 'gone/block' ),
+            'subscriber' => array( 'gone/block' ),
+        ),
+        'labels' => array( 'gone/block' => 'Retired Block' ),
+    )
+);
+
+$result = jpkcom_allow_blocks_apply_form(
+    $settings_blocked_by_two_roles,
+    array( 'gone/block' ),
+    array( 'editor' => array( 'gone/block' => '1' ) ),
+    array( 'gone/block' => '1' ),
+    array( 'editor' )
+);
+
+jpkcom_check(
+    'forget clears a rendered role',
+    ! in_array( 'gone/block', $result['roles']['editor'], true ),
+    json_encode( $result['roles']['editor'] ?? null )
+);
+jpkcom_check(
+    'forget also clears a role that was not rendered this save',
+    ! in_array( 'gone/block', $result['roles']['subscriber'], true ),
+    json_encode( $result['roles']['subscriber'] ?? null )
+);
+jpkcom_check(
+    'forget clears the label even when a hidden role still blocked the row',
+    ! isset( $result['labels']['gone/block'] )
+);
+
+/*
  * Even without ticking "forget", an unregistered row that ends up blocked
  * by no role after the save loses its label automatically: a name nobody
  * blocks and nothing registers has no reason to persist. $roles is

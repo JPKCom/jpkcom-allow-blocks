@@ -526,15 +526,26 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_apply_form' ) ) {
      * not wipe the rows that were scrolled out of view.
      *
      * An unregistered row can be dropped for good in two ways: ticking
-     * `forget[<name>]` removes it from every role's deny list and from
-     * `labels` unconditionally, regardless of the per-role checkboxes on the
-     * same row; and, even without ticking it, a row that ends up blocked by
-     * no role at all after this save has its label dropped automatically
-     * once the block is not registered - a name nobody blocks and nothing
-     * registers has no reason to persist. A registered block's label is
-     * always refreshed from its current title, never from the block name:
-     * a block without a real title in its registration is not given one
-     * here either.
+     * `forget[<name>]` removes it from **every role the stored settings
+     * currently know about** and from `labels` unconditionally, regardless
+     * of the per-role checkboxes on the same row and regardless of whether
+     * a given role was even rendered this save (see below); and, even
+     * without ticking it, a row that ends up blocked by no role at all
+     * after this save has its label dropped automatically once the block
+     * is not registered - a name nobody blocks and nothing registers has
+     * no reason to persist. A registered block's label is always refreshed
+     * from its current title, never from the block name: a block without a
+     * real title in its registration is not given one here either.
+     *
+     * Forget deliberately purges more broadly than the checkbox diff does.
+     * The checkbox diff below is scoped to `$roles` because that has to
+     * match exactly what was rendered - see the parameter doc. But "forget
+     * this block" is a stronger promise than "uncheck every box I can see":
+     * a role hidden by the "show roles without edit_posts" toggle can still
+     * block the same name, and if forget only cleared the rendered roles,
+     * the name would keep blocking silently in the hidden role while
+     * disappearing from `labels` - unregistered, unreachable, and still
+     * growing the option, the exact failure this mechanism exists to close.
      *
      * `$rendered` is only deduplicated here, not validated: an invalid name
      * moving through this function does no harm because
@@ -549,8 +560,11 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_apply_form' ) ) {
      * @param string[]                            $rendered Block names the form rendered.
      * @param array<string,array<string,mixed>>   $allowed  Ticked boxes, keyed role then block name.
      * @param array<string,mixed>                 $forget   Rows whose "forget this block" box was ticked, keyed by block name.
-     * @param string[]|null                       $roles    Role slugs to process, matching what was rendered. Defaults to
-     *                                                       every editable role, including ones that cannot edit posts.
+     * @param string[]|null                       $roles    Role slugs the checkbox diff processes, matching what was
+     *                                                       rendered. Defaults to every editable role, including ones
+     *                                                       that cannot edit posts. Does not limit the forget purge,
+     *                                                       which always reaches every role already present in
+     *                                                       `$settings['roles']` in addition to these.
      * @return array New settings, not yet stored.
      */
     function jpkcom_allow_blocks_apply_form( array $settings, array $rendered, array $allowed, array $forget = array(), ?array $roles = null ): array {
@@ -580,6 +594,24 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_apply_form' ) ) {
             }
 
             $settings['roles'][ $role ] = array_values( array_unique( $kept ) );
+        }
+
+        /*
+         * A forgotten block is purged from every role the stored settings
+         * currently know about, not only the roles this save's checkbox
+         * diff covers: the toggle that hides roles without `edit_posts`
+         * means $roles can legitimately be a subset of what is actually
+         * stored (e.g. `subscriber` blocks the same name but is not
+         * rendered). Ticking "forget" is a promise to remove the name
+         * everywhere, so leaving it behind in an unrendered role would
+         * silently reintroduce the exact stale-row problem this exists to
+         * close: the name resurfaces as unregistered but unreachable
+         * because no rendered row still names it as blocked.
+         */
+        if ( array() !== $forgotten ) {
+            foreach ( array_unique( array_merge( array_keys( $settings['roles'] ), $roles ) ) as $role ) {
+                $settings['roles'][ $role ] = array_values( array_diff( $settings['roles'][ $role ] ?? array(), $forgotten ) );
+            }
         }
 
         $registered = WP_Block_Type_Registry::get_instance()->get_all_registered();
