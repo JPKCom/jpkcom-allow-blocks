@@ -174,6 +174,12 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_render_page' ) ) {
 
             <p><?php echo esc_html__( 'Choose which blocks each role may insert. Administrators always have every block.', 'jpkcom-allow-blocks' ); ?></p>
 
+            <?php if ( isset( $_GET['jpkcom-ab-saved'] ) ) : ?>
+                <div class="notice notice-success is-dismissible">
+                    <p><?php echo esc_html__( 'Block permissions saved.', 'jpkcom-allow-blocks' ); ?></p>
+                </div>
+            <?php endif; ?>
+
             <div class="jpkcom-ab-controls">
                 <p class="search-box">
                     <label for="jpkcom-ab-search" class="screen-reader-text"><?php echo esc_html__( 'Search blocks', 'jpkcom-allow-blocks' ); ?></label>
@@ -256,6 +262,76 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_render_page' ) ) {
     }
 
 }
+
+if ( ! function_exists( function: 'jpkcom_allow_blocks_apply_form' ) ) {
+
+    /**
+     * Compute new settings from a settings-screen submission.
+     *
+     * The difference is taken over the rendered rows only: names the form did
+     * not show keep whatever they had. A save while the table is filtered must
+     * not wipe the rows that were scrolled out of view.
+     *
+     * @since 3.0.0
+     *
+     * @param array                        $settings Current validated settings.
+     * @param string[]                     $rendered Block names the form rendered.
+     * @param array<string,array<string,mixed>> $allowed Ticked boxes, keyed role then block name.
+     * @return array New settings, not yet stored.
+     */
+    function jpkcom_allow_blocks_apply_form( array $settings, array $rendered, array $allowed ): array {
+        $rendered = array_values( array_unique( array_filter( $rendered, 'jpkcom_allow_blocks_is_valid_block_name' ) ) );
+        $rows     = array_column( jpkcom_allow_blocks_block_rows( $settings ), null, 'name' );
+
+        foreach ( array_keys( jpkcom_allow_blocks_editable_roles( true ) ) as $role ) {
+            $previous = $settings['roles'][ $role ] ?? array();
+            $kept     = array_values( array_diff( $previous, $rendered ) );
+            $ticked   = $allowed[ $role ] ?? array();
+
+            foreach ( $rendered as $name ) {
+                if ( ! isset( $ticked[ $name ] ) ) {
+                    $kept[] = $name;
+                }
+            }
+
+            $settings['roles'][ $role ] = array_values( array_unique( $kept ) );
+        }
+
+        foreach ( $rendered as $name ) {
+            $title = $rows[ $name ]['title'] ?? $name;
+
+            if ( is_string( $title ) && '' !== $title ) {
+                $settings['labels'][ $name ] = $title;
+            }
+        }
+
+        return jpkcom_allow_blocks_sanitize_settings( $settings );
+    }
+
+}
+
+add_action( 'admin_post_jpkcom_allow_blocks_save', static function (): void {
+    if ( ! current_user_can( 'manage_options' ) ) {
+        wp_die( esc_html__( 'You are not allowed to change block permissions.', 'jpkcom-allow-blocks' ), '', array( 'response' => 403 ) );
+    }
+
+    check_admin_referer( 'jpkcom_allow_blocks_save', 'jpkcom_allow_blocks_nonce' );
+
+    $rendered = isset( $_POST['rendered'] ) && is_array( $_POST['rendered'] )
+        ? array_map( 'sanitize_text_field', wp_unslash( $_POST['rendered'] ) )
+        : array();
+
+    $allowed = isset( $_POST['allowed'] ) && is_array( $_POST['allowed'] )
+        ? wp_unslash( $_POST['allowed'] )
+        : array();
+
+    jpkcom_allow_blocks_save_settings(
+        jpkcom_allow_blocks_apply_form( jpkcom_allow_blocks_get_settings(), $rendered, is_array( $allowed ) ? $allowed : array() )
+    );
+
+    wp_safe_redirect( add_query_arg( 'jpkcom-ab-saved', '1', admin_url( 'themes.php?page=' . jpkcom_allow_blocks_menu_slug() ) ) );
+    exit;
+} );
 
 add_action( 'admin_menu', static function (): void {
     $hook = add_submenu_page(

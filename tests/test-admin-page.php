@@ -181,6 +181,48 @@ jpkcom_check( 'rows are grouped by category', $categories === $sorted, json_enco
 /* The menu is registered under Appearance. */
 jpkcom_check( 'the admin_menu hook is used', ( $GLOBALS['jpkcom_hooks']['admin_menu'] ?? array() ) !== array() );
 
+/*
+ * Saving computes the difference over the rendered rows only. Without that, a
+ * save with an active search filter would wipe every setting not on screen.
+ */
+$settings = jpkcom_allow_blocks_sanitize_settings(
+    array( 'roles' => array( 'editor' => array( 'core/code', 'core/html' ) ) )
+);
+
+$result = jpkcom_allow_blocks_apply_form(
+    $settings,
+    array( 'core/code', 'core/paragraph' ),
+    array( 'editor' => array( 'core/code' => '1' ) )
+);
+
+jpkcom_check(
+    'a row rendered and ticked is unblocked',
+    ! in_array( 'core/code', $result['roles']['editor'], true )
+);
+jpkcom_check(
+    'a row rendered and unticked is blocked',
+    in_array( 'core/paragraph', $result['roles']['editor'], true )
+);
+jpkcom_check(
+    'a row that was not rendered keeps its setting',
+    in_array( 'core/html', $result['roles']['editor'], true ),
+    json_encode( $result['roles']['editor'] )
+);
+
+$result = jpkcom_allow_blocks_apply_form( $settings, array( 'core/code' ), array() );
+jpkcom_check(
+    'a role absent from the submission still loses its rendered rows',
+    in_array( 'core/code', $result['roles']['editor'], true )
+);
+
+$result = jpkcom_allow_blocks_apply_form( $settings, array( 'bad name', 'core/code' ), array( 'editor' => array() ) );
+jpkcom_check( 'invalid rendered names are ignored', ! in_array( 'bad name', $result['roles']['editor'], true ) );
+
+jpkcom_check(
+    'labels are recorded for rendered blocks',
+    ( $result['labels']['core/code'] ?? '' ) !== ''
+);
+
 printf( "\n  %d passed, %d failed\n", $passed, $failed );
 
 exit( $failed > 0 ? 1 : 0 );
