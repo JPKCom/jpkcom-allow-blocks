@@ -14,6 +14,8 @@ Requires PHP: 8.3
 Stable tag: 3.0.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: jpkcom-allow-blocks
+Domain Path: /languages
 */
 
 declare(strict_types=1);
@@ -61,6 +63,17 @@ add_action( 'init', static function (): void {
 if ( ! defined( 'JPKCOM_ALLOW_BLOCKS_PATH' ) ) {
     define( constant_name: 'JPKCOM_ALLOW_BLOCKS_PATH', value: plugin_dir_path( __FILE__ ) );
 }
+
+/**
+ * Load the plugin's translations.
+ *
+ * @since 3.0.0
+ *
+ * @return void
+ */
+add_action( 'plugins_loaded', static function (): void {
+    load_plugin_textdomain( 'jpkcom-allow-blocks', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+} );
 
 /**
  * Load the plugin modules.
