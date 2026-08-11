@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: JPKCom Allow Block Types 3.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/jpkcom-allow-"
 "blocks\n"
-"POT-Creation-Date: 2026-07-30T18:57:39+02:00\n"
+"POT-Creation-Date: 2026-08-11T13:57:26+02:00\n"
 "PO-Revision-Date: 2026-07-30 12:00+0100\n"
 "Last-Translator: Jean Pierre Kolb <jpk@jpkc.com>\n"
 "Language-Team: German (Formal)\n"
@@ -45,6 +45,121 @@ msgstr ""
 #. Author URI of the plugin
 #: jpkcom-allow-blocks.php
 msgid "https://www.jpkc.com"
+msgstr ""
+
+#: includes/abilities.php:162
+msgid ""
+"The block restriction settings on this site could not be read. This is a "
+"condition on the site, not a problem with the request, so repeating the call "
+"unchanged will not help; the details are in the site error log."
+msgstr ""
+
+#. translators: 1: comma-separated rejected keys, 2: comma-separated accepted keys.
+#: includes/abilities.php:320
+#, php-format
+msgid ""
+"Unknown input key: %1$s. This ability accepts: %2$s. A key it does not "
+"declare is never read, so the request would be answered as though that key "
+"had not been sent."
+msgstr ""
+
+#: includes/abilities.php:322
+msgid "no input at all"
+msgstr ""
+
+#: includes/abilities.php:362
+msgid "This ability takes no parameters. Call it with no input at all."
+msgstr ""
+
+#: includes/abilities.php:491
+msgid "List the blocks you may insert"
+msgstr ""
+
+#: includes/abilities.php:492
+msgid ""
+"Returns which blocks the calling user may actually insert in the block "
+"editor on this site, and how the restriction is configured for each role. "
+"The answer is produced by the same filter the editor is handed, so it cannot "
+"disagree with what the editor will accept. Note that a user's blocked set is "
+"the INTERSECTION across their roles - someone holding two roles is blocked "
+"only from what both roles block, and a single role with an empty list lifts "
+"the restriction entirely."
+msgstr ""
+
+#: includes/abilities.php:512
+msgid ""
+"True when the calling user is exempt from the restriction entirely. The "
+"default exemption is the manage_options capability, and a site can move it "
+"with a filter, so do not infer this from the role list."
+msgstr ""
+
+#: includes/abilities.php:513
+msgid "Role slugs of the calling user, empty when there is no user."
+msgstr ""
+
+#: includes/abilities.php:514
+msgid ""
+"True when the calling user is actually restricted right now. False either "
+"because they are exempt or because nothing is blocked for their role "
+"combination."
+msgstr ""
+
+#: includes/abilities.php:515
+msgid ""
+"How many block types this site knows altogether, so the allowed list can be "
+"read as a proportion."
+msgstr ""
+
+#: includes/abilities.php:516
+msgid ""
+"The block names the calling user may insert. This is what the editor is "
+"handed, not a re-derivation of the settings."
+msgstr ""
+
+#: includes/abilities.php:517
+msgid ""
+"The block names the calling user may not insert. Inserting one of these "
+"produces content the editor will refuse."
+msgstr ""
+
+#: includes/abilities.php:520
+msgid ""
+"How the restriction is CONFIGURED per role. This is the stored "
+"configuration, not an evaluated result for any user: a user holding several "
+"roles gets the intersection, and an exempt user gets everything regardless "
+"of what is listed here."
+msgstr ""
+
+#: includes/abilities.php:524
+msgid "Role slug."
+msgstr ""
+
+#: includes/abilities.php:525
+msgid "Block names blocked for this role."
+msgstr ""
+
+#: includes/abilities.php:526
+msgid ""
+"How many entries the blocked list holds, including any that no longer exist "
+"on this site."
+msgstr ""
+
+#: includes/abilities.php:527
+msgid ""
+"How many of the block types this site knows would remain for a user holding "
+"only this role."
+msgstr ""
+
+#: includes/abilities.php:531
+msgid "Locale this answer was read in."
+msgstr ""
+
+#: includes/abilities.php:574
+msgid "JPKCom Content"
+msgstr ""
+
+#: includes/abilities.php:575
+msgid "Read-only access to content managed by the JPKCom content plugins."
 msgstr ""
 
 #: includes/admin-page.php:177 includes/admin-page.php:300
@@ -122,8 +237,8 @@ msgstr "Diese Datei ist kein erkannter Blockberechtigungs-Export."
 msgid "The file has no roles to import."
 msgstr "Die Datei enthält keine zu importierenden Rollen."
 
-#: includes/admin-page.php:345 includes/admin-page.php:671
-#: includes/admin-page.php:672
+#: includes/admin-page.php:345 includes/admin-page.php:703
+#: includes/admin-page.php:704
 msgid "Block permissions"
 msgstr "Blockberechtigungen"
 
@@ -213,7 +328,7 @@ msgstr "Blockberechtigungsdatei"
 msgid "Import…"
 msgstr "Importieren…"
 
-#: includes/admin-page.php:628
+#: includes/admin-page.php:660
 msgid "You are not allowed to change block permissions."
 msgstr "Sie dürfen die Blockberechtigungen nicht ändern."
 

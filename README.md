@@ -3,15 +3,15 @@
 **Plugin Name:** JPKCom Allow Block Types  
 **Plugin URI:** https://github.com/JPKCom/jpkcom-allow-blocks  
 **Description:** Only allow certain types of blocks in Gutenberg for non admins.  
-**Version:** 3.0.0  
+**Version:** 3.1.0  
 **Author:** Jean Pierre Kolb <jpk@jpkc.com>  
 **Author URI:** https://www.jpkc.com  
 **Contributors:** JPKCom  
 **Tags:** Admin, Block, Bootstrap, Editor, Gutenberg  
-**Requires at least:** 6.9  
+**Requires at least:** 7.0  
 **Tested up to:** 7.1  
 **Requires PHP:** 8.3  
-**Stable tag:** 3.0.0  
+**Stable tag:** 3.1.0  
 **License:** GPL-2.0-or-later  
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -76,6 +76,12 @@ For more details on WordPress' built-in block types visit: https://developer.wor
 
 
 ## Changelog
+
+### 3.1.0
+* Added: a read-only WordPress Ability, `jpkcom-allow-blocks/list-allowed-blocks`, so an AI assistant, an MCP client or REST automation can ask which blocks it may actually insert before it writes content that the editor would refuse. The answer is produced by the same filter the editor is handed, so it cannot disagree with what the editor accepts
+* Added: the answer also reports how the restriction is configured for every role, clearly separated from the effective answer for the calling user. Those are two different questions: a user holding several roles is blocked only from what **all** of their roles block, and an exempt user gets everything regardless of what any role lists
+* Added: the ability requires the `edit_posts` capability and can be switched off entirely with `define( 'JPKCOM_ALLOW_BLOCKS_ABILITIES', false )`, or narrowed through a filter
+* Changed: WordPress 7.0 is now the minimum
 
 ### 3.0.0
 * **Breaking:** `jpkcom_allowed_block_types()` has been removed with no deprecated shim. It always returned the same hard-coded array regardless of its arguments, so a shim could only return that same stale list — code calling it directly will now fatal instead of silently getting outdated data
