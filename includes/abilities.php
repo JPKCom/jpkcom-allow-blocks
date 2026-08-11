@@ -67,11 +67,31 @@ if ( ! function_exists( function: 'jpkcom_allow_blocks_abilities_enabled' ) ) {
 	/**
 	 * Decide whether the ability should be registered at all.
 	 *
+	 * Both spellings of the kill switch are honoured. README.md and CLAUDE.md
+	 * have always documented the separated JPKCOM_ALLOW_BLOCKS_ABILITIES, but
+	 * 3.1.0 shipped a check for the run-together JPKCOM_ALLOWBLOCKS_ABILITIES,
+	 * so the documented constant did nothing and only the undocumented one
+	 * worked. Accepting both keeps a 3.1.0 workaround working while making the
+	 * documented spelling authoritative.
+	 *
+	 * The plugin's constant naming is genuinely split, which is how the slip
+	 * survived review: the main file uses JPKCOM_ALLOW_BLOCKS_* (VERSION, PATH,
+	 * IMPORT_MAX_BYTES), while the two other constants in THIS file run the
+	 * words together (JPKCOM_ALLOWBLOCKS_ABILITY_CATEGORY, _ABILITY_INPUT_KEYS).
+	 * Writing the local spelling here was the natural mistake to make.
+	 *
 	 * @since 3.1.0
+	 * @since 3.1.1 Honours the documented JPKCOM_ALLOW_BLOCKS_ABILITIES.
 	 *
 	 * @return bool True when registration should proceed.
 	 */
 	function jpkcom_allow_blocks_abilities_enabled(): bool {
+
+		if ( defined( constant_name: 'JPKCOM_ALLOW_BLOCKS_ABILITIES' ) && ! JPKCOM_ALLOW_BLOCKS_ABILITIES ) {
+
+			return false;
+
+		}
 
 		if ( defined( constant_name: 'JPKCOM_ALLOWBLOCKS_ABILITIES' ) && ! JPKCOM_ALLOWBLOCKS_ABILITIES ) {
 

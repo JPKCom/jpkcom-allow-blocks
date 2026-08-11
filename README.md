@@ -3,7 +3,7 @@
 **Plugin Name:** JPKCom Allow Block Types  
 **Plugin URI:** https://github.com/JPKCom/jpkcom-allow-blocks  
 **Description:** Only allow certain types of blocks in Gutenberg for non admins.  
-**Version:** 3.1.0  
+**Version:** 3.1.1  
 **Author:** Jean Pierre Kolb <jpk@jpkc.com>  
 **Author URI:** https://www.jpkc.com  
 **Contributors:** JPKCom  
@@ -11,7 +11,7 @@
 **Requires at least:** 7.0  
 **Tested up to:** 7.1  
 **Requires PHP:** 8.3  
-**Stable tag:** 3.1.0  
+**Stable tag:** 3.1.1  
 **License:** GPL-2.0-or-later  
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -76,6 +76,10 @@ For more details on WordPress' built-in block types visit: https://developer.wor
 
 
 ## Changelog
+
+### 3.1.1
+* Fixed: the kill switch published with 3.1.0 did nothing. The release note above and the developer documentation both named `JPKCOM_ALLOW_BLOCKS_ABILITIES`, while the code checked `JPKCOM_ALLOWBLOCKS_ABILITIES`, without the separator. Anyone who followed the documentation to switch the ability off got no error and no effect: the ability stayed registered. Both spellings are now honoured, so a site that diagnosed the discrepancy and worked around it keeps working, and the documented spelling is the authoritative one
+* Hardened: the test suite now calls the kill switch instead of reading the source for it — once per spelling, each in its own process, plus the no-constant baseline that proves the switch is what closes the gate. Nothing compared the documented constant against the one the code reads before, which is why a kill switch that never fired shipped as a feature
 
 ### 3.1.0
 * Added: a read-only WordPress Ability, `jpkcom-allow-blocks/list-allowed-blocks`, so an AI assistant, an MCP client or REST automation can ask which blocks it may actually insert before it writes content that the editor would refuse. The answer is produced by the same filter the editor is handed, so it cannot disagree with what the editor accepts

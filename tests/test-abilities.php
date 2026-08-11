@@ -217,6 +217,49 @@ chk(
 	'It is the one rule an agent cannot guess from the field names, and getting it backwards means telling someone a block is forbidden when it is not.'
 );
 
+section( 'Kill switch' );
+
+/**
+ * Run the kill-switch fixture in its own process and return what it printed.
+ *
+ * Asserting on the SOURCE TEXT here would be worthless: the bug being guarded
+ * against was a documented constant that was never read, and a substring check
+ * cannot tell a live `defined()` call from one inside a comment. So the gate is
+ * actually called, in a fresh process per spelling, because a constant cannot
+ * be undefined once set.
+ */
+function kill_switch_gate( string $constant = '' ): string {
+	$command = escapeshellarg( PHP_BINARY )
+		. ' ' . escapeshellarg( __DIR__ . '/fixture-kill-switch.php' )
+		. ( $constant === '' ? '' : ' ' . escapeshellarg( $constant ) );
+
+	return trim( (string) shell_exec( $command . ' 2>&1' ) );
+}
+
+chk(
+	'the fixture can be run at all',
+	function_exists( 'shell_exec' ) && is_readable( __DIR__ . '/fixture-kill-switch.php' ),
+	'Without this the three checks below fail with a message about the kill switch, which would be the wrong diagnosis: shell_exec() disabled or a missing tests/fixture-kill-switch.php reddens them no matter what the gate does.'
+);
+
+chk(
+	'baseline: the gate is open when no kill switch is defined',
+	kill_switch_gate() === 'true',
+	'If the baseline were already false the two checks below would pass without proving anything, because every answer would be false.'
+);
+
+chk(
+	'the documented constant actually closes the gate',
+	kill_switch_gate( 'JPKCOM_ALLOW_BLOCKS_ABILITIES' ) === 'false',
+	'3.1.0 read only the run-together spelling while README.md and CLAUDE.md documented the separated one, so following the documentation silently did nothing and the ability stayed registered.'
+);
+
+chk(
+	'the 3.1.0 spelling still closes the gate',
+	kill_switch_gate( 'JPKCOM_ALLOWBLOCKS_ABILITIES' ) === 'false',
+	'It was the only spelling that worked in 3.1.0, so a site that found the discrepancy and worked around it must not break on update.'
+);
+
 printf( "\n  %d passed, %d failed\n", $pass, $fail );
 
 exit( $fail > 0 ? 1 : 0 );

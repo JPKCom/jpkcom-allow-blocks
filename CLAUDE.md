@@ -384,6 +384,28 @@ it reports how every role is restricted. `JPKCOM_ALLOW_BLOCKS_ABILITIES = false`
 suppresses registration; `jpkcom_allow_blocks_ability_capability` and
 `jpkcom_allow_blocks_ability_meta` narrow it further.
 
+> **3.1.0 shipped this kill switch broken.** This file and `README.md` both documented
+> `JPKCOM_ALLOW_BLOCKS_ABILITIES`, while `jpkcom_allow_blocks_abilities_enabled()` checked the
+> run-together `JPKCOM_ALLOWBLOCKS_ABILITIES`. Following the documentation therefore did nothing,
+> silently: measured against the 3.1.0 file, defining the documented constant as `false` still left
+> the gate returning `true`. Since 3.1.1 both spellings are honoured, the documented one being
+> authoritative and the 3.1.0 one kept so a site that diagnosed the discrepancy itself does not break
+> on update.
+>
+> **The naming here is genuinely split** — that is how the slip survived review, and it is worth
+> knowing before adding the next constant. The main file uses `JPKCOM_ALLOW_BLOCKS_*` (`VERSION`,
+> `PATH`, `IMPORT_MAX_BYTES`); the two other constants in `abilities.php` run the words together
+> (`JPKCOM_ALLOWBLOCKS_ABILITY_CATEGORY`, `_ABILITY_INPUT_KEYS`). Writing the local spelling for a
+> constant documented in the other one was the natural mistake to make. Neither family is being
+> renamed: both are public API by now.
+>
+> `tests/test-abilities.php` guards this by **calling the gate**, once per spelling in its own
+> process via `tests/fixture-kill-switch.php`, since a constant cannot be undefined once set. A
+> substring check over the source would not do — it cannot tell a live `defined()` call from one
+> inside a comment, and the bug was precisely a constant that appeared in the file while being read
+> by nothing. The baseline case (no constant defined, gate open) is asserted too, because without it
+> all three checks would pass on a gate that was simply always closed.
+
 > **The Abilities API messages stay English, in every language** — they are read by MCP clients and
 > agents, and their wording is the feature. Do not read an empty `msgstr` on an `abilities.php`
 > string as a backlog.
@@ -395,6 +417,10 @@ suppresses registration; `jpkcom_allow_blocks_ability_capability` and
 | `JPKCOM_ALLOW_BLOCKS_VERSION` | matches the header `Version:` | Plugin version (sync with header/README/phpdoc.xml) |
 | `JPKCOM_ALLOW_BLOCKS_PATH` | `plugin_dir_path( __FILE__ )` | Base path used to require the modules and enqueue assets |
 | `JPKCOM_ALLOW_BLOCKS_IMPORT_MAX_BYTES` | `1048576` (1 MB) | Upper bound checked before an import file is read |
+| `JPKCOM_ALLOW_BLOCKS_ABILITIES` | undefined | Site-defined kill switch: `false` suppresses the ability registration. The documented, authoritative spelling |
+| `JPKCOM_ALLOWBLOCKS_ABILITIES` | undefined | The spelling 3.1.0 actually read. Still honoured for compatibility; do not document it as the one to use |
+| `JPKCOM_ALLOWBLOCKS_ABILITY_CATEGORY` | `jpkcom-content` | Ability category, registered first-wins across the sibling JPKCom plugins |
+| `JPKCOM_ALLOWBLOCKS_ABILITY_INPUT_KEYS` | map | Top-level input keys per ability, cross-checked against the registered schema by the tests |
 
 ---
 
@@ -519,7 +545,14 @@ module directly, and asserts against its functions:
   returns for each rejection path, and that its `rejected` count matches
   the number of invalid entries in the file.
 
-Run all four locally:
+`tests/fixture-kill-switch.php` is **not** a suite and is deliberately not named
+`test-*.php`, so neither CI nor the loop below picks it up. It exists to be run
+as a subprocess by `test-abilities.php`'s kill-switch checks: it stubs the gate's
+dependencies, defines at most one kill-switch constant, and prints the resulting
+boolean. Anything added to `tests/` that is not itself a suite must follow the
+same naming rule.
+
+Run them all locally:
 
 ```bash
 for t in tests/test-*.php; do php "$t" || echo "FAILED: $t"; done
