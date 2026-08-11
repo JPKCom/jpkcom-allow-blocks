@@ -11,7 +11,7 @@ shown as a column.
 - **Text Domain:** `jpkcom-allow-blocks` (declared in the plugin header,
   `Domain Path: /languages`; loaded via `load_plugin_textdomain()` on
   `plugins_loaded`)
-- **Min PHP:** 8.3 | **Min WP:** 6.9
+- **Min PHP:** 8.3 | **Min WP:** 7.0
 - **Network:** not network-only (no `Network:` header) — settings are per
   site
 
@@ -333,6 +333,60 @@ still leaves its name in storage, and this is precisely the case the
 warning exists to surface.
 
 ---
+
+## Abilities API (since 3.1.0)
+
+`includes/abilities.php` registers one read-only ability,
+`jpkcom-allow-blocks/list-allowed-blocks`, in the `jpkcom-content` category the sibling JPKCom
+plugins share. Loaded in the **always** list, not the `is_admin()` one: abilities answer over REST
+and MCP, where `is_admin()` is false.
+
+### The effective answer comes from the filter, never from the option
+
+```php
+$effective = jpkcom_allow_blocks_filter_allowed( true, null );
+```
+
+That is the function registered on `allowed_block_types_all`, invoked with the value core passes
+when nothing has restricted the editor yet. Its result is literally what the editor would be handed.
+Re-deriving it from the stored settings would create a second rule, and two rules here disagree in
+ways that matter:
+
+- **The blocked set is the INTERSECTION across a user's roles**, not the union. Measured: with
+  `editor` blocking `core/html, core/shortcode, core/file` and `author` blocking
+  `core/html, core/shortcode, core/video`, a user holding both is blocked from **two** blocks, not
+  four. A union would have told a caller that `core/file` is forbidden when it may insert it.
+- **A single role with an empty deny list lifts the restriction entirely.** Measured:
+  `editor + contributor` is blocked from nothing at all.
+- **The exemption is `manage_options` and is itself filterable**, so a site can move it. Checking
+  the capability directly here would report the wrong answer on such a site;
+  `jpkcom_allow_blocks_is_exempt()` is called instead.
+
+`tests/test-abilities.php` asserts each of these structurally, and mutating the code to derive the
+list from the option or to check `manage_options` directly reddens exactly the corresponding
+assertion.
+
+### Verified against the filter, not against intent
+
+On a WPML-free 7.0.3 instance, four user constellations — one role, two roles with overlapping deny
+lists, two roles where one lists nothing, and an administrator — each had the real
+`allowed_block_types_all` filter applied and the result compared with the ability's answer for that
+same user. Zero disagreements, and both non-obvious rules confirmed on the numbers.
+
+> `jpkcom_allow_blocks_all_block_names()` takes `array $settings` but requires the **sanitised**
+> shape: it reads `$settings['roles']` and `$settings['labels']` unguarded, so a raw `[]` is a
+> TypeError. Always pass `jpkcom_allow_blocks_get_settings()`.
+
+### Exposure
+
+Default capability **`edit_posts`**: the answer is only meaningful to someone who edits content, and
+it reports how every role is restricted. `JPKCOM_ALLOW_BLOCKS_ABILITIES = false` in `wp-config.php`
+suppresses registration; `jpkcom_allow_blocks_ability_capability` and
+`jpkcom_allow_blocks_ability_meta` narrow it further.
+
+> **The Abilities API messages stay English, in every language** — they are read by MCP clients and
+> agents, and their wording is the feature. Do not read an empty `msgstr` on an `abilities.php`
+> string as a backlog.
 
 ## Constants
 
