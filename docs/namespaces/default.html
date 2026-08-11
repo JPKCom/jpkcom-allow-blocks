@@ -150,8 +150,22 @@
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="namespaces/default.html#constant_JPKCOM_ALLOW_BLOCKS_VERSION">JPKCOM_ALLOW_BLOCKS_VERSION</a>
     <span>
-        &nbsp;: mixed&nbsp;= &#039;3.0.0&#039;                            </span>
+        &nbsp;: mixed&nbsp;= &#039;3.1.0&#039;                            </span>
 </dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="namespaces/default.html#constant_JPKCOM_ALLOWBLOCKS_ABILITY_CATEGORY">JPKCOM_ALLOWBLOCKS_ABILITY_CATEGORY</a>
+    <span>
+        &nbsp;: mixed&nbsp;= &#039;jpkcom-content&#039;                            </span>
+</dt>
+<dd>Ability category.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="namespaces/default.html#constant_JPKCOM_ALLOWBLOCKS_ABILITY_INPUT_KEYS">JPKCOM_ALLOWBLOCKS_ABILITY_INPUT_KEYS</a>
+    <span>
+        &nbsp;: mixed&nbsp;= [&#039;jpkcom-allow-blocks/list-allowed-blocks&#039; =&gt; []]                            </span>
+</dt>
+<dd>Top-level input keys the ability declares.</dd>
 
     </dl>
 
@@ -164,6 +178,104 @@
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_abilities_enabled">jpkcom_allow_blocks_abilities_enabled()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Decide whether the ability should be registered at all.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_ability_log">jpkcom_allow_blocks_ability_log()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Write a debug line, and only with WP_DEBUG.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_ability_error">jpkcom_allow_blocks_ability_error()</a>
+    <span>
+                                &nbsp;: <abbr title="\WP_Error">WP_Error</abbr>    </span>
+</dt>
+<dd>Build a WP_Error carrying an HTTP status.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_ability_boundary">jpkcom_allow_blocks_ability_boundary()</a>
+    <span>
+                                &nbsp;: array&lt;string, mixed&gt;|<abbr title="\WP_Error">WP_Error</abbr>    </span>
+</dt>
+<dd>Turn a Throwable out of the callback into a WP_Error.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_ability_capability">jpkcom_allow_blocks_ability_capability()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Check the capability required to run the ability.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_ability_meta">jpkcom_allow_blocks_ability_meta()</a>
+    <span>
+                                &nbsp;: array&lt;string, mixed&gt;    </span>
+</dt>
+<dd>Build the meta array for the ability.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_ability_normalise_input">jpkcom_allow_blocks_ability_normalise_input()</a>
+    <span>
+                                &nbsp;: array&lt;string, mixed&gt;|null    </span>
+</dt>
+<dd>Bring the value core hands the callback into array form.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_ability_validate_input_keys">jpkcom_allow_blocks_ability_validate_input_keys()</a>
+    <span>
+                                &nbsp;: true|<abbr title="\WP_Error">WP_Error</abbr>    </span>
+</dt>
+<dd>Refuse a top-level input key the ability does not declare.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_ability_list_inner">jpkcom_allow_blocks_ability_list_inner()</a>
+    <span>
+                                &nbsp;: array&lt;string, mixed&gt;|<abbr title="\WP_Error">WP_Error</abbr>    </span>
+</dt>
+<dd>Report which blocks the calling user may insert, and how roles are configured.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_ability_permission">jpkcom_allow_blocks_ability_permission()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Permission callback.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_ability_list">jpkcom_allow_blocks_ability_list()</a>
+    <span>
+                                &nbsp;: array&lt;string, mixed&gt;|<abbr title="\WP_Error">WP_Error</abbr>    </span>
+</dt>
+<dd>Execute callback.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_get_ability_definitions">jpkcom_allow_blocks_get_ability_definitions()</a>
+    <span>
+                                &nbsp;: array&lt;string, array&lt;string, mixed&gt;&gt;    </span>
+</dt>
+<dd>Build the registration arguments.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_register_ability_category">jpkcom_allow_blocks_register_ability_category()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Register the shared category, unless a sibling plugin already did.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_register_abilities">jpkcom_allow_blocks_register_abilities()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Register the ability.</dd>
+
             <dt class="phpdocumentor-table-of-contents__entry -function -">
     <a class="" href="namespaces/default.html#function_jpkcom_allow_blocks_menu_slug">jpkcom_allow_blocks_menu_slug()</a>
     <span>
@@ -428,13 +540,108 @@
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">JPKCOM_ALLOW_BLOCKS_VERSION</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;3.0.0&#039;</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;3.1.0&#039;</span>
 </code>
 
 
     
     
     
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_JPKCOM_ALLOWBLOCKS_ABILITY_CATEGORY">
+        JPKCOM_ALLOWBLOCKS_ABILITY_CATEGORY
+        <a href="namespaces/default.html#constant_JPKCOM_ALLOWBLOCKS_ABILITY_CATEGORY" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/abilities.php"><a href="files/includes-abilities.html"><abbr title="includes/abilities.php">abilities.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">42</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Ability category.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">JPKCOM_ALLOWBLOCKS_ABILITY_CATEGORY</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;jpkcom-content&#039;</span>
+</code>
+
+
+        <section class="phpdocumentor-description"><p>Categories are global and registration is FIRST-WINS, so this goes through
+wp_has_ability_category() rather than assuming.</p>
+</section>
+
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="constant_JPKCOM_ALLOWBLOCKS_ABILITY_CATEGORY_tags">
+        Tags
+        <a href="namespaces/default.html#constant_JPKCOM_ALLOWBLOCKS_ABILITY_CATEGORY_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.1.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_JPKCOM_ALLOWBLOCKS_ABILITY_INPUT_KEYS">
+        JPKCOM_ALLOWBLOCKS_ABILITY_INPUT_KEYS
+        <a href="namespaces/default.html#constant_JPKCOM_ALLOWBLOCKS_ABILITY_INPUT_KEYS" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/abilities.php"><a href="files/includes-abilities.html"><abbr title="includes/abilities.php">abilities.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">55</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Top-level input keys the ability declares.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">JPKCOM_ALLOWBLOCKS_ABILITY_INPUT_KEYS</span>
+    = <span class="phpdocumentor-signature__default-value">[&#039;jpkcom-allow-blocks/list-allowed-blocks&#039; =&gt; []]</span>
+</code>
+
+
+        <section class="phpdocumentor-description"><p>Cross-checked against the registered schema by tests/test-abilities.php.</p>
+</section>
+
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="constant_JPKCOM_ALLOWBLOCKS_ABILITY_INPUT_KEYS_tags">
+        Tags
+        <a href="namespaces/default.html#constant_JPKCOM_ALLOWBLOCKS_ABILITY_INPUT_KEYS_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.1.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
 
         
     </article>
@@ -446,6 +653,846 @@
             <a href="namespaces/default.html#functions" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_abilities_enabled">
+        jpkcom_allow_blocks_abilities_enabled()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_abilities_enabled" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/abilities.php"><a href="files/includes-abilities.html"><abbr title="includes/abilities.php">abilities.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">74</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Decide whether the ability should be registered at all.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_abilities_enabled</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_abilities_enabled_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_abilities_enabled_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.1.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>True when registration should proceed.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_ability_log">
+        jpkcom_allow_blocks_ability_log()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_ability_log" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/abilities.php"><a href="files/includes-abilities.html"><abbr title="includes/abilities.php">abilities.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">101</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Write a debug line, and only with WP_DEBUG.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_ability_log</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$message</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$message</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Message.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_ability_log_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_ability_log_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.1.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_ability_error">
+        jpkcom_allow_blocks_ability_error()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_ability_error" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/abilities.php"><a href="files/includes-abilities.html"><abbr title="includes/abilities.php">abilities.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">130</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Build a WP_Error carrying an HTTP status.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_ability_error</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$code</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$message</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$status</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">400</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\WP_Error">WP_Error</abbr></span></code>
+
+        <section class="phpdocumentor-description"><p>Without data['status'] rest_ensure_response() defaults to 500, and a 5xx
+tells an agent &quot;transient fault, retry unchanged&quot; - the opposite of what a
+caller mistake needs to hear.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$code</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Error code.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$message</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Message.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$status</span>
+                : <span class="phpdocumentor-argument-list__argument__type">int</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">400</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>HTTP status.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_ability_error_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_ability_error_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.1.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\WP_Error">WP_Error</abbr></span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Error.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_ability_boundary">
+        jpkcom_allow_blocks_ability_boundary()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_ability_boundary" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/abilities.php"><a href="files/includes-abilities.html"><abbr title="includes/abilities.php">abilities.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">150</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Turn a Throwable out of the callback into a WP_Error.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_ability_boundary</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$body</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$ability</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string, mixed&gt;|<abbr title="\WP_Error">WP_Error</abbr></span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$body</span>
+                : <span class="phpdocumentor-argument-list__argument__type">callable</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Callback.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$ability</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Ability name.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_ability_boundary_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_ability_boundary_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.1.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string, mixed&gt;|<abbr title="\WP_Error">WP_Error</abbr></span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Result or error.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_ability_capability">
+        jpkcom_allow_blocks_ability_capability()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_ability_capability" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/abilities.php"><a href="files/includes-abilities.html"><abbr title="includes/abilities.php">abilities.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">187</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Check the capability required to run the ability.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_ability_capability</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$ability</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+        <section class="phpdocumentor-description"><p><code class="prettyprint">edit_posts</code>: the answer is only meaningful to someone who edits content,
+and it reports how the site restricts every role, which is configuration
+rather than visitor-facing content.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$ability</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Ability name.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_ability_capability_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_ability_capability_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.1.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>True when the current user may run it.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_ability_meta">
+        jpkcom_allow_blocks_ability_meta()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_ability_meta" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/abilities.php"><a href="files/includes-abilities.html"><abbr title="includes/abilities.php">abilities.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">220</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Build the meta array for the ability.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_ability_meta</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$ability</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string, mixed&gt;</span></code>
+
+        <section class="phpdocumentor-description"><p>All three annotations explicit: they default to null and the REST run
+controller derives the HTTP verb from them, so without readonly the run
+route would be POST-only.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$ability</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Ability name.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_ability_meta_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_ability_meta_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.1.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string, mixed&gt;</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Meta array.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_ability_normalise_input">
+        jpkcom_allow_blocks_ability_normalise_input()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_ability_normalise_input" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/abilities.php"><a href="files/includes-abilities.html"><abbr title="includes/abilities.php">abilities.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">264</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Bring the value core hands the callback into array form.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_ability_normalise_input</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$input</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string, mixed&gt;|null</span></code>
+
+        <section class="phpdocumentor-description"><p>normalize_input() substitutes the schema's top-level default when the input
+is exactly null, and that default is a stdClass - so the callback receives
+an object and must read it.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$input</span>
+                : <span class="phpdocumentor-argument-list__argument__type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Raw input.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_ability_normalise_input_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_ability_normalise_input_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.1.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string, mixed&gt;|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Array form, or null when unusable.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_ability_validate_input_keys">
+        jpkcom_allow_blocks_ability_validate_input_keys()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_ability_validate_input_keys" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/abilities.php"><a href="files/includes-abilities.html"><abbr title="includes/abilities.php">abilities.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">296</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Refuse a top-level input key the ability does not declare.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_ability_validate_input_keys</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">array&lt;string, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$input</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type">array&lt;string|int, string&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$allowed</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">true|<abbr title="\WP_Error">WP_Error</abbr></span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$input</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;string, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Raw input.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$allowed</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;string|int, string&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Declared keys.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_ability_validate_input_keys_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_ability_validate_input_keys_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.1.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">true|<abbr title="\WP_Error">WP_Error</abbr></span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>True when every key is declared.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_ability_list_inner">
+        jpkcom_allow_blocks_ability_list_inner()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_ability_list_inner" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/abilities.php"><a href="files/includes-abilities.html"><abbr title="includes/abilities.php">abilities.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">354</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Report which blocks the calling user may insert, and how roles are configured.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_ability_list_inner</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$input</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string, mixed&gt;|<abbr title="\WP_Error">WP_Error</abbr></span></code>
+
+        <section class="phpdocumentor-description"><p>The effective list comes from running the plugin's OWN filter with <code class="prettyprint">true</code>
+as the incoming value - &quot;everything is allowed so far&quot; - so the answer is
+whatever the editor would actually be handed. It is not re-derived from the
+option, and that matters twice over:</p>
+<ul>
+<li>The blocked set for a user is the INTERSECTION across their roles. A user
+with two roles is blocked only from what both block, and one role with an
+empty list lifts the restriction entirely. A union would be the opposite
+answer.</li>
+<li>The exemption is <code class="prettyprint">manage_options</code> and is itself filterable, so a site can
+move it somewhere this ability has no way to predict.</li>
+</ul>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$input</span>
+                : <span class="phpdocumentor-argument-list__argument__type">mixed</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Ability input.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_ability_list_inner_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_ability_list_inner_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.1.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string, mixed&gt;|<abbr title="\WP_Error">WP_Error</abbr></span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Result.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_ability_permission">
+        jpkcom_allow_blocks_ability_permission()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_ability_permission" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/abilities.php"><a href="files/includes-abilities.html"><abbr title="includes/abilities.php">abilities.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">443</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Permission callback.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_ability_permission</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$input</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$input</span>
+                : <span class="phpdocumentor-argument-list__argument__type">mixed</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Validated input, unused.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_ability_permission_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_ability_permission_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.1.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>True when the current user may run the ability.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_ability_list">
+        jpkcom_allow_blocks_ability_list()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_ability_list" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/abilities.php"><a href="files/includes-abilities.html"><abbr title="includes/abilities.php">abilities.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">462</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Execute callback.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_ability_list</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$input</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string, mixed&gt;|<abbr title="\WP_Error">WP_Error</abbr></span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-argument-list__argument__name">$input</span>
+                : <span class="phpdocumentor-argument-list__argument__type">mixed</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Ability input.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_ability_list_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_ability_list_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.1.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string, mixed&gt;|<abbr title="\WP_Error">WP_Error</abbr></span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Result.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_get_ability_definitions">
+        jpkcom_allow_blocks_get_ability_definitions()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_get_ability_definitions" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/abilities.php"><a href="files/includes-abilities.html"><abbr title="includes/abilities.php">abilities.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">486</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Build the registration arguments.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_get_ability_definitions</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string, array&lt;string, mixed&gt;&gt;</span></code>
+
+        <section class="phpdocumentor-description"><p>Reads no WordPress state and touches no registry, which is what lets the CI
+harness assert the shape without a WordPress installation.</p>
+</section>
+
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_get_ability_definitions_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_get_ability_definitions_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.1.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string, array&lt;string, mixed&gt;&gt;</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Ability name =&gt; registration args.</p>
+</section>
+
+            </section>
+
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_register_ability_category">
+        jpkcom_allow_blocks_register_ability_category()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_register_ability_category" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/abilities.php"><a href="files/includes-abilities.html"><abbr title="includes/abilities.php">abilities.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">556</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Register the shared category, unless a sibling plugin already did.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_register_ability_category</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_register_ability_category_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_register_ability_category_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.1.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_register_abilities">
+        jpkcom_allow_blocks_register_abilities()
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_register_abilities" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="includes/abilities.php"><a href="files/includes-abilities.html"><abbr title="includes/abilities.php">abilities.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">603</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Register the ability.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">jpkcom_allow_blocks_register_abilities</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+        <section class="phpdocumentor-description"><p>wp_register_ability() returns null on EVERY failure path and reports only
+through _doing_it_wrong(), which is silent in production - and so is the
+debug log without WP_DEBUG.</p>
+</section>
+
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="function_jpkcom_allow_blocks_register_abilities_tags">
+        Tags
+        <a href="namespaces/default.html#function_jpkcom_allow_blocks_register_abilities_tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">3.1.0</span>
+                                                                                                        
+                                    </dd>
+                        </dl>
+
+    
+</article>
                     <article class="phpdocumentor-element -function - ">
     <h4 class="phpdocumentor-element__name" id="function_jpkcom_allow_blocks_menu_slug">
         jpkcom_allow_blocks_menu_slug()
@@ -2102,12 +3149,25 @@ blocks nothing, so it empties the intersection.</p>
                                                     <li class=""><a href="namespaces/default.html#constant_JPKCOM_ALLOW_BLOCKS_IMPORT_MAX_BYTES">JPKCOM_ALLOW_BLOCKS_IMPORT_MAX_BYTES</a></li>
                                                     <li class=""><a href="namespaces/default.html#constant_JPKCOM_ALLOW_BLOCKS_PATH">JPKCOM_ALLOW_BLOCKS_PATH</a></li>
                                                     <li class=""><a href="namespaces/default.html#constant_JPKCOM_ALLOW_BLOCKS_VERSION">JPKCOM_ALLOW_BLOCKS_VERSION</a></li>
+                                                    <li class=""><a href="namespaces/default.html#constant_JPKCOM_ALLOWBLOCKS_ABILITY_CATEGORY">JPKCOM_ALLOWBLOCKS_ABILITY_CATEGORY</a></li>
+                                                    <li class=""><a href="namespaces/default.html#constant_JPKCOM_ALLOWBLOCKS_ABILITY_INPUT_KEYS">JPKCOM_ALLOWBLOCKS_ABILITY_INPUT_KEYS</a></li>
                                             </ul>
                 </li>
             
                             <li class="phpdocumentor-on-this-page-section__title">Functions</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_abilities_enabled">jpkcom_allow_blocks_abilities_enabled()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_ability_boundary">jpkcom_allow_blocks_ability_boundary()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_ability_capability">jpkcom_allow_blocks_ability_capability()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_ability_error">jpkcom_allow_blocks_ability_error()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_ability_list">jpkcom_allow_blocks_ability_list()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_ability_list_inner">jpkcom_allow_blocks_ability_list_inner()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_ability_log">jpkcom_allow_blocks_ability_log()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_ability_meta">jpkcom_allow_blocks_ability_meta()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_ability_normalise_input">jpkcom_allow_blocks_ability_normalise_input()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_ability_permission">jpkcom_allow_blocks_ability_permission()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_ability_validate_input_keys">jpkcom_allow_blocks_ability_validate_input_keys()</a></li>
                                                     <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_all_block_names">jpkcom_allow_blocks_all_block_names()</a></li>
                                                     <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_apply_form">jpkcom_allow_blocks_apply_form()</a></li>
                                                     <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_block_rows">jpkcom_allow_blocks_block_rows()</a></li>
@@ -2119,6 +3179,7 @@ blocks nothing, so it empties the intersection.</p>
                                                     <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_export_filename">jpkcom_allow_blocks_export_filename()</a></li>
                                                     <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_export_payload">jpkcom_allow_blocks_export_payload()</a></li>
                                                     <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_filter_allowed">jpkcom_allow_blocks_filter_allowed()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_get_ability_definitions">jpkcom_allow_blocks_get_ability_definitions()</a></li>
                                                     <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_get_settings">jpkcom_allow_blocks_get_settings()</a></li>
                                                     <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_import_error_message">jpkcom_allow_blocks_import_error_message()</a></li>
                                                     <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_import_error_redirect">jpkcom_allow_blocks_import_error_redirect()</a></li>
@@ -2129,6 +3190,8 @@ blocks nothing, so it empties the intersection.</p>
                                                     <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_merge_import">jpkcom_allow_blocks_merge_import()</a></li>
                                                     <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_option_name">jpkcom_allow_blocks_option_name()</a></li>
                                                     <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_parse_import">jpkcom_allow_blocks_parse_import()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_register_abilities">jpkcom_allow_blocks_register_abilities()</a></li>
+                                                    <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_register_ability_category">jpkcom_allow_blocks_register_ability_category()</a></li>
                                                     <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_render_import_preview">jpkcom_allow_blocks_render_import_preview()</a></li>
                                                     <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_render_page">jpkcom_allow_blocks_render_page()</a></li>
                                                     <li class=""><a href="namespaces/default.html#function_jpkcom_allow_blocks_sanitize_settings">jpkcom_allow_blocks_sanitize_settings()</a></li>
