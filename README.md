@@ -3,7 +3,7 @@
 **Plugin Name:** JPKCom Allow Block Types  
 **Plugin URI:** https://github.com/JPKCom/jpkcom-allow-blocks  
 **Description:** Only allow certain types of blocks in Gutenberg for non admins.  
-**Version:** 3.1.1  
+**Version:** 3.1.2  
 **Author:** Jean Pierre Kolb <jpk@jpkc.com>  
 **Author URI:** https://www.jpkc.com  
 **Contributors:** JPKCom  
@@ -11,9 +11,10 @@
 **Requires at least:** 7.0  
 **Tested up to:** 7.1  
 **Requires PHP:** 8.3  
-**Stable tag:** 3.1.1  
+**Stable tag:** 3.1.2  
 **License:** GPL-2.0-or-later  
-**License URI:** https://www.gnu.org/licenses/gpl-2.0.html
+**License URI:** https://www.gnu.org/licenses/gpl-2.0.html  
+**Update URI:** https://github.com/JPKCom/jpkcom-allow-blocks
 
 Only allow certain types of blocks in Gutenberg for non admins.
 
@@ -76,6 +77,12 @@ For more details on WordPress' built-in block types visit: https://developer.wor
 
 
 ## Changelog
+
+### 3.1.2
+* Security: the plugin header now carries `Update URI: https://github.com/JPKCom/jpkcom-allow-blocks`. Without it, WordPress also asks wordpress.org for updates under this plugin's slug, so a same-named plugin published there with a higher version would be offered as an update of this one. With the header, wordpress.org answers nothing for this plugin and updates come only from this repository
+* Changed: the updater keeps its manifest cache, its failure marker and its fetch lock in site transients. On multisite the network now fetches the manifest once instead of once per site; on a single site nothing changes. The old per-site entries expire on their own within a day
+* Changed: the release workflow downloads phpDocumentor from a fixed GitHub release and verifies its SHA-256 before running it, instead of executing whatever phpdoc.org serves that day. No effect on the shipped plugin
+* CI: `shivammathur/setup-php` pinned to 2.40.0
 
 ### 3.1.1
 * Fixed: the kill switch published with 3.1.0 did nothing. The release note above and the developer documentation both named `JPKCOM_ALLOW_BLOCKS_ABILITIES`, while the code checked `JPKCOM_ALLOWBLOCKS_ABILITIES`, without the separator. Anyone who followed the documentation to switch the ability off got no error and no effect: the ability stayed registered. Both spellings are now honoured, so a site that diagnosed the discrepancy and worked around it keeps working, and the documented spelling is the authoritative one
