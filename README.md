@@ -3,7 +3,7 @@
 **Plugin Name:** JPKCom Allow Block Types  
 **Plugin URI:** https://github.com/JPKCom/jpkcom-allow-blocks  
 **Description:** Only allow certain types of blocks in Gutenberg for non admins.  
-**Version:** 3.1.2  
+**Version:** 3.1.3  
 **Author:** Jean Pierre Kolb <jpk@jpkc.com>  
 **Author URI:** https://www.jpkc.com  
 **Contributors:** JPKCom  
@@ -11,7 +11,7 @@
 **Requires at least:** 7.0  
 **Tested up to:** 7.1  
 **Requires PHP:** 8.3  
-**Stable tag:** 3.1.2  
+**Stable tag:** 3.1.3  
 **License:** GPL-2.0-or-later  
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html  
 **Update URI:** https://github.com/JPKCom/jpkcom-allow-blocks
@@ -77,6 +77,9 @@ For more details on WordPress' built-in block types visit: https://developer.wor
 
 
 ## Changelog
+
+### 3.1.3
+* Added: a plugin icon. The update manifest now points WordPress to the JPKCom logo, so the Updates screen (Dashboard → Updates) shows it next to this plugin instead of the generic pattern wordpress.org generates from the slug
 
 ### 3.1.2
 * Security: the plugin header now carries `Update URI: https://github.com/JPKCom/jpkcom-allow-blocks`. Without it, WordPress also asks wordpress.org for updates under this plugin's slug, so a same-named plugin published there with a higher version would be offered as an update of this one. With the header, wordpress.org answers nothing for this plugin and updates come only from this repository
